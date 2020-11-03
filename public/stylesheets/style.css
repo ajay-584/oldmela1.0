@@ -609,6 +609,17 @@ html{
   border-radius: 4px;
   resize: vertical;
 }
+.upload_image_section{
+  display: flex;
+  /* justify-content: space-between; */
+  justify-items: center;
+}
+.myFile{
+  /* background-color: red; */
+  width: 10rem;
+  margin: .5rem;
+  /* display: none; */
+}
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;

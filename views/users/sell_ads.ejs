@@ -3,14 +3,14 @@
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
         <div class="sell-area">
-          <form action="/" method="POST">
-            <!-- <div><b>Ads details</b></div> -->
+          <form action="/sell_ads" method="POST">
+            <div><p style="color: red;"><%= msg %></p></div>
             <div class="row">
               <div class="col-25">
                 <label for="fname">Title/Name</label>
               </div>
               <div class="col-75">
-                <input type="text" class="sell_input" id="fname" name="firstname" placeholder="Ads name..">
+                <input type="text" class="sell_input" id="fname" name="ads_name" placeholder="Ads name..">
               </div>
             </div>
             <div class="row">
@@ -18,7 +18,7 @@
                 <label for="lname">Price</label>
               </div>
               <div class="col-75">
-                <input type="text" class="sell_input"  id="lname" name="lastname" placeholder="Ads price..">
+                <input type="number" class="sell_input"  id="lname" name="ads_price" placeholder="Ads price..">
               </div>
             </div>
             <div class="row">
@@ -47,6 +47,18 @@
             </div>
             <div class="row">
               <div class="col-25">
+                <label for="subject">Ads_Images</label>
+              </div>
+              <div class="col-75">
+                <div class="upload_image_section">
+                  <label for="image1">Image_1<input type="file" class="myFile" name="img_1" required /></label>
+                  <label for="image1">Image_2<input type="file" class="myFile" name="img_1"></label>
+                  <label for="image1">Image_3<input type="file" class="myFile" name="img_1"></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
                 <label for="subject">Description</label>
               </div>
               <div class="col-75">
@@ -70,7 +82,7 @@
                 <label for="lname">Phone</label>
               </div>
               <div class="col-75">
-                <input type="text" class="sell_input"  id="lname" name="lastname" placeholder="Your mobile number..">
+                <input type="number" class="sell_input"  id="lname" name="ads" placeholder="Your mobile number..">
               </div>
             </div>
             <div class="row">
