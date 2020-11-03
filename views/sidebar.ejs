@@ -1,0 +1,57 @@
+<!-- ==================================================Side Bar Area start========================================================= -->
+    <!-- Sidebar section means categories section -->
+    <aside class="sidebar">
+        <!-- Heading area -->
+        <div class="sidebar-header">
+          <h1>Categroies</h1>
+          <button class="closebtn" onclick="closeSideBar()"><i style='font-size:2rem' class='fas'>&#xf00d;</i></button>
+        </div>
+        <!-- End of heading area -->
+        <!-- Thsi is list of categores in side bar like books, electronics -->
+        <div class="sidebar-links">
+          <button onclick="opensidebarlinks()">Heading-1</button>
+          <!-- This is sub links area like engg books, medical books -->
+          <div id="sidebar-link" class="sidebar-link">
+            <a href="">Link-1</a>
+            <a href="">Link-2</a>
+            <a href="">Link-3</a>
+          </div>
+          <button>Heading-2</button>
+        </div>
+        <!-- End of list of  -->
+      </aside>
+      <!-- End of side bar section  -->
+      <!-- select city section -->
+      <aside class="city">
+        <!-- responsive city means mobile view interface -->
+        <div  class="responsive-city">
+          <select>
+            <option  value="0">Select City</option>
+            <option value="1"><a onclick="removecity()" href="">Patna</a></option>
+            <option value="2">Darbhnage</option>
+            <option value="3">Chhpra</option>
+          </select>
+          <!-- colse button of select city oprions -->
+          <div><button class="city-close-btn" onclick="removecity()"><i style='font-size:3rem' class='fas'>&#xf00d;</i></button></div>
+        </div>
+      </aside>
+      <!-- Serach section means mobile view interface -->
+      <aside class="search">
+        <div class="search-div">
+          <form  action="index.html">
+            <input type="text" placeholder="Search.." name="search">
+            <!-- search button -->
+            <button onclick="closesearch()" type="submit"><i style="font-size: 3rem;" class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </aside>
+      <!-- Profile sections for both desktop and mbile view interface -->
+      <aside id="profile" class="profile-box">
+        <div class="profile-links">
+          <ul onclick="colseprofile()">
+            <li><a href="#">Sign In</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </div>
+      </aside>
+      <!-- ==================================================End of Side Bar Area========================================================= -->

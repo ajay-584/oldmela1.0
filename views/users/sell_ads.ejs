@@ -1,0 +1,137 @@
+<%- include('../header') %>  <!-- header section -->
+<%- include('../sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+        <div class="sell-area">
+          <form action="/" method="POST">
+            <!-- <div><b>Ads details</b></div> -->
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Title/Name</label>
+              </div>
+              <div class="col-75">
+                <input type="text" class="sell_input" id="fname" name="firstname" placeholder="Ads name..">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="lname">Price</label>
+              </div>
+              <div class="col-75">
+                <input type="text" class="sell_input"  id="lname" name="lastname" placeholder="Ads price..">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="country">Categroies</label>
+              </div>
+              <div class="col-75">
+                <select class="sell_input"  id="country" name="ads_cat">
+                  <option value="australia">Books</option>
+                  <option value="canada">Vahicle</option>
+                  <option value="usa">Phones</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="country">Sub_Categroies</label>
+              </div>
+              <div class="col-75">
+                <select class="sell_input"  id="country" name="sum_ads_cat">
+                  <option value="australia">Computer Science</option>
+                  <option value="canada">Machanical</option>
+                  <option value="usa">Food Technology</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="subject">Description</label>
+              </div>
+              <div class="col-75">
+                <textarea class="sell_input"  id="subject" name="subject" placeholder="Write ads details.." style="height:130px"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="country">City</label>
+              </div>
+              <div class="col-75">
+                <select class="sell_input"  id="country" name="ads_cat">
+                  <option value="australia">Patna</option>
+                  <option value="canada">Darbhnage</option>
+                  <option value="usa">Madhubni</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="lname">Phone</label>
+              </div>
+              <div class="col-75">
+                <input type="text" class="sell_input"  id="lname" name="lastname" placeholder="Your mobile number..">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="subject">Addres</label>
+              </div>
+              <div class="col-75">
+                <textarea class="sell_input"  id="subject" name="subject" placeholder="Write your addres.." style="height:130px"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <input type="submit" class="sell_submit" value="Submit">
+            </div>
+            </form>
+        </div> <!--End of sell area  -->
+    </div>
+    <!-- ==================================================footer Area========================================================= -->
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+    <script>
+      function opensidebar(){
+        document.querySelector(".sidebar").classList.add("open");
+      }
+      function closeSideBar(){
+        document.querySelector(".sidebar").classList.remove("open");
+      }
+      function selcetcity(){
+          document.querySelector(".city").classList.add("city-open");
+      }
+      function removecity(){
+        document.querySelector(".city").classList.remove("city-open");
+      }
+      function searchitem(){
+        document.querySelector(".search").classList.add("search-open");
+      }
+      function closesearch(){
+        document.querySelector(".search").classList.remove("search-open");
+      }
+      function profile(){
+        var x = document.getElementById("profile");
+        if(x.className == "profile-box"){
+          x.classList.add("open-profile");
+        }else{
+          x.classList.remove("open-profile");
+        }
+      }
+      function colseprofile(){
+        var x = document.getElementById("profile");
+        x.classList.remove("open-profile");
+      }
+      function opensidebarlinks(){
+        var x = document.getElementById("sidebar-link");
+        if (x.className === "sidebar-link"){
+          x.classList.add("sidebar-link-open");
+        }else{
+          x.classList.remove("sidebar-link-open");
+        }
+      }
+
+    </script>
+</body>
+</html>
