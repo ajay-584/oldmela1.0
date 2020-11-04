@@ -4,122 +4,23 @@
     <div class="main-area">
       <div class="cards">
         
+        <% for(ele of ads_data){ %>
         <div class="card">
           <a href="ads.html">
             <div class="image-section">
-              <img src="images/b.jfif" alt="">
+              <img src="/images/<%= ele.ads_img1 %>" alt="">
             </div>
           </a>
           <div class="details-section">
             <ul>
-              <li><a href="ads.html">The wonderful cycle for the best for you</a></li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>50000</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
+              <li><a href="ads.html"><%= ele.ads_title %></a></li>
+              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i><%= ele.ads_price %></li>
+              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i><%= ele.ads_city %></li>
+              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i><%= moment(ele.dueDate).format('Do MMM YYYY') %></li>
             </ul>
           </div>
         </div>
-        
-
-        <div class="card">
-          <a href="ads.html">
-            <div class="image-section">
-              <img src="images/b.jfif" alt="">
-            </div>
-          </a>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b2.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b2.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-section">
-            <img src="images/b2.jfif" alt="">
-          </div>
-          <div class="details-section">
-            <ul>
-              <li>The wonderful cycle for the best for you</li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i>Price</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i>Date</li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i>location</li>
-            </ul>
-          </div>
-        </div>
+        <% } %>
 
       </div>
     </div>
