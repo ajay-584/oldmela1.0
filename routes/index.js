@@ -2,10 +2,11 @@ var express = require('express');
 const pool = require('./../model/pool');
 var uuid = require('uuid');
 var moment = require('moment');
+const mongoose = require('mongoose');
 
 var router = express.Router();
 
-var filePath = process.env.FILE_URL;
+var filePath = process.env.FILE_URL;    // There is file path of images file
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
@@ -13,8 +14,20 @@ router.get('/', async function(req, res, next) {
   // console.log("ads_data",ads_data);
   res.render('index', { title: 'oldmela.com', ads_data:ads_data, moment:moment });
 });
+// ========================================= end of home sections ==================================================
 
-
+// ========================================= Start of main ads page sections ==================================================
+router.get('/card', async function(req,res){
+  try{
+    var ads_info =  await pool.findOne({_id:{$eq:mongoose.Types.ObjectId(req.query.link)}});
+    console.log(ads_info);
+  }catch(err){
+    if(err) throw err
+  }
+  // console.log(req.query.link);
+  res.render('ads_page', { title: 'oldmela.com', ads_info:ads_info, moment:moment });
+});
+// ========================================= end of main ads page sections ====================================================
 
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
@@ -27,9 +40,11 @@ router.post('/sell_ads', (req,res)=>{
 // inserting ads data in collection
 
   var img1 = '';
+  // checking images is uploaded or not
   if(req.files.img_1){
     let extesion = req.files.img_1.mimetype.replace(/\//g,' ').split(' ')[1];
     img1 = uuid.v1() + '.' + extesion;
+    // moving image in imgae file
     req.files.img_1.mv(filePath + img1, function (err, data) {
       // cheking errr
       if (err) {
@@ -86,8 +101,8 @@ pool.create({
     // console.log("insert ho gya",data);
     msg = "The ads data has been submitted Thank you!"
     res.render('users/sell_ads', { title: 'oldmela.com', msg:msg});
-  });
-});
+  }); // end of ads insert
+}); // end of post method 
 
 // ========================================= end of sell ads sections ==================================================
 

@@ -1,34 +1,46 @@
+
     <%- include('header') %>  <!-- header section -->
     <%- include('sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-      <div class="cards">
-        
-        <% for(ele of ads_data){ %>
-        <div class="card">
-          <a href="/card?link=<%= ele._id %>">
-            <div class="image-section">
-              <img src="/images/<%= ele.ads_img1 %>" alt="">
+        <div class="ads">
+            <div class="ads-image">
+                <div class="big-image">
+                    <img id="bigImage" src="/images/<%= ads_info.ads_img1 %>" alt="">
+                </div>
+                <div class="small-image">
+                    <img onclick="showImage()" src="/images/<%= ads_info.ads_img1 %>" alt="">
+                    <% if(ads_info.ads_img2){ %>
+                    <img src="/images/<%= ads_info.ads_img2 %>" alt="">
+                    <% } %>
+                    <% if(ads_info.ads_img3){ %>
+                      <img src="/images/<%= ads_info.ads_img3 %>" alt="">
+                    <% } %>
+                </div>
             </div>
-          </a>
-          <div class="details-section">
-            <ul>
-              <li><a href="/card?link=<%= ele._id %>"><%= ele.ads_title %></a></li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i><%= ele.ads_price %></li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i><%= ele.ads_city %></li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i><%= moment(ele.dueDate).format('Do MMM YYYY') %></li>
-            </ul>
-          </div>
+            <div class="ads-details">
+                <h2>Ads Details</h2>
+                <ul>
+                    <li><h3><%= ads_info.ads_title %></h3></li>
+                    <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i><%= ads_info.ads_price %></li>
+                    <li>Description: <%= ads_info.ads_description %></li>
+                    <li>Date: <%= moment(ads_info.ads_date).format('Do MMMM YYYY') %></li>
+                </ul>
+            </div>
+            <div class="ads-contact-details">
+                <h2>Contact Details</h2>
+                <ul>
+                    <li>Phone: <%= ads_info.ads_phone %></li>
+                    <li>City: <%= ads_info.ads_city %></li>
+                    <li>Address: <%= ads_info.ads_address %></li>
+                </ul>
+            </div>
         </div>
-        <% } %>
-
-      </div>
     </div>
     <!-- ==================================================footer Area========================================================= -->
     <div class="footer-area">
-      <div>©2018-2019 By oldmela.com</div>
+      <div><h3>footer area</h3></div>
     </div>
-  </div>
      <!-- ==================================================End of footer Area========================================================= -->
     <script>
       function opensidebar(){
@@ -69,6 +81,11 @@
           x.classList.remove("sidebar-link-open");
         }
       }
+    //   function showImage(){
+    //       var x = document.getElementById("imdbRating");
+    //       x.innerHTML = 
+    //   }
+
     </script>
 </body>
 </html>
