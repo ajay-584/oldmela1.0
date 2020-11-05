@@ -86,7 +86,7 @@ pool.create({
     // console.log("insert ho gya",data);
     msg = "The ads data has been submitted Thank you!"
     res.render('users/sell_ads', { title: 'oldmela.com', msg:msg});
-});
+  });
 });
 
 // ========================================= end of sell ads sections ==================================================
