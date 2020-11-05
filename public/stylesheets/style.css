@@ -423,11 +423,11 @@ html{
 .ads-details{
   margin: 2rem;
   width: 20%;
-  height: 20rem;
+  height: auto;
   /* border: 1px solid blue; */
   padding: 1rem;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 0.5px 1px #888888;
+  /* border: 1px solid #f0f0f0;
+  box-shadow: 0 0.5px 1px #888888; */
   background-color: #ffffff;
 }
 .ads-details h2{
@@ -446,11 +446,11 @@ html{
 .ads-contact-details{
   margin: 2rem;
   width: 20%;
-  height: 20rem;
+  height: auto;
   /* border: 1px solid blueviolet; */
   padding: 1rem;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 0.5px 1px #888888;
+  /* border: 1px solid #f0f0f0;
+  box-shadow: 0 0.5px 1px #888888; */
   background-color: #ffffff;
 }
 .ads-contact-details h2{

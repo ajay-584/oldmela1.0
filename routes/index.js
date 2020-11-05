@@ -10,7 +10,7 @@ var filePath = process.env.FILE_URL;    // There is file path of images file
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
-  var ads_data = await pool.find({});
+  var ads_data = await pool.ads_data.find();
   // console.log("ads_data",ads_data);
   res.render('index', { title: 'oldmela.com', ads_data:ads_data, moment:moment });
 });
@@ -19,8 +19,8 @@ router.get('/', async function(req, res, next) {
 // ========================================= Start of main ads page sections ==================================================
 router.get('/card', async function(req,res){
   try{
-    var ads_info =  await pool.findOne({_id:{$eq:mongoose.Types.ObjectId(req.query.link)}});
-    console.log(ads_info);
+    var ads_info =  await pool.ads_data.findOne({_id:{$eq:mongoose.Types.ObjectId(req.query.link)}});
+    // console.log(ads_info);
   }catch(err){
     if(err) throw err
   }
@@ -80,7 +80,7 @@ router.post('/sell_ads', (req,res)=>{
       });
   }; // end of img3
 var msg = ""
-pool.create({
+pool.ads_data.create({
   ads_title:req.body.ads_name,
   ads_price:req.body.ads_price,
   ads_cat:req.body.ads_cat,

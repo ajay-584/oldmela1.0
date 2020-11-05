@@ -23,16 +23,18 @@
                 <ul>
                     <li><h3><%= ads_info.ads_title %></h3></li>
                     <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i><%= ads_info.ads_price %></li>
-                    <li>Description: <%= ads_info.ads_description %></li>
-                    <li>Date: <%= moment(ads_info.ads_date).format('Do MMMM YYYY') %></li>
+                    <li><span style="font-weight: bold;">Description:</span> <%= ads_info.ads_description %></li>
+                    <li><span style="font-weight: bold;">Date:</span> <%= moment(ads_info.ads_date).format('Do MMMM YYYY') %></li>
+                    <hr>
                 </ul>
             </div>
             <div class="ads-contact-details">
                 <h2>Contact Details</h2>
                 <ul>
-                    <li>Phone: <%= ads_info.ads_phone %></li>
-                    <li>City: <%= ads_info.ads_city %></li>
-                    <li>Address: <%= ads_info.ads_address %></li>
+                    <li><span style="font-weight: bold;">Phone:</span> <%= ads_info.ads_phone %></li>
+                    <li><span style="font-weight: bold;">City:</span> <%= ads_info.ads_city %></li>
+                    <li><span style="font-weight: bold;">Address:</span>: <%= ads_info.ads_address %></li>
+                    <hr>
                 </ul>
             </div>
         </div>

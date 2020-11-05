@@ -17,4 +17,23 @@ const ads_schema = mongoose.Schema({
 });
 var ads_model = mongoose.model('ads_model',ads_schema,'ads_data');
 
-module.exports = ads_model;
+// add categories
+const cat_schema = mongoose.Schema({
+    name:String,
+    date:{type:Date, default:Date.now()}
+});
+var cat_model = mongoose.model('cat_model', cat_schema,'cat_data');
+
+// add sub categoreis
+const sub_cat_schema = mongoose.Schema({
+    name:String,
+    cat_id:{type:mongoose.Types.ObjectId,ref:'cat_data'},
+    date:{type:Date, default:Date.now()}
+});
+var sub_cat_model = mongoose.model('sub_cat_model', sub_cat_schema, 'sub_cat_data');
+
+module.exports = {
+    ads_data : ads_model,
+    cat_data : cat_model,
+    sub_cat_data : sub_cat_model 
+};
