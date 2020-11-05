@@ -8,6 +8,14 @@ var router = express.Router();
 
 var filePath = process.env.FILE_URL;    // There is file path of images file
 
+
+var cat_data = async ()=>{
+    var data = await  pool.cat_data.find({});
+    let new_data = await data;
+    console.log(new_data);
+    // return new_data
+};
+cat_data();
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
   var ads_data = await pool.ads_data.find();
