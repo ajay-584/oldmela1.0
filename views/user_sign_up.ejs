@@ -1,0 +1,82 @@
+<%- include('header') %>  <!-- header section -->
+<%- include('sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+        <div class="login-area">
+            <div class="model">
+                <div class="user-img">
+                    <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="form-area">
+                    <form class="frm" action="verification.html" method="post">
+                        <div class="input-area">
+                          <label for="uname"><b>Username</b></label>
+                          <input type="text" placeholder="Enter Username" name="uname" required>
+
+                          <label for="name"><b>Name</b></label>
+                          <input type="text" placeholder="Enter Full Name" name="uname" required>
+
+                          <label for="password"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="password" required>
+                    
+                          <label for="cinfirmpassword"><b>Confirm Password</b></label>
+                          <input type="password" placeholder="Enter Confirm Password" name="confirmPassword" required>
+                            
+                          <button type="submit">Register</button>
+                        </div>
+                        <div class="input-area">
+                            <a href="login.html"><button type="button">I have Already Account</button></a>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div> <!--End of login area  -->
+    </div>
+    <!-- ==================================================footer Area========================================================= -->
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+    <script>
+      function opensidebar(){
+        document.querySelector(".sidebar").classList.add("open");
+      }
+      function closeSideBar(){
+        document.querySelector(".sidebar").classList.remove("open");
+      }
+      function selcetcity(){
+          document.querySelector(".city").classList.add("city-open");
+      }
+      function removecity(){
+        document.querySelector(".city").classList.remove("city-open");
+      }
+      function searchitem(){
+        document.querySelector(".search").classList.add("search-open");
+      }
+      function closesearch(){
+        document.querySelector(".search").classList.remove("search-open");
+      }
+      function profile(){
+        var x = document.getElementById("profile");
+        if(x.className == "profile-box"){
+          x.classList.add("open-profile");
+        }else{
+          x.classList.remove("open-profile");
+        }
+      }
+      function colseprofile(){
+        var x = document.getElementById("profile");
+        x.classList.remove("open-profile");
+      }
+      function opensidebarlinks(){
+        var x = document.getElementById("sidebar-link");
+        if (x.className === "sidebar-link"){
+          x.classList.add("sidebar-link-open");
+        }else{
+          x.classList.remove("sidebar-link-open");
+        }
+      }
+
+    </script>
+</body>
+</html>

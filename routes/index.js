@@ -9,13 +9,15 @@ var router = express.Router();
 var filePath = process.env.FILE_URL;    // There is file path of images file
 
 
-var cat_data = async ()=>{
-    var data = await  pool.cat_data.find({});
-    let new_data = await data;
-    console.log(new_data);
-    // return new_data
-};
-cat_data();
+// var cat_data = async ()=>{
+//     var data = await  pool.cat_data.find({});
+//     let new_data = await data;
+//     console.log(new_data);
+//     // return new_data
+// };
+// cat_data();
+
+
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
   var ads_data = await pool.ads_data.find();
@@ -36,6 +38,12 @@ router.get('/card', async function(req,res){
   res.render('ads_page', { title: 'oldmela.com', ads_info:ads_info, moment:moment });
 });
 // ========================================= end of main ads page sections ====================================================
+
+// ========================================= start of sign up page sections ====================================================
+router.get('/sign_up', (req,res)=>{
+  res.render('user_sign_up', { title:'oldmela.com'});
+});
+// ========================================= end of sign up page sections ======================================================
 
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
