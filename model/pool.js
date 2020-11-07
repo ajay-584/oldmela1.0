@@ -41,9 +41,17 @@ const sub_cat_schema = mongoose.Schema({
 });
 var sub_cat_model = mongoose.model('sub_cat_model', sub_cat_schema, 'sub_cat_data');
 
+// add City
+const city_schema = mongoose.Schema({
+    name:String,
+    date:{type:Date, default:Date.now()}
+});
+var city_model = mongoose.model('city_model', city_schema,'city_data');
+
 module.exports = {
     ads_data : ads_model,
     cat_data : cat_model,
     sub_cat_data : sub_cat_model,
-    user_data : sign_up_model 
+    user_data : sign_up_model,
+    city_data : city_model
 };

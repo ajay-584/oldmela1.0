@@ -18,12 +18,6 @@ res.render('admin/add_cat',{msg:""});
 router.post('/cat', function(req,res){
   pool.cat_data.create({
     name:req.body.cat
-  },function(err,data){
-    if(err) throw err;
-    console.log(data);
-  },(err,result)=>{
-    if(err) throw err;
-    // console.log(result);
   });
 res.render('admin/add_cat', {msg:"Data has been inseted!"});
 });
@@ -49,5 +43,16 @@ router.post('/sub_cat', (req,res)=>{
 });
 
 
+// ==============================Add cat========================
+router.get('/city', function(req,res){
+  res.render('admin/add_city',{msg:""});
+  });
+// post mehtod
+router.post('/city', function(req,res){
+  pool.city_data.create({
+  name:req.body.city
+  });
+  res.render('admin/add_city', {msg:"Data has been inseted!"});
+  });
 
 module.exports = router;

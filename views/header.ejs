@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script defer src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="javascripts/sidebar.js"></script>
   <title><%= title %></title>
 </head>
 <body>
@@ -18,7 +19,7 @@
         <!-- There is button for side bar -->
         <div class="iconbar"><button class="openbtn" onclick="opensidebar()"><i style='font-size:2rem' class='fas'>&#xf0c9;</i></button></div>
         <!-- Thsi main logo or brand name which is oldmela -->
-        <div class="logo"><h1>oldmela</h1></div>
+        <div class="logo"><a href="/" style="text-decoration: none; color: #000000;"><h1>oldmela</h1></a></div>
       </div>
       <!-- End of logo box  -->
       <!-- This is second section which is search box the search bax has two section first for select city and second is search item in one row -->
@@ -26,19 +27,10 @@
         <!-- select city section for desktop view -->
         <div id="city-select" class="city-select">
           <select>
-            <option value="0">Select City</option>
-            <option value="1">Patna</option>
-            <option value="2">Darbhnage</option>
-            <option value="3">Chhpra</option>
-            <option value="4">Siwan</option>
-            <option value="5">Honda</option>
-            <option value="6">Jaguar</option>
-            <option value="7">Land Rover</option>
-            <option value="8">Mercedes</option>
-            <option value="9">Mini</option>
-            <option value="10">Nissan</option>
-            <option value="11">Toyota</option>
-            <option value="12">Volvo</option>
+            <option value="#">Select City</option>
+            <% for(x of city_data){ %>
+            <option value="1"><%= x.name %></option>
+            <% } %>
           </select>
         </div>
         <!-- This is search area for desk to view like search any items of products -->
@@ -67,44 +59,3 @@
       
     </div>
     <!-- ==================================================End of Header section========================================================= -->
-
-    <script>
-      function opensidebar(){
-        document.querySelector(".sidebar").classList.add("open");
-      }
-      function closeSideBar(){
-        document.querySelector(".sidebar").classList.remove("open");
-      }
-      function selcetcity(){
-          document.querySelector(".city").classList.add("city-open");
-      }
-      function removecity(){
-        document.querySelector(".city").classList.remove("city-open");
-      }
-      function searchitem(){
-        document.querySelector(".search").classList.add("search-open");
-      }
-      function closesearch(){
-        document.querySelector(".search").classList.remove("search-open");
-      }
-      function profile(){
-        var x = document.getElementById("profile");
-        if(x.className == "profile-box"){
-          x.classList.add("open-profile");
-        }else{
-          x.classList.remove("open-profile");
-        }
-      }
-      function colseprofile(){
-        var x = document.getElementById("profile");
-        x.classList.remove("open-profile");
-      }
-      function opensidebarlinks(){
-        var x = document.getElementById("sidebar-link");
-        if (x.className === "sidebar-link"){
-          x.classList.add("sidebar-link-open");
-        }else{
-          x.classList.remove("sidebar-link-open");
-        }
-      }
-    </script>

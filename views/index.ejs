@@ -14,9 +14,9 @@
           <div class="details-section">
             <ul>
               <li><a href="/card?link=<%= ele._id %>"><%= ele.ads_title %></a></li>
-              <li><i style='font-size:1.4rem; margin-right: .5rem;' class='fas'>&#xf156;</i><%= ele.ads_price %></li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='fas'>&#xf041;</i><%= ele.ads_city %></li>
-              <li><i style='font-size:1.4rem; margin-right: 0.5rem;' class='far'>&#xf073;</i><%= moment(ele.dueDate).format('Do MMM YYYY') %></li>
+              <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf156;</i><%= ele.ads_price %></li>
+              <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="fas">&#xf041;</i><%= ele.ads_city %></li>
+              <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i><%= moment(ele.ads_date).format('Do MMM YYYY') %></li>
             </ul>
           </div>
         </div>
