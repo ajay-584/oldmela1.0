@@ -9,14 +9,18 @@
         <!-- End of heading area -->
         <!-- Thsi is list of categores in side bar like books, electronics -->
         <div class="sidebar-links">
-          <button onclick="opensidebarlinks()">Heading-1</button>
+          <% for(x of cat_data){ %>
+          <button onclick="opensidebarlinks()"><%= x.name %></button>
           <!-- This is sub links area like engg books, medical books -->
           <div id="sidebar-link" class="sidebar-link">
-            <a href="">Link-1</a>
-            <a href="">Link-2</a>
-            <a href="">Link-3</a>
+            <!-- <% for(y of sub_cat_data){ %>
+              <% if((x._id).toString() === (y.cat_id).toString()){ %> -->
+                <a href="">Link-1</a>
+                <a href="">Link-1</a>
+               <!-- <% } %> 
+            <% } %> -->
           </div>
-          <button>Heading-2</button>
+          <% } %>
         </div>
         <!-- End of list of  -->
       </aside>
@@ -55,3 +59,45 @@
         </div>
       </aside>
       <!-- ==================================================End of Side Bar Area========================================================= -->
+
+      <script>
+        function opensidebar(){
+          document.querySelector(".sidebar").classList.add("open");
+        }
+        function closeSideBar(){
+          document.querySelector(".sidebar").classList.remove("open");
+        }
+        function selcetcity(){
+            document.querySelector(".city").classList.add("city-open");
+        }
+        function removecity(){
+          document.querySelector(".city").classList.remove("city-open");
+        }
+        function searchitem(){
+          document.querySelector(".search").classList.add("search-open");
+        }
+        function closesearch(){
+          document.querySelector(".search").classList.remove("search-open");
+        }
+        function profile(){
+          var x = document.getElementById("profile");
+          if(x.className == "profile-box"){
+            x.classList.add("open-profile");
+          }else{
+            x.classList.remove("open-profile");
+          }
+        }
+        function colseprofile(){
+          var x = document.getElementById("profile");
+          x.classList.remove("open-profile");
+        }
+        function opensidebarlinks(){
+          var x = document.getElementById("sidebar-link");
+          if (x.className === "sidebar-link"){
+            x.classList.add("sidebar-link-open");
+          }
+          else{
+            x.classList.remove("sidebar-link-open");
+          }
+        }
+      </script>

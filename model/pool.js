@@ -17,6 +17,15 @@ const ads_schema = mongoose.Schema({
 });
 var ads_model = mongoose.model('ads_model',ads_schema,'ads_data');
 
+// user resigration schema
+const sign_up_schema = mongoose.Schema({
+    user_mobile:Number,
+    user_name:String,
+    user_password:String,
+    user_date:{type:Date, default:Date.now()}
+});
+const sign_up_model = mongoose.model('sign_up_model', sign_up_schema, 'user_data');
+
 // add categories
 const cat_schema = mongoose.Schema({
     name:String,
@@ -35,5 +44,6 @@ var sub_cat_model = mongoose.model('sub_cat_model', sub_cat_schema, 'sub_cat_dat
 module.exports = {
     ads_data : ads_model,
     cat_data : cat_model,
-    sub_cat_data : sub_cat_model 
+    sub_cat_data : sub_cat_model,
+    user_data : sign_up_model 
 };

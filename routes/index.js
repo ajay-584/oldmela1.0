@@ -3,27 +3,32 @@ const pool = require('./../model/pool');
 var uuid = require('uuid');
 var moment = require('moment');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 var router = express.Router();
 
 var filePath = process.env.FILE_URL;    // There is file path of images file
 
+var cat_data = async ()=>{
+    let data = await  pool.cat_data.find({});
+    return data;
+};
 
-// var cat_data = async ()=>{
-//     var data = await  pool.cat_data.find({});
-//     let new_data = await data;
-//     console.log(new_data);
-//     // return new_data
-// };
-// cat_data();
+var sub_cat_data = async ()=>{
+  var data = await  pool.sub_cat_data.find({});
+  return data;
+};
 
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
   var ads_data = await pool.ads_data.find();
-  // console.log("ads_data",ads_data);
-  res.render('index', { title: 'oldmela.com', ads_data:ads_data, moment:moment });
-});
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      res.render('index', { title: 'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, ads_data:ads_data, moment:moment });
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
 // ========================================= end of home sections ==================================================
 
 // ========================================= Start of main ads page sections ==================================================
@@ -35,24 +40,67 @@ router.get('/card', async function(req,res){
     if(err) throw err
   }
   // console.log(req.query.link);
-  res.render('ads_page', { title: 'oldmela.com', ads_info:ads_info, moment:moment });
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      res.render('ads_page', { title: 'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, ads_info:ads_info, moment:moment });
+    }); // end of sub catagories
+  }); // end of catagories
 });
 // ========================================= end of main ads page sections ====================================================
 
 // ========================================= start of sign up page sections ====================================================
 router.get('/sign_up', (req,res)=>{
-  res.render('user_sign_up', { title:'oldmela.com'});
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      res.render('user_sign_up', { title:'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:''});
+    }); // end of sub catagories
+  }); // end of catagories
 });
+// post method
+router.post('/sign_up', (req,res)=>{
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      // Checking password and confirm password is same or not?
+      if(req.body.password === req.body.confirmPassword){
+        pool.user_data.find({user_mobile:parseInt(req.body.mobile)},(err,result)=>{
+        if(err) throw err;
+        // Checking mobile nuber already exit or not?
+        if(result.length < 1){
+          const hash_pass = bcrypt.hashSync(req.body.password,10);
+          pool.user_data.create({
+            user_mobile:req.body.mobile,
+            user_name:req.body.name,
+            user_password:hash_pass,
+          }, (err,result)=>{
+            if(err) throw err;
+              res.render('user_sign_up', { title:'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'done'});
+            });  // end of create data
+        }else{
+            res.render('user_sign_up', { title:'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Mobile has already register'});
+          }
+        }); // end of find data
+      }else{
+        res.render('user_sign_up', { title:'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Confirm password does not matched!'});
+      }
+    }); // end of sub catagories
+  }); // end of catagories
+}); // end of post method
 // ========================================= end of sign up page sections ======================================================
 
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
 router.get('/sell_ads', function(req, res, next){
-  res.render('users/sell_ads', { title: 'oldmela.com', msg:'' });
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      res.render('users/sell_ads', { title: 'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'' });
+    }); // end of sub catagories
+  }); // end of catagories
 });
 // post method------------------------------------------------------------
 router.post('/sell_ads', (req,res)=>{
-//  console.log(req.body);
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      //  console.log(req.body);
 // inserting ads data in collection
 
   var img1 = '';
@@ -112,12 +160,14 @@ pool.ads_data.create({
   if(err){
     console.log("there is error in ads inserting");
     msg="There is someting wrong please try agian"
-    res.render('users/sell_ads', { title: 'oldmela.com', msg:msg});
+    res.render('users/sell_ads', { title: 'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:msg});
   }
     // console.log("insert ho gya",data);
     msg = "The ads data has been submitted Thank you!"
-    res.render('users/sell_ads', { title: 'oldmela.com', msg:msg});
+    res.render('users/sell_ads', { title: 'oldmela.com', cat_data:cat_data, sub_cat_data:sub_cat_data, msg:msg});
   }); // end of ads insert
+    }); // end of sub catagories
+  }); // end of catagories
 }); // end of post method 
 
 // ========================================= end of sell ads sections ==================================================
