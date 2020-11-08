@@ -1,0 +1,35 @@
+<%- include('header') %>  <!-- header section -->
+<%- include('sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+        <div class="login-area">
+            <div class="model">
+                <div class="user-img">
+                    <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="form-area">
+                    <form class="frm" action="/action_page.php" method="post">
+                        <div class="input-area">
+                          <label for="uname"><b>Username</b></label>
+                          <input type="text" placeholder="Enter Username" name="uname" required>
+                    
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="psw" required>
+                            
+                          <button type="submit">Login</button>
+
+                          <a href="sign_up"><button type="button">Create New Account</button></a>
+                          <span class="psw">Forgot <a href="forgot_pass.html">password?</a></span>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div> <!--End of login area  -->
+    </div>
+    <!-- ==================================================footer Area========================================================= -->
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+</body>
+</html>

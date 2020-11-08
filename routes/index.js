@@ -11,7 +11,7 @@ var filePath = process.env.FILE_URL;    // There is file path of images file
 
 var city_data = async ()=>{
   let data = await  pool.city_data.find({});
-  console.log(data)
+  // console.log(data)
   return data;
 };
 var cat_data = async ()=>{
@@ -23,10 +23,14 @@ var sub_cat_data = async ()=>{
   return data;
 };
 // Generating 4 digit random no for otp
-var a = Math.floor(100000 + Math.random() * 900000)
-a = a.toString().substring(0, 4);
-a =  parseInt(a);
-// console.log(a)
+var otp = ()=>{
+  var a = Math.floor(100000 + Math.random() * 900000)
+  a = a.toString().substring(0, 4);
+  a =  parseInt(a);
+  // console.log("Your otp is ",a);
+  return a;
+};
+
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
@@ -59,49 +63,6 @@ router.get('/card', async function(req,res){
   }); // end of catagories
 });
 // ========================================= end of main ads page sections ====================================================
-
-// ========================================= start of sign up page sections ====================================================
-router.get('/sign_up', (req,res)=>{
-  cat_data().then((cat_data)=>{
-    sub_cat_data().then((sub_cat_data)=>{
-      city_data().then((city_data)=>{
-        res.render('user_sign_up', { title:'oldmela.com',city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:''});
-      }); // end of city
-    }); // end of sub catagories
-  }); // end of catagories
-});
-// post method
-router.post('/sign_up', (req,res)=>{
-  cat_data().then((cat_data)=>{
-    sub_cat_data().then((sub_cat_data)=>{
-      city_data().then((city_data)=>{
-        // Checking password and confirm password is same or not?
-        if(req.body.password === req.body.confirmPassword){
-          pool.user_data.find({user_mobile:parseInt(req.body.mobile)},(err,result)=>{
-            if(err) throw err;
-            // Checking mobile nuber already exit or not?
-            if(result.length < 1){
-              const hash_pass = bcrypt.hashSync(req.body.password,10);
-                pool.user_data.create({
-                  user_mobile:req.body.mobile,
-                  user_name:req.body.name,
-                  user_password:hash_pass,
-                }, (err,result)=>{
-                if(err) throw err;
-                  res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'done'});
-                });  // end of create data
-            }else{
-              res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Mobile has already register'});
-            }
-          }); // end of find data
-        }else{
-          res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Confirm password does not matched!'});
-        }
-      }); // end of city
-    }); // end of sub catagories
-  }); // end of catagories
-}); // end of post method
-// ========================================= end of sign up page sections ======================================================
 
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
@@ -191,4 +152,104 @@ router.post('/sell_ads', (req,res)=>{
 
 // ========================================= end of sell ads sections ==================================================
 
+/* -----------------------------------------------------------------------------------------------------------------------------
+                              USER SECTION IS HERE                                                                 
+------------------------------------------------------------------------------------------------------------------------------- */
+// ========================================= start of sign up page sections ====================================================
+router.get('/sign_up', (req,res)=>{
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        res.render('user_sign_up', { title:'oldmela.com',city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:''});
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});
+// post method
+router.post('/sign_up', (req,res)=>{
+  let new_otp = otp();
+  // console.log(new_otp);
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        // Checking password and confirm password is same or not?
+        if(req.body.password === req.body.confirmPassword){
+          pool.user_data.find({user_mobile:parseInt(req.body.mobile)},(err,result)=>{
+            if(err) throw err;
+            // Checking mobile nuber already exit or not?
+            if(result.length < 1){
+              const hash_pass = bcrypt.hashSync(req.body.password,10);
+                pool.user_data.create({
+                  user_mobile:req.body.mobile,
+                  user_name:req.body.name,
+                  user_password:hash_pass,
+                  user_otp:new_otp
+                }, (err,result)=>{
+                if(err) throw err;
+                  res.redirect('/verification?link='+ (result._id).toString());
+                });  // end of create data
+            }else{
+              res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Mobile number is already registered.'});
+            }
+          }); // end of find data
+        }else{
+          res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Confirm password does not matched!'});
+        }
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+}); // end of post method
+// ========================================= end of sign up page sections ======================================================
+/* =======================================Start of user verification root home page.================================================= */
+router.get('/verification', async function(req, res, next) {
+  // console.log(req.query);
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:''});
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
+
+// post method
+router.post('/verification', async function(req, res, next) {
+  let num = mongoose.Types.ObjectId(req.query.link);
+  console.log(num);
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        let get_otp = parseInt(req.body.otp);
+        // console.log(req.body);
+        pool.user_data.findOne({_id:num},(err,result)=>{
+          if(err) throw err;
+          // checking otp is same or not
+          if(result.user_otp === get_otp){
+            pool.user_data.updateOne({user_otp:get_otp},{user_status:1},(err,result)=>{
+              if(err) throw err;
+              res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'Verification successful'});
+            }); // end of update
+          }else{
+            res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'Invalid otp' });
+          }
+        }); // end of findone
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
+
+// ========================================= end of user verification root sections ==================================================
+
+// ========================================= start of user login root sections =======================================================
+// get method
+router.get('/login', async function(req, res, next) {
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, moment:moment });
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
+// ========================================= end of user login root sections ==========================================================
 module.exports = router;

@@ -22,6 +22,8 @@ const sign_up_schema = mongoose.Schema({
     user_mobile:Number,
     user_name:String,
     user_password:String,
+    user_status:{type:Number, default:0},
+    user_otp:Number,
     user_date:{type:Date, default:Date.now()}
 });
 const sign_up_model = mongoose.model('sign_up_model', sign_up_schema, 'user_data');
