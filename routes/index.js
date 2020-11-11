@@ -9,6 +9,14 @@ var router = express.Router();
 
 var filePath = process.env.FILE_URL;    // There is file path of images file
 
+function logout(req, res, next){
+  let user_session = req.session;
+  if(!user_session.phone){
+    res.redirect('/login')
+  }
+  next();
+}
+
 var city_data = async ()=>{
   let data = await  pool.city_data.find({});
   // console.log(data)
@@ -64,9 +72,14 @@ router.get('/card', async function(req,res){
 });
 // ========================================= end of main ads page sections ====================================================
 
+/* -----------------------------------------------------------------------------------------------------------------------------
+                              USER SECTION IS HERE                                                                 
+------------------------------------------------------------------------------------------------------------------------------- */
+
+
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
-router.get('/sell_ads', function(req, res, next){
+router.get('/sell_ads', logout, function(req, res, next){
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
@@ -150,11 +163,8 @@ router.post('/sell_ads', (req,res)=>{
   }); // end of catagories
 }); // end of post method 
 
-// ========================================= end of sell ads sections ==================================================
+// ========================================= end of sell ads sections ========================================================
 
-/* -----------------------------------------------------------------------------------------------------------------------------
-                              USER SECTION IS HERE                                                                 
-------------------------------------------------------------------------------------------------------------------------------- */
 // ========================================= start of sign up page sections ====================================================
 router.get('/sign_up', (req,res)=>{
   cat_data().then((cat_data)=>{
@@ -242,14 +252,70 @@ router.post('/verification', async function(req, res, next) {
 
 // ========================================= start of user login root sections =======================================================
 // get method
-router.get('/login', async function(req, res, next) {
+router.get('/login', function(req, res, next) {
+  if(req.session.phone){
+    res.redirect('/dash_board');
+  }
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, moment:moment });
+        res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'' });
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
+
+// post method
+router.post('/login', function(req, res, next) {
+  // console.log(req.body);
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        pool.user_data.findOne({user_mobile:parseInt(req.body.phone)}, (err, data)=>{
+          if(err) throw err;
+          // console.log(data);
+          if(data){
+            let match = bcrypt.compareSync(req.body.password, data.user_password)
+            if(match){
+              var session = req.session;
+              session.phone = data.user_mobile;
+              session.name = data.user_name;
+              // console.log(session);
+              res.redirect('/dash_board');
+            }else{
+              res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Invalid password' });
+            }
+          }else{
+            res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Invalid mobile' });
+          }
+        }); // end of pool
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
 });  // end of get method 
 // ========================================= end of user login root sections ==========================================================
+
+/* =======================================GET user home page.================================================= */
+router.get('/dash_board', logout, function(req, res, next) {
+  cat_data().then((cat_data)=>{
+    sub_cat_data().then((sub_cat_data)=>{
+      city_data().then((city_data)=>{
+        res.render('users/user_profile', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data });
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});  // end of get method 
+// ========================================= end of user home sections ==================================================
+
+// ========================================= start logout section    ==================================================
+router.get('/logout', (req,res)=>{
+  req.session.destroy((err, result)=>{
+    if(err) throw err;
+    // console.log("logout ho gya", result)
+  });
+  res.redirect('/');
+});
+// ========================================= end of logout sections ===================================================
+
+
 module.exports = router;
