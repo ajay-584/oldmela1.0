@@ -25,7 +25,10 @@ const sign_up_schema = mongoose.Schema({
     user_password:String,
     user_status:{type:Number, default:0},
     user_otp:Number,
-    user_date:{type:Date, default:Date.now()}
+    user_date:{type:Date, default:Date.now()},
+    user_gender:{type:String, default:null},
+    user_address:{type:String, default:null},
+    user_email:{type:String, default:null}
 });
 const sign_up_model = mongoose.model('sign_up_model', sign_up_schema, 'user_data');
 

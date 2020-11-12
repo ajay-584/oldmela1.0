@@ -310,7 +310,11 @@ router.get('/dash_board', logout, function(req, res, next) {
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('users/index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:session.name });
+        pool.user_data.find({_id:session.user_id},(err,user_data)=>{
+          if(err) throw err;
+          // console.log(user_data);
+          res.render('users/index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_data:user_data, user_name:session.name });
+        });
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
