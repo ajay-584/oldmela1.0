@@ -43,6 +43,7 @@ var otp = ()=>{
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
   let session = req.session;
+  // console.log(session.user_id);
   var ads_data = await pool.ads_data.find();
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
@@ -143,15 +144,16 @@ router.post('/sell_ads', (req,res)=>{
         pool.ads_data.create({
           ads_title:req.body.ads_name,
           ads_price:req.body.ads_price,
-          ads_cat:req.body.ads_cat,
-          ads_sub_cat:req.body.sub_ads_cat,
+          ads_cat_id:req.body.ads_cat,
+          ads_sub_cat_id:req.body.sub_ads_cat,
           ads_img1:img1,
           ads_img2:img2,
           ads_img3:img3,
           ads_description:req.body.description,
-          ads_city:req.body.city,
+          ads_city_id:req.body.city,
           ads_phone:req.body.phone,
-          ads_address:req.body.address
+          ads_address:req.body.address,
+          user_id:session.user_id
         },(err,data)=>{
           if(err){
             console.log("there is error in ads inserting");
@@ -285,6 +287,8 @@ router.post('/login', function(req, res, next) {
               var session = req.session;
               session.name = data.user_name;
               session.phone = data.user_mobile;
+              session.user_id = data._id;
+              // console.log(data._id);
               // console.log(session.phone,session);
               res.redirect('/dash_board');
             }else{
@@ -317,7 +321,7 @@ router.get('/dash_board', logout, function(req, res, next) {
 router.get('/logout', (req,res)=>{
   req.session.destroy((err, result)=>{
     if(err) throw err;
-    console.log("logout ho gya", result)
+    // console.log("logout ho gya", result)
   });
   res.redirect('/');
 });

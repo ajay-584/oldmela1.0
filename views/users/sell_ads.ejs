@@ -27,9 +27,9 @@
               </div>
               <div class="col-75">
                 <select class="sell_input"  name="ads_cat" required>
-                  <option value="book">Books</option>
-                  <option value="vahicle">Vahicle</option>
-                  <option value="usa">Phones</option>
+                  <% for(x of cat_data){ %>
+                    <option value="<%= x._id %>"><%= x.name %></option>
+                  <% } %>
                 </select>
               </div>
             </div>
@@ -39,9 +39,9 @@
               </div>
               <div class="col-75">
                 <select class="sell_input" name="sub_ads_cat">
-                  <option value="Computer Science">Computer Science</option>
-                  <option value="canada">Machanical</option>
-                  <option value="usa">Food Technology</option>
+                  <% for(x of sub_cat_data){ %>
+                    <option value="<%= x._id %>"><%= x.name %></option>
+                  <% } %>
                 </select>
               </div>
             </div>
@@ -71,9 +71,9 @@
               </div>
               <div class="col-75">
                 <select class="sell_input"  name="city">
-                  <option value="patna">Patna</option>
-                  <option value="canada">Darbhnage</option>
-                  <option value="usa">Madhubni</option>
+                  <% for(x of city_data){ %>
+                    <option value="<%= x._id %>"><%= x.name %></option>
+                  <% } %>
                 </select>
               </div>
             </div>
