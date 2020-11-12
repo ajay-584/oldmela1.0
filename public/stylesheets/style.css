@@ -540,6 +540,7 @@ html{
   /* flex-wrap: wrap; */
 }
 .left-area{
+  /* position: fixed; */
   width: 20%;
   /* height: 50rem; */
   margin: 0 1% 0 3%;

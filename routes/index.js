@@ -42,11 +42,12 @@ var otp = ()=>{
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function(req, res, next) {
+  let session = req.session;
   var ads_data = await pool.ads_data.find();
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, ads_data:ads_data, moment:moment });
+        res.render('index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, ads_data:ads_data, moment:moment, user_name:session.name });
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -63,9 +64,10 @@ router.get('/card', async function(req,res){
   }
   // console.log(req.query.link);
   cat_data().then((cat_data)=>{
+    let session=req.session;
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('ads_page', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, ads_info:ads_info, moment:moment });
+        res.render('ads_page', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, ads_info:ads_info, user_name:session.name, moment:moment });
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -80,16 +82,18 @@ router.get('/card', async function(req,res){
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
 router.get('/sell_ads', logout, function(req, res, next){
+  let session = req.session;
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'' });
+        res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:session.name, msg:'' });
       }); // end of sub city
     }); // end of sub catagories
   }); // end of catagories
 });
 // post method------------------------------------------------------------
 router.post('/sell_ads', (req,res)=>{
+  let session = req.session;
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
@@ -152,11 +156,11 @@ router.post('/sell_ads', (req,res)=>{
           if(err){
             console.log("there is error in ads inserting");
             msg="There is someting wrong please try agian"
-            res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:msg});
+            res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:session.name, msg:msg});
           }
           // console.log("insert ho gya",data);
           msg = "The ads data has been submitted Thank you!"
-          res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:msg});
+          res.render('users/sell_ads', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:session.name, msg:msg});
         }); // end of ads insert
       }); // end of city
     }); // end of sub catagories
@@ -170,7 +174,7 @@ router.get('/sign_up', (req,res)=>{
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('user_sign_up', { title:'oldmela.com',city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:''});
+        res.render('user_sign_up', { title:'oldmela.com',city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:''});
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -199,11 +203,11 @@ router.post('/sign_up', (req,res)=>{
                   res.redirect('/verification?link='+ (result._id).toString());
                 });  // end of create data
             }else{
-              res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Mobile number is already registered.'});
+              res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:'Mobile number is already registered.'});
             }
           }); // end of find data
         }else{
-          res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Confirm password does not matched!'});
+          res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:'', msg:'Confirm password does not matched!'});
         }
       }); // end of city
     }); // end of sub catagories
@@ -216,7 +220,7 @@ router.get('/verification', async function(req, res, next) {
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:''});
+        res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:'', msg:''});
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -237,10 +241,10 @@ router.post('/verification', async function(req, res, next) {
           if(result.user_otp === get_otp){
             pool.user_data.updateOne({user_otp:get_otp},{user_status:1},(err,result)=>{
               if(err) throw err;
-              res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'Verification successful'});
+              res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:'Verification successful'});
             }); // end of update
           }else{
-            res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'Invalid otp' });
+            res.render('user_verification', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:'Invalid otp' });
           }
         }); // end of findone
       }); // end of city
@@ -253,13 +257,14 @@ router.post('/verification', async function(req, res, next) {
 // ========================================= start of user login root sections =======================================================
 // get method
 router.get('/login', function(req, res, next) {
-  if(req.session.phone){
+  let session = req.session;
+  if(session.phone){
     res.redirect('/dash_board');
   }
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,msg:'' });
+        res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:'', msg:'' });
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -278,15 +283,15 @@ router.post('/login', function(req, res, next) {
             let match = bcrypt.compareSync(req.body.password, data.user_password)
             if(match){
               var session = req.session;
-              session.phone = data.user_mobile;
               session.name = data.user_name;
-              // console.log(session);
+              session.phone = data.user_mobile;
+              // console.log(session.phone,session);
               res.redirect('/dash_board');
             }else{
-              res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Invalid password' });
+              res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:'', msg:'Invalid password' });
             }
           }else{
-            res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, msg:'Invalid mobile' });
+            res.render('user_login', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:'', msg:'Invalid mobile' });
           }
         }); // end of pool
       }); // end of city
@@ -297,10 +302,11 @@ router.post('/login', function(req, res, next) {
 
 /* =======================================GET user home page.================================================= */
 router.get('/dash_board', logout, function(req, res, next) {
+  let session = req.session;
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
-        res.render('users/user_profile', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data });
+        res.render('users/index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, user_name:session.name });
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
@@ -311,7 +317,7 @@ router.get('/dash_board', logout, function(req, res, next) {
 router.get('/logout', (req,res)=>{
   req.session.destroy((err, result)=>{
     if(err) throw err;
-    // console.log("logout ho gya", result)
+    console.log("logout ho gya", result)
   });
   res.redirect('/');
 });

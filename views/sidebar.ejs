@@ -53,8 +53,9 @@
       <aside id="profile" class="profile-box">
         <div class="profile-links">
           <ul onclick="colseprofile()">
-            <li><a href="#">Sign In</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <li><div>Hellow</div><div><% if(user_name){ %><%= user_name %><% } %></div></li>
+            <li><a href="dash_board">My prfile</a></li>
+            <li><a href="logout">Logout</a></li>
           </ul>
         </div>
       </aside>
