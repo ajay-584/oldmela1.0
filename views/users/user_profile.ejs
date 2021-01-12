@@ -4,17 +4,17 @@
     </div>
     <div class="user-info-section">
       <ul>
-        <li><span style="font-weight: bold;">Name:</span> <%= user_data.user_name %></li>
-        <li><span style="font-weight: bold;">Phone:</span> <%= user_data.user_mobile %></li>
-        <li><span style="font-weight: bold;">Email:</span> <%= user_data.user_email %></li>
-        <li><span style="font-weight: bold;">Gender:</span> <%= user_data.user_gender %></li>
-        <li><span style="font-weight: bold;">Address:</span> <%= user_data.user_address %></li>
+        <li><span style="font-weight: bold;">Name:</span> <%= user_data[0].user_name %></li>
+        <li><span style="font-weight: bold;">Phone:</span> <%= user_data[0].user_mobile %></li>
+        <li><span style="font-weight: bold;">Email:</span> <%= user_data[0].user_email %></li>
+        <li><span style="font-weight: bold;">Gender:</span> <%= user_data[0].user_gender %></li>
+        <li><span style="font-weight: bold;">Address:</span> <%= user_data[0].user_address %></li>
       </ul>
     </div>
     <div class="profile-options-section">
         <ul>
             <li><button>My Ads</button></li>
-            <li><button>Edit Profile</button></li>
+            <li><button>Update Profile</button></li>
             <li><button>Change Password</button></li>
             <li><a href="logout"><button>Logout</button></a></li>
         </ul>

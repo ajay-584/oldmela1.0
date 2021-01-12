@@ -512,8 +512,8 @@ html{
   /* box-sizing: border-box; */
 }
 .input-area button{
-  background-color: #f0f0f0;
-  /* color: white; */
+  background-color: #000000;
+  color: white;
   padding: 14px 20px;
   margin: .5rem 0;
   border: 1px solid;
@@ -591,6 +591,7 @@ html{
   border: 1px solid;
   border-radius: .5rem;
   background-color: #f0f0f0;
+  cursor: pointer;
 }
 .right-area{
   width: 70%;
