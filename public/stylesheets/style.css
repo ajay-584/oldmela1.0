@@ -51,6 +51,7 @@ html{
   font-size: 1.6rem;
   font-weight: bold;
   outline: none;
+  position: relative;
   cursor: pointer;
   /* border-bottom: 1px solid; */
 }
@@ -58,7 +59,8 @@ html{
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* display: none; */
+  position: relative;
+  display: none;
   background-color: #fff;
 }
 .sidebar-link-open{
@@ -512,11 +514,11 @@ html{
   /* box-sizing: border-box; */
 }
 .input-area button{
-  background-color: #000000;
+  background-color: #111;
   color: white;
   padding: 14px 20px;
   margin: .5rem 0;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 0.5rem;
   cursor: pointer;
   width: 100%;

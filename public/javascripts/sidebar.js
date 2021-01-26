@@ -1,3 +1,4 @@
+
 function opensidebar(){
   document.querySelector(".sidebar").classList.add("open");
 }
@@ -28,12 +29,35 @@ function colseprofile(){
   var x = document.getElementById("profile");
   x.classList.remove("open-profile");
 }
-function opensidebarlinks(){
+function opensidebarlinks(data){
+  // console.log(data)
   var x = document.getElementById("sidebar-link");
   if (x.className === "sidebar-link"){
     x.classList.add("sidebar-link-open");
-  }else{
-    x.classList.remove("sidebar-link-open");
+  }
+
+  const ajaxreq = new XMLHttpRequest();
+  ajaxreq.open('GET','http://localhost:3000/subcat?value='+data,'TRUE');
+  ajaxreq.send();
+
+  ajaxreq.onreadystatechange = function(){
+    if(ajaxreq.readyState == 4 && ajaxreq.status == 200){
+      x.innerHTML = ajaxreq.responseText;
+    }
+  }
+
+}
+function sellselectcat(data){
+  // console.log(data)
+  var x = document.getElementById("sellsubcat");
+  const ajaxreq = new XMLHttpRequest();
+  ajaxreq.open('GET','http://localhost:3000/sellsubcat?value='+data,'TRUE');
+  ajaxreq.send();
+
+  ajaxreq.onreadystatechange = function(){
+    if(ajaxreq.readyState == 4 && ajaxreq.status == 200){
+      x.innerHTML = ajaxreq.responseText;
+    }
   }
 }
 

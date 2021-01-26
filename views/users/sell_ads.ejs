@@ -26,7 +26,8 @@
                 <label for="Categroies">Categroies</label>
               </div>
               <div class="col-75">
-                <select class="sell_input"  name="ads_cat" required>
+                <select class="sell_input" onchange="sellselectcat(this.value)"  name="ads_cat" required>
+                  <option value="">Select Categroies</option>
                   <% for(x of cat_data){ %>
                     <option value="<%= x._id %>"><%= x.name %></option>
                   <% } %>
@@ -38,10 +39,8 @@
                 <label for="Sub_Categroies">Sub_Categroies</label>
               </div>
               <div class="col-75">
-                <select class="sell_input" name="sub_ads_cat">
-                  <% for(x of sub_cat_data){ %>
-                    <option value="<%= x._id %>"><%= x.name %></option>
-                  <% } %>
+                <select id="sellsubcat" class="sell_input" name="sub_ads_cat">
+                  <option value="">Select Sub-Categroies</option>
                 </select>
               </div>
             </div>

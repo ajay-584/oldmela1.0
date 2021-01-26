@@ -48,6 +48,7 @@ router.get('/', async function(req, res, next) {
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
+        // console.log(city_data);
         res.render('index', { title: 'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data, ads_data:ads_data, moment:moment, user_name:session.name });
       }); // end of city
     }); // end of sub catagories
@@ -55,6 +56,25 @@ router.get('/', async function(req, res, next) {
 });  // end of get method 
 // ========================================= end of home sections ==================================================
 
+// ========================================= Ajax sections ==================================================
+// for side bar
+router.get('/subcat', (req, res)=>{
+  var val = mongoose.Types.ObjectId(req.query.value);
+  sub_cat_data().then((data)=>{
+    // console.log(data);
+    res.render('subcatajax',{data:data, val:val});
+  });
+});
+// for sell section
+router.get('/sellsubcat', (req, res)=>{
+  var val = mongoose.Types.ObjectId(req.query.value);
+  // console.log(val)
+  sub_cat_data().then((data)=>{
+    // console.log(data);
+    res.render('users/sellsubcatajax',{data:data, val:val});
+  });
+});
+// ========================================= end of ajax sections ==================================================
 // ========================================= Start of main ads page sections ==================================================
 router.get('/card', async function(req,res){
   try{
@@ -231,7 +251,7 @@ router.get('/verification', async function(req, res, next) {
 // post method
 router.post('/verification', async function(req, res, next) {
   let num = mongoose.Types.ObjectId(req.query.link);
-  console.log(num);
+  // console.log(num);
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
@@ -253,6 +273,7 @@ router.post('/verification', async function(req, res, next) {
     }); // end of sub catagories
   }); // end of catagories
 });  // end of get method 
+
 
 // ========================================= end of user verification root sections ==================================================
 
