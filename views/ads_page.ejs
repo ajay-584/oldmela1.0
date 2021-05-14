@@ -4,17 +4,18 @@
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
         <div class="ads">
+            <!-- image area -->
             <div class="ads-image">
                 <div id="img" class="big-image">
-                    <img id="bigImage" src="/images/<%= ads_info.ads_img1 %>" alt="">
+                    <img id="bigImage" src="/images/<%= ads_info.ads_img1 %>" alt="Product image">
                 </div>
                 <div class="small-image">
-                    <img id="img1" onclick="img1()" src="/images/<%= ads_info.ads_img1 %>" alt="">
+                    <img id="img1" onclick="img1()" src="/images/<%= ads_info.ads_img1 %>" alt="extra product image">
                     <% if(ads_info.ads_img2){ %>
-                    <img id="img2" onclick="img2()" src="/images/<%= ads_info.ads_img2 %>" alt="">
+                    <img id="img2" onclick="img2()" src="/images/<%= ads_info.ads_img2 %>" alt="extra product image">
                     <% } %>
                     <% if(ads_info.ads_img3){ %>
-                      <img id="img3" onclick="img3()" src="/images/<%= ads_info.ads_img3 %>" alt="">
+                      <img id="img3" onclick="img3()" src="/images/<%= ads_info.ads_img3 %>" alt="extra product image">
                     <% } %>
                 </div>
             </div>

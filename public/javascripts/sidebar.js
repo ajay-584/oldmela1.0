@@ -29,6 +29,8 @@ function colseprofile(){
   var x = document.getElementById("profile");
   x.classList.remove("open-profile");
 }
+
+//  for categories and sub cat data
 function opensidebarlinks(data){
   // console.log(data)
   var x = document.getElementById("sidebar-link");
@@ -47,6 +49,8 @@ function opensidebarlinks(data){
   }
 
 }
+
+// for sell cat and sub cat data
 function sellselectcat(data){
   // console.log(data)
   var x = document.getElementById("sellsubcat");
@@ -56,11 +60,11 @@ function sellselectcat(data){
 
   ajaxreq.onreadystatechange = function(){
     if(ajaxreq.readyState == 4 && ajaxreq.status == 200){
-      x.innerHTML = ajaxreq.responseText;
+      x.appendChild = ajaxreq.responseText;
     }
   }
 }
-
+// sellselectcat("5fa4224d1ddd8d2ac89dcff5");
 // ads page
 function img1(){
   x = document.getElementById("img1").src;

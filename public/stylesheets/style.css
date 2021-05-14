@@ -46,7 +46,7 @@ html{
   /* overflow: scroll; */
 }
 .sidebar-links button{
-  height: 4rem;
+  /* height: 4rem; */
   padding: 0.6rem;
   font-size: 1.6rem;
   font-weight: bold;
