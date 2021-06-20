@@ -24,7 +24,7 @@ const sign_up_schema = mongoose.Schema({
     user_name:String,
     user_password:String,
     user_status:{type:Number, default:0},
-    user_otp:Number,
+    user_otp:{type:Number, default:0},
     user_date:{type:Date, default:Date.now()},
     user_gender:{type:String, default:'Na'},
     user_address:{type:String, default:'Na'},

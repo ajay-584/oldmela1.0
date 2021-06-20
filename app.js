@@ -18,11 +18,19 @@ app.set('view engine', 'ejs');
 
 app.use(session({ 
   secret : "@#%$@#$sdfjk;",
+<<<<<<< HEAD
     // name: cookie_name,
     // store: sessionStore, // connect-mongo session store
     proxy: true,
     resave: true,
     saveUninitialized: true
+=======
+  // name: cookie_name,
+  // store: sessionStore, // connect-mongo session store
+  proxy: true,
+  resave: true,
+  saveUninitialized: true
+>>>>>>> dev1
 }));  // seesion
 app.use(fileUpload());
 app.use(logger('dev'));
@@ -50,8 +58,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // ==============================================port===============================
-// app.listen(port,function(req,res){
-//   console.log('server started....');
+// app.listen(process.env.PORT,function(){
+//   console.log(`server started.... on ${process.env.PORT}`);
 // });
 app.listen('3000');
 module.exports = app;

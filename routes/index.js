@@ -4,6 +4,8 @@ var uuid = require('uuid');
 var moment = require('moment');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { query } = require('express');
+const session = require('express-session');
 
 var router = express.Router();
 
@@ -193,6 +195,10 @@ router.post('/sell_ads', (req,res)=>{
 
 // ========================================= start of sign up page sections ====================================================
 router.get('/sign_up', (req,res)=>{
+  let session = req.session;
+  if(session.phone){
+    res.redirect('404');
+  }
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
@@ -204,7 +210,6 @@ router.get('/sign_up', (req,res)=>{
 // post method
 router.post('/sign_up', (req,res)=>{
   let new_otp = otp();
-  let session = req.session;
   // console.log(new_otp);
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
@@ -223,8 +228,7 @@ router.post('/sign_up', (req,res)=>{
                   user_otp:new_otp
                 }, (err,result)=>{
                 if(err) throw err;
-                  session.phone = result.user_mobile;
-                  res.redirect('/verification');
+                  res.redirect('/verification?link='+String(result._id));
                 });  // end of create data
             }else{
               res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:'Mobile number is already registered.'});
@@ -240,8 +244,9 @@ router.post('/sign_up', (req,res)=>{
 // ========================================= end of sign up page sections ======================================================
 /* =======================================Start of user verification root home page.================================================= */
 router.get('/verification', async function(req, res, next) {
-  let session = req.session;
-  console.log(session);
+  if(!req.query.hasOwnProperty('link')){
+    res.redirect('404');
+  }
   // console.log(req.query);
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
@@ -255,7 +260,10 @@ router.get('/verification', async function(req, res, next) {
 // post method
 router.post('/verification', async function(req, res, next) {
   let num = mongoose.Types.ObjectId(req.query.link);
-  // console.log(num);
+  console.log("this is query",req.query.hasOwnProperty('link'));
+  if(!req.query.hasOwnProperty('link')){
+    res.redirect('404');
+  }else{
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
       city_data().then((city_data)=>{
@@ -276,6 +284,7 @@ router.post('/verification', async function(req, res, next) {
       }); // end of city
     }); // end of sub catagories
   }); // end of catagories
+  } // end of req.qeury if statement
 });  // end of get method 
 
 
