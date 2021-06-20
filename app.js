@@ -18,19 +18,11 @@ app.set('view engine', 'ejs');
 
 app.use(session({ 
   secret : "@#%$@#$sdfjk;",
-<<<<<<< HEAD
-    // name: cookie_name,
-    // store: sessionStore, // connect-mongo session store
-    proxy: true,
-    resave: true,
-    saveUninitialized: true
-=======
   // name: cookie_name,
   // store: sessionStore, // connect-mongo session store
   proxy: true,
   resave: true,
   saveUninitialized: true
->>>>>>> dev1
 }));  // seesion
 app.use(fileUpload());
 app.use(logger('dev'));
