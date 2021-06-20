@@ -204,6 +204,7 @@ router.get('/sign_up', (req,res)=>{
 // post method
 router.post('/sign_up', (req,res)=>{
   let new_otp = otp();
+  let session = req.session;
   // console.log(new_otp);
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{
@@ -222,7 +223,8 @@ router.post('/sign_up', (req,res)=>{
                   user_otp:new_otp
                 }, (err,result)=>{
                 if(err) throw err;
-                  res.redirect('/verification?link='+ (result._id).toString());
+                  session.phone = result.user_mobile;
+                  res.redirect('/verification');
                 });  // end of create data
             }else{
               res.render('user_sign_up', { title:'oldmela.com', city_data:city_data, cat_data:cat_data, sub_cat_data:sub_cat_data,user_name:'', msg:'Mobile number is already registered.'});
@@ -238,6 +240,8 @@ router.post('/sign_up', (req,res)=>{
 // ========================================= end of sign up page sections ======================================================
 /* =======================================Start of user verification root home page.================================================= */
 router.get('/verification', async function(req, res, next) {
+  let session = req.session;
+  console.log(session);
   // console.log(req.query);
   cat_data().then((cat_data)=>{
     sub_cat_data().then((sub_cat_data)=>{

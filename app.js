@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 
+console.log("what happening");
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render('404');
