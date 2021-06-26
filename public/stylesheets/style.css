@@ -60,7 +60,7 @@ html{
   flex-direction: column;
   width: 100%;
   position: relative;
-  display: none;
+  /* display: none; */
   background-color: #fff;
 }
 .sidebar-link-open{
@@ -569,12 +569,17 @@ html{
   border: 1px solid #f0f0f0f0;
 }
 .user-info-section ul{
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 0.5rem;
+  text-align: center;
+  align-items: center;
 }
 .user-info-section ul li{
   list-style: none;
   padding: 0.2rem;
+  color: green;
 }
 .profile-options-section ul{
   width: 100%;

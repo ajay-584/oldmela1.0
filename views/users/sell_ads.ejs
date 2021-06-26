@@ -27,7 +27,7 @@
               </div>
               <div class="col-75">
                 <select class="sell_input" onchange="sellselectcat(this.value)"  name="ads_cat" required>
-                  <option value="">Select Categroies</option>
+                  <option>Select Categroies</option>
                   <% for(x of cat_data){ %>
                     <option value="<%= x._id %>"><%= x.name %></option>
                   <% } %>

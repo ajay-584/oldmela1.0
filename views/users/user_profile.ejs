@@ -4,11 +4,8 @@
     </div>
     <div class="user-info-section">
       <ul>
-        <li><span style="font-weight: bold;">Name:</span> <%= user_data[0].user_name %></li>
-        <li><span style="font-weight: bold;">Phone:</span> <%= user_data[0].user_mobile %></li>
-        <li><span style="font-weight: bold;">Email:</span> <%= user_data[0].user_email %></li>
-        <li><span style="font-weight: bold;">Gender:</span> <%= user_data[0].user_gender %></li>
-        <li><span style="font-weight: bold;">Address:</span> <%= user_data[0].user_address %></li>
+        <li> <!-- <span style="font-weight: bold;">Name:</span> --> <%= user_data.user_name %> </li>
+        <li> <!-- <span style="font-weight: bold;">Phone:</span> --> <%= user_data.user_mobile %> </li>
       </ul>
     </div>
     <div class="profile-options-section">
@@ -16,6 +13,7 @@
             <li><button id="my_ads">My Ads</button></li>
             <li><button id="update_profile">Update Profile</button></li>
             <li><button id="change_password">Change Password</button></li>
+            <li><a href="#"><button>Donation</button></a></li>
             <li><a href="logout"><button>Logout</button></a></li>
         </ul>
     </div>
