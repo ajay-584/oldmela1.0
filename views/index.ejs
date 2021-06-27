@@ -1,26 +1,36 @@
-    <%- include('header') %>  <!-- header section -->
-    <%- include('sidebar') %> <!-- side bar section  -->
+<%- include('header') %>
+  <!-- header section -->
+  <%- include('sidebar') %>
+    <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
       <div class="cards">
-        
+
         <% for(ele of ads_data){ %>
-        <div class="card">
-          <a href="/card?link=<%= ele._id %>">
-            <div class="image-section">
-              <img src="/images/<%= ele.ads_img1 %>" alt="">
+          <div class="card">
+            <a href="/card?link=<%= ele._id %>">
+              <div class="image-section">
+                <img src="/images/<%= ele.ads_img1 %>" alt="">
+              </div>
+            </a>
+            <div class="details-section">
+              <ul>
+                <li><a href="/card?link=<%= ele._id %>">
+                    <%= ele.ads_title %>
+                  </a></li>
+                <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf156;</i>
+                  <%= ele.ads_price %>
+                </li>
+                <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="fas">&#xf041;</i>
+                  <%= ele.ads_city %>
+                </li>
+                <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i>
+                  <%= moment(ele.ads_date).format('Do MMM YYYY') %>
+                </li>
+              </ul>
             </div>
-          </a>
-          <div class="details-section">
-            <ul>
-              <li><a href="/card?link=<%= ele._id %>"><%= ele.ads_title %></a></li>
-              <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf156;</i><%= ele.ads_price %></li>
-              <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="fas">&#xf041;</i><%= ele.ads_city %></li>
-              <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i><%= moment(ele.ads_date).format('Do MMM YYYY') %></li>
-            </ul>
           </div>
-        </div>
-        <% } %>
+          <% } %>
 
       </div>
     </div>
@@ -28,7 +38,8 @@
     <div class="footer-area">
       <div>©2018-2019 By oldmela.com</div>
     </div>
-  </div>
-     <!-- ==================================================End of footer Area========================================================= -->
-</body>
-</html>
+    </div>
+    <!-- ==================================================End of footer Area========================================================= -->
+    </body>
+
+    </html>

@@ -497,6 +497,56 @@ router.get('/dash_board', logout, (req, res, next) => {
 
 // ========================================= end of user home sections ==================================================
 
+// ========================================= start myAds section    ==================================================
+router.get("/myAds", logout, (req, res, next) => {
+  // let id = mongoose.Types.ObjectId(req.query.id)
+  // console.log(req.query);
+  let session = req.session;
+  // console.log(session)
+  cat_data().then((cat_data) => {
+    sub_cat_data().then((sub_cat_data) => {
+      city_data().then((city_data) => {
+        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
+          if (err) throw err;
+          // console.log(result);
+          pool.ads_data.find({ user_id: result._id }, (err, data) => {
+            console.log(data);
+            res.render("users/user_ads", {
+              title: "oldmela.com",
+              city_data: city_data,
+              cat_data: cat_data,
+              sub_cat_data: sub_cat_data,
+              user_data: result,
+              ads_data: data,
+              moment: moment,
+              user_name: session.name,
+            }); //end of render
+          }); //end of  ads data
+        }); // end of user data
+      }); // end of city
+    }); // end of sub catagories
+  }); // end of catagories
+});
+// ========================================= end of myads sections ===================================================
+
+// ========================================= start updateProfile section    ==================================================
+router.get('/update_profile', (req, res, next) => {
+  next()
+})
+// ========================================= end of Update Profile sections ===================================================
+
+// ========================================= start Change password section    ==================================================
+router.get('/change_password', (req, res, next) => {
+  next()
+})
+// ========================================= end of change password sections ===================================================
+
+// ========================================= start donation section    ==================================================
+router.get('/donation', (req, res, next) => {
+  next()
+})
+// ========================================= end of donation sections ===================================================
+
 // ========================================= start logout section    ==================================================
 router.get('/logout', (req, res) => {
   req.session.destroy((err, result) => {

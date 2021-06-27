@@ -1,0 +1,52 @@
+<%- include('../header') %>
+    <!-- header section -->
+    <%- include('./user_profile_sidebar') %>
+        <!-- side bar section  -->
+        <!-- ==================================================Main Area========================================================= -->
+        <div class="main-area">
+            <div class="cards">
+                <% if(ads_data.length){ %>
+                <h1 style="color: green; margin: .2rem;">My Ads</h1>
+              <% for(ele of ads_data){ %>
+                <div class="card">
+                  <a href="/card?link=<%= ele._id %>">
+                    <div class="image-section">
+                      <img src="/images/<%= ele.ads_img1 %>" alt="">
+                    </div>
+                  </a>
+                  <div class="details-section">
+                    <ul>
+                      <li><a href="/card?link=<%= ele._id %>">
+                          <%= ele.ads_title %>
+                        </a></li>
+                      <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf156;</i>
+                        <%= ele.ads_price %>
+                      </li>
+                      <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i>
+                        <%= moment(ele.ads_date).format('Do MMM YYYY') %>
+                      </li>
+                      <li>
+                          <button style="background-color: green; font-size: 1.5rem; padding: .2rem; border-radius: 0.2rem; color: #fff; border: none; outline: none;"><i style="font-size:1.4rem; margin-right: 0.1rem;" class="fa">&#xf06e;</i> View</button>
+                          <button style="background-color: red; font-size: 1.5rem; padding: .2rem; border-radius: 0.2rem; color: #fff; border: none; outline: none;"><i style="font-size:1.4rem; margin-right: 0.1rem;" class="fa">&#xf1f8;</i> Delete</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <% } } else { %>
+                    <div><h3>Dear <span style="color: green; font-weight: bold;"><%= user_name %></span> currently you have not any ads</h3></div>
+                <% } %>
+      
+            </div>
+          </div>
+          <!-- ==================================================footer Area========================================================= -->
+
+
+        <div class="footer-area">
+            <div>
+                <h3>footer area</h3>
+            </div>
+        </div>
+        <!-- ==================================================End of footer Area========================================================= -->
+        </body>
+
+        </html>
