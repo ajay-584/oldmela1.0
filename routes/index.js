@@ -527,11 +527,69 @@ router.get("/myAds", logout, (req, res, next) => {
     }); // end of sub catagories
   }); // end of catagories
 });
+
+router.post('/myADs', logout, (req, res)=>{
+  res.send("this is delete method");
+})
 // ========================================= end of myads sections ===================================================
 
 // ========================================= start updateProfile section    ==================================================
-router.get('/update_profile', (req, res, next) => {
-  next()
+// get method
+router.get('/update_profile', logout, (req, res, next) => {
+  let id = mongoose.Types.ObjectId(req.query.id)
+  // console.log(req.query);
+  let session = req.session
+  // console.log(session)
+  cat_data().then((cat_data) => {
+    sub_cat_data().then((sub_cat_data) => {
+      city_data().then((city_data) => {
+        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
+          if (err) throw err
+          console.log(result);
+          res.render('users/user_update_profile', {
+            title: 'oldmela.com',
+            city_data: city_data,
+            cat_data: cat_data,
+            sub_cat_data: sub_cat_data,
+            user_data: result,
+            user_name: session.name,
+            msg: '',
+          })
+        }) // end of user data
+      }) // end of city
+    }) // end of sub catagories
+  }) // end of catagories
+})
+// Post method
+router.post('/update_profile', logout, (req, res, next) => {
+  console.log(req.body);
+  const name = req.body.user_name;
+  const email = req.body.user_email;
+  const add = req.body.user_address;
+  let session = req.session
+  // console.log(session)
+  cat_data().then((cat_data) => {
+    sub_cat_data().then((sub_cat_data) => {
+      city_data().then((city_data) => {
+        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
+          if (err) throw err
+          pool.user_data.updateOne({_id:result._id}, {$set: {user_name:name, user_email:email, user_address:add}}, (err, rel)=>{
+            if(err) throw err;
+            console.log(result);
+            res.render('users/user_update_profile', {
+              title: 'oldmela.com',
+              city_data: city_data,
+              cat_data: cat_data,
+              sub_cat_data: sub_cat_data,
+              user_data: result,
+              user_name: session.name,
+              msg: 'Data has been updated',
+            }) //end of render method
+          }) // end of update user
+        }) // end of user data
+      }) // end of city
+    }) // end of sub catagories
+  }) // end of catagories
 })
 // ========================================= end of Update Profile sections ===================================================
 
