@@ -15,7 +15,7 @@
           <div class="sidebar-link">
             <% for(y of sub_cat_data){ %>
               <% if((x._id).toString() === (y.cat_id).toString()){ %>
-                <a href="<%= y._id %>"><%= y.name %></a>
+                <a href="/cat?id=<%= y._id %>"><%= y.name %></a>
               <% } %> 
             <% } %>
           </div>

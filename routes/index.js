@@ -21,7 +21,7 @@ function logout(req, res, next) {
 }
 
 var city_data = async () => {
-  let data = await pool.city_data.find({})
+  let data = await pool.city_data.find({});
   // console.log(data)
   return data
 }
@@ -46,11 +46,11 @@ var otp = () => {
 router.get('/', async function (req, res, next) {
   let session = req.session
   // console.log(session.user_id);
-  var ads_data = await pool.ads_data.find()
+  const ads_data = await pool.ads_data.find();
   cat_data().then((cat_data) => {
     sub_cat_data().then((sub_cat_data) => {
       city_data().then((city_data) => {
-        // console.log(city_data);
+        // console.log(ads_data);
         res.render('index', {
           title: 'oldmela.com',
           city_data: city_data,
@@ -59,11 +59,36 @@ router.get('/', async function (req, res, next) {
           ads_data: ads_data,
           moment: moment,
           user_name: session.name,
-        })
+        });
       }) // end of city
     }) // end of sub catagories
   }) // end of catagories
 }) // end of get method
+
+//  categories data
+router.get('/cat', async (req, res, next)=>{
+  try{
+    let session = req.session;
+    const id = mongoose.Types.ObjectId(req.query.id);
+    const city = await pool.city_data.find();
+    const cat = await pool.cat_data.find();
+    const sub_cat = await pool.sub_cat_data.find();
+    const ads = await pool.ads_data.find({ads_sub_cat_id:id});
+    // console.log(id,ads);
+    res.render('index', {
+      title: 'oldmela.com',
+      city_data: city,
+      cat_data: cat,
+      sub_cat_data: sub_cat,
+      ads_data: ads,
+      moment: moment,
+      user_name: session.name,
+    });
+  }catch(e){
+    console.log(e);
+    next();
+  }
+}); // end of get method
 // ========================================= end of home sections ==================================================
 
 // ========================================= Ajax sections ==================================================
@@ -282,7 +307,7 @@ router.post('/sign_up', (req, res) => {
               if (err) throw err
               // Checking mobile nuber already exit or not?
               if (result.length < 1) {
-                const hash_pass = bcrypt.hashSync(req.body.password, 10)
+                const hash_pass = bcrypt.hashSync(req.body.password, 10);
                 pool.user_data.create(
                   {
                     user_mobile: req.body.mobile,
@@ -510,7 +535,7 @@ router.get("/myAds", logout, (req, res, next) => {
           if (err) throw err;
           // console.log(result);
           pool.ads_data.find({ user_id: result._id }, (err, data) => {
-            console.log(data);
+            // console.log(data);
             res.render("users/user_ads", {
               title: "oldmela.com",
               city_data: city_data,
@@ -528,8 +553,17 @@ router.get("/myAds", logout, (req, res, next) => {
   }); // end of catagories
 });
 
-router.post('/myADs', logout, (req, res)=>{
-  res.send("this is delete method");
+router.get('/deleteMyad', logout, async (req, res)=>{
+  const ad_id = mongoose.Types.ObjectId(req.query.id);
+  try{
+    const find_id = await pool.ads_data.findOne({_id:ad_id});
+    if(find_id){
+      await pool.ads_data.deleteOne({_id:find_id._id});
+    }
+  }catch(e){
+    console.log(e);
+  }
+  res.redirect('/myAds');
 })
 // ========================================= end of myads sections ===================================================
 
@@ -545,7 +579,7 @@ router.get('/update_profile', logout, (req, res, next) => {
       city_data().then((city_data) => {
         pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
           if (err) throw err
-          console.log(result);
+          // console.log(result);
           res.render('users/user_update_profile', {
             title: 'oldmela.com',
             city_data: city_data,
@@ -562,7 +596,7 @@ router.get('/update_profile', logout, (req, res, next) => {
 })
 // Post method
 router.post('/update_profile', logout, (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const name = req.body.user_name;
   const email = req.body.user_email;
   const add = req.body.user_address;
@@ -575,7 +609,7 @@ router.post('/update_profile', logout, (req, res, next) => {
           if (err) throw err
           pool.user_data.updateOne({_id:result._id}, {$set: {user_name:name, user_email:email, user_address:add}}, (err, rel)=>{
             if(err) throw err;
-            console.log(result);
+            // console.log(result);
             res.render('users/user_update_profile', {
               title: 'oldmela.com',
               city_data: city_data,
@@ -594,9 +628,87 @@ router.post('/update_profile', logout, (req, res, next) => {
 // ========================================= end of Update Profile sections ===================================================
 
 // ========================================= start Change password section    ==================================================
-router.get('/change_password', (req, res, next) => {
-  next()
-})
+router.get('/update_password', (req, res, next) => {
+  let id = mongoose.Types.ObjectId(req.query.id)
+  // console.log(req.query);
+  let session = req.session
+  // console.log(session)
+  cat_data().then((cat_data) => {
+    sub_cat_data().then((sub_cat_data) => {
+      city_data().then((city_data) => {
+        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
+          if (err) throw err
+          // console.log(result);
+          res.render('users/user_change_password', {
+            title: 'oldmela.com',
+            city_data: city_data,
+            cat_data: cat_data,
+            sub_cat_data: sub_cat_data,
+            user_data: result,
+            user_name: session.name,
+            msg: '',
+          })
+        }) // end of user data
+      }) // end of city
+    }) // end of sub catagories
+  }) // end of catagories
+}) // end of get method
+
+// post mehtod
+router.post('/update_password', (req, res) => {
+  let session = req.session;
+  let current_password = req.body.old_password;
+  let new_password = req.body.new_password;
+  let confirm_password = req.body.confirm_password;
+  cat_data().then((cat_data) => {
+    sub_cat_data().then((sub_cat_data) => {
+      city_data().then((city_data) => {
+        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
+          if (err) throw err
+          let match = bcrypt.compareSync(current_password, result.user_password,);
+          if(match){
+            if(new_password === confirm_password){
+              const hash_pass = bcrypt.hashSync(confirm_password, 10);
+              pool.user_data.updateOne({_id:result._id},{$set:{user_password:hash_pass}},(err, rel)=>{
+                if(err) throw err;
+                // console.log(rel);
+                res.render('users/user_change_password', {
+                  title: 'oldmela.com',
+                  city_data: city_data,
+                  cat_data: cat_data,
+                  sub_cat_data: sub_cat_data,
+                  user_data: result,
+                  user_name: session.name,
+                  msg: 'Password has been successfully changed',
+                }); //end of render 
+              }) // end of update one
+            }else{
+              res.render('users/user_change_password', {
+                title: 'oldmela.com',
+                city_data: city_data,
+                cat_data: cat_data,
+                sub_cat_data: sub_cat_data,
+                user_data: result,
+                user_name: session.name,
+                msg: 'Your new password and confirm password does not matched',
+              }) // end of render
+            } // end of if password matching statement 
+          }else{
+            res.render('users/user_change_password', {
+              title: 'oldmela.com',
+              city_data: city_data,
+              cat_data: cat_data,
+              sub_cat_data: sub_cat_data,
+              user_data: result,
+              user_name: session.name,
+              msg: 'Your current password is invalid',
+            }); // end of render
+          } // end of verify password statement 
+        }) // end of user data
+      }) // end of city
+    }) // end of sub catagories
+  }) // end of catagories
+}) // end of post method
 // ========================================= end of change password sections ===================================================
 
 // ========================================= start donation section    ==================================================

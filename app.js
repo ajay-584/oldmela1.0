@@ -50,8 +50,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // ==============================================port===============================
-app.listen(process.env.PORT,function(){
-  console.log(`server started.... on ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT,function(){
+//   console.log(`server started.... on ${process.env.PORT}`);
+// });
 
 module.exports = app;
