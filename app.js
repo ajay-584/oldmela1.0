@@ -1,14 +1,14 @@
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
-var indexRouter = require('./routes/index');
-var adminRouter = require('./routes/admin');
+const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -50,8 +50,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // ==============================================port===============================
-// app.listen(process.env.PORT,function(){
-//   console.log(`server started.... on ${process.env.PORT}`);
-// });
+app.listen(process.env.PORT,function(){
+  console.log(`server started.... on ${process.env.PORT}`);
+});
 
 module.exports = app;

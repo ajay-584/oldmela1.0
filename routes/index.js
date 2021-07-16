@@ -6,7 +6,8 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const { query } = require('express')
 const session = require('express-session')
-const { myAds } = require('./userHelper')
+// const { myAds } = require('./userHelper')
+const cityHlper = require('./../helper/cityHelper');
 
 var router = express.Router()
 
@@ -44,25 +45,28 @@ var otp = () => {
 
 /* =======================================GET home page.================================================= */
 router.get('/', async function (req, res, next) {
-  let session = req.session
-  // console.log(session.user_id);
-  const ads_data = await pool.ads_data.find();
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        // console.log(ads_data);
-        res.render('index', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
-          ads_data: ads_data,
-          moment: moment,
-          user_name: session.name,
-        });
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
+  try{
+    let session = req.session;
+    const city = await pool.city_data.find();
+    const cat = await pool.cat_data.find();
+    const sub_cat = await pool.sub_cat_data.find();
+    const ads_data = await pool.ads_data.find();
+    // console.log(ads_data);
+    res.render('index', {
+      title: 'oldmela.com',
+      city_data: city,
+      cat_data: cat,
+      sub_cat_data: sub_cat,
+      ads_data: ads_data,
+      moment: moment,
+      user_name: session.name,
+    });
+  }catch(e){
+    if(e){
+      res.send("there is some error");
+      next();
+    }
+  }
 }) // end of get method
 
 //  categories data
@@ -119,31 +123,27 @@ router.get('/sellsubcat', (req, res) => {
 // ========================================= Start of main ads page sections ==================================================
 router.get('/card', async function (req, res) {
   try {
-    var ads_info = await pool.ads_data.findOne({
-      _id: { $eq: mongoose.Types.ObjectId(req.query.link) },
-    })
-    // console.log(ads_info);
+    let session = req.session;
+    const id = mongoose.Types.ObjectId(req.query.link);
+    const ads_info = await pool.ads_data.findOne({_id: { $eq: id },});
+    const city = await pool.city_data.find();
+    const cat = await pool.cat_data.find();
+    const sub_cat = await pool.sub_cat_data.find();
+    const city_name = await cityHlper(ads_info.ads_city_id);
+    res.render('ads_page', {
+      title: 'oldmela.com',
+      city_data: city,
+      cat_data: cat,
+      sub_cat_data: sub_cat,
+      ads_info: ads_info,
+      city_name:city_name,
+      user_name: session.name,
+      moment: moment,
+    });
   } catch (err) {
-    if (err) throw err
+    res.send('Not found');
   }
-  // console.log(req.query.link);
-  cat_data().then((cat_data) => {
-    let session = req.session
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        res.render('ads_page', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
-          ads_info: ads_info,
-          user_name: session.name,
-          moment: moment,
-        })
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-})
+}); // end of get method
 // ========================================= end of main ads page sections ====================================================
 
 /* -----------------------------------------------------------------------------------------------------------------------------

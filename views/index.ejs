@@ -22,7 +22,9 @@
                   <%= ele.ads_price %>
                 </li>
                 <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="fas">&#xf041;</i>
-                  <%= ele.ads_city %>
+                  <% for(x of city_data){ if(String(ele.ads_city_id) === String(x._id)){  %>
+                  <%= x.name %>
+                  <% }} %>
                 </li>
                 <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i>
                   <%= moment(ele.ads_date).format('Do MMM YYYY') %>
