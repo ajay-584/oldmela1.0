@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors')
 const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
@@ -24,6 +25,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));  // seesion
+app.use(cors());
 app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
