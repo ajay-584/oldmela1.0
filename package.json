@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "assert": "^2.0.0",
@@ -20,6 +20,7 @@
     "mongoose": "^5.10.11",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.9",
+    "unirest": "^0.6.0",
     "uuid": "^8.3.1"
   }
 }
