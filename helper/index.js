@@ -1,8 +1,10 @@
 const city = require('./city');
-const otp = require('./otp');
+const otpSender = require('./otpSender');
+const otpGenerator = require('./otpGenerator');
 
 
 module.exports = {
     city,
-    otp
+    otpSender,
+    otpGenerator
 }

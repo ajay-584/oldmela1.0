@@ -7,6 +7,11 @@ const bcrypt = require('bcryptjs')
 const session = require('express-session')
 const middleware = require('../middleware/index');
 const helper = require('../helper/index');
+// Callback controllers
+const adsController = require('../controller/adsController');
+const verifyController = require('../controller/verificationController');
+const signUpController = require('../controller/signUpController');
+const loginController = require('../controller/loginController');
 
 var router = express.Router()
 var filePath = process.env.FILE_URL // There is file path of images file
@@ -32,65 +37,12 @@ var sub_cat_data = async () => {
   var data = await pool.sub_cat_data.find({})
   return data
 }
-// Generating 4 digit random no for otp
-var otp = () => {
-  var a = Math.floor(100000 + Math.random() * 900000)
-  a = a.toString().substring(0, 6)
-  a = parseInt(a)
-  // console.log("Your otp is ",a);
-  return a
-}
 
 /* =======================================GET home page.================================================= */
-router.get('/', async function (req, res, next) {
-  try{
-    let session = req.session;
-    const city = await pool.city_data.find();
-    const cat = await pool.cat_data.find();
-    const sub_cat = await pool.sub_cat_data.find();
-    const ads_data = await pool.ads_data.find({ads_status:true});
-    // console.log(ads_data);
-    res.render('index', {
-      title: 'oldmela.com',
-      city_data: city,
-      cat_data: cat,
-      sub_cat_data: sub_cat,
-      ads_data: ads_data,
-      moment: moment,
-      user_name: session.name,
-    });
-  }catch(e){
-    if(e){
-      res.send("there is some error");
-      next();
-    }
-  }
-}) // end of get method
+router.get('/', adsController.allAds); // end of get method
 
 //  categories data
-router.get('/cat', async (req, res, next)=>{
-  try{
-    let session = req.session;
-    const id = mongoose.Types.ObjectId(req.query.id);
-    const city = await pool.city_data.find();
-    const cat = await pool.cat_data.find();
-    const sub_cat = await pool.sub_cat_data.find();
-    const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]});
-    // console.log(id,ads);
-    res.render('index', {
-      title: 'oldmela.com',
-      city_data: city,
-      cat_data: cat,
-      sub_cat_data: sub_cat,
-      ads_data: ads,
-      moment: moment,
-      user_name: session.name,
-    });
-  }catch(e){
-    console.log("Error in cat root");
-    next();
-  }
-}); // end of get method
+router.get('/cat', adsController.allAdsByCatId); // end of get method
 // ========================================= end of home sections ==================================================
 
 // ========================================= Ajax sections ==================================================
@@ -270,303 +222,65 @@ router.post('/sell_ads', (req, res) => {
 // ========================================= end of sell ads sections ========================================================
 
 // ========================================= start of sign up page sections ====================================================
-router.get('/sign_up', (req, res) => {
-  let session = req.session
-  if (session.phone) {
-    res.redirect('404')
-  }
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        res.render('user_sign_up', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
-          user_name: '',
-          msg: '',
-        })
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-})
+router.get('/sign_up', signUpController.signUpGet);
+
 // post method
-router.post('/sign_up', async (req, res) => {
-  try{
-    const new_otp = otp();
-    console.log("this is otp:",new_otp);
-    const city_data = await pool.city_data.find();
-    const cat_data = await pool.cat_data.find();
-    const sub_cat_data = await pool.sub_cat_data.find();
-    // Checking password and confirm password is same or not?
-    if (req.body.password === req.body.confirmPassword) {
-      await pool.user_data.find(
-        { user_mobile: parseInt(req.body.mobile) },
-        (err, result) => {
-          if (err) throw err
-          // Checking mobile nuber already exit or not?
-          if (result.length < 1) {
-            const hash_pass = bcrypt.hashSync(req.body.password, 10);
-            pool.user_data.create(
-              {
-                user_mobile: req.body.mobile,
-                user_name: req.body.name,
-                user_password: hash_pass,
-                user_otp: new_otp,
-              },
-              async (err, result) => {
-                if (err) throw err
-                await helper.otp(new_otp, req.body.mobile);
-                res.redirect('/verification?link=' + String(result._id))
-              },
-            ) // end of create data
-          } else {
-            res.render('user_sign_up', {
-              title: 'oldmela.com',
-              city_data: city_data,
-              cat_data: cat_data,
-              sub_cat_data: sub_cat_data,
-              user_name: '',
-              msg: 'Mobile number is already registered.',
-            })
-          }
-        },
-      ) // end of find data
-    } else {
-      res.render('user_sign_up', {
-        title: 'oldmela.com',
-        city_data: city_data,
-        cat_data: cat_data,
-        sub_cat_data: sub_cat_data,
-        user_name: '',
-        msg: 'Confirm password does not matched!',
-      })
-    }
-
-
-  }catch(e){
-    console.log(e);
-    next();
-  }
-}) // end of post method
+router.post('/sign_up', signUpController.signUpPost); // end of post method
 // ========================================= end of sign up page sections ======================================================
 /* =======================================Start of user verification root home page.================================================= */
-router.get('/verification', async function (req, res, next) {
-  try{
-    if (!req.query.hasOwnProperty('link')) {
-      res.redirect('404')
-    }
-    const city_data = await pool.city_data.find();
-    const cat_data = await pool.cat_data.find();
-    const sub_cat_data = await pool.sub_cat_data.find();
-    res.render('user_verification', {
-      title: 'oldmela.com',
-      city_data: city_data,
-      cat_data: cat_data,
-      sub_cat_data: sub_cat_data,
-      user_name: '',
-      msg: '',
-    });
-  }catch(e){
-    console.log(e);
-    next();
-  }
-}) // end of get method
+router.get('/verification', verifyController.verifyGet); // end of get method
 
 // post method
-router.post('/verification', async function (req, res, next) {
-  try{
-    let num = mongoose.Types.ObjectId(req.query.link)
-    console.log('this is query', req.query.hasOwnProperty('link'))
-    if (!req.query.hasOwnProperty('link')) {
-      res.redirect('404')
-    } else {
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
-      const get_otp = parseInt(req.body.otp)
-      await pool.user_data.findOne({ _id: num }, (err, result) => {
-          if (err) throw err
-          // checking otp is same or not
-            if (result.user_otp === get_otp) {
-              pool.user_data.updateOne(
-                { user_otp: get_otp },
-                { user_status: 1 },
-                (err, result) => {
-                  if (err) throw err
-                  res.render('user_verification', {
-                    title: 'oldmela.com',
-                    city_data: city_data,
-                    cat_data: cat_data,
-                    sub_cat_data: sub_cat_data,
-                    user_name: '',
-                    msg: 'Verification successful',
-                  })
-                },
-              ) // end of update
-            } else {
-              res.render('user_verification', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
-                user_name: '',
-                msg: 'Invalid otp',
-              })
-            }
-          }) // end of findone
-  } // end of req.qeury if statement
-  }catch(e){
-    console.log(e);
-    next();
-  }
-  let num = mongoose.Types.ObjectId(req.query.link)
-  // console.log('this is query', req.query.hasOwnProperty('link'))
-  if (!req.query.hasOwnProperty('link')) {
-    res.redirect('404')
-  } else {
-    cat_data().then((cat_data) => {
-      sub_cat_data().then((sub_cat_data) => {
-        city_data().then((city_data) => {
-          let get_otp = parseInt(req.body.otp)
-          // console.log(req.body);
-          pool.user_data.findOne({ _id: num }, (err, result) => {
-            if (err) throw err
-            // checking otp is same or not
-            if (result.user_otp === get_otp) {
-              pool.user_data.updateOne(
-                { user_otp: get_otp },
-                { user_status: 1 },
-                (err, result) => {
-                  if (err) throw err
-                  res.render('user_verification', {
-                    title: 'oldmela.com',
-                    city_data: city_data,
-                    cat_data: cat_data,
-                    sub_cat_data: sub_cat_data,
-                    user_name: '',
-                    msg: 'Verification successful',
-                  })
-                },
-              ) // end of update
-            } else {
-              res.render('user_verification', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
-                user_name: '',
-                msg: 'Invalid otp',
-              })
-            }
-          }) // end of findone
-        }) // end of city
-      }) // end of sub catagories
-    }) // end of catagories
-  } // end of req.qeury if statement
-}) // end of get method
+router.post('/verification', verifyController.verifyPost); // end of get method
 
 // ========================================= end of user verification root sections ==================================================
 
 // ========================================= start of user login root sections =======================================================
 // get method
-router.get('/login', function (req, res, next) {
-  let session = req.session
-  if (session.phone) {
-    res.redirect('/dash_board')
-  }
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        res.render('user_login', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
-          user_name: '',
-          msg: '',
-        })
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-}) // end of get method
+router.get('/login', loginController.loginGet); // end of get method
 
 // post method
-router.post('/login', function (req, res, next) {
-  // console.log(req.body);
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne(
-          { user_mobile: parseInt(req.body.phone) },
-          (err, data) => {
-            if (err) throw err
-            // console.log(data);
-            if (data) {
-              let match = bcrypt.compareSync(
-                req.body.password,
-                data.user_password,
-              )
-              if (match) {
-                var session = req.session
-                session.name = data.user_name
-                session.phone = data.user_mobile
-                session.user_id = data._id
-                // console.log(data._id);
-                // console.log(session.phone,session);
-                res.redirect('/dash_board?id=' + String(data._id))
-              } else {
-                res.render('user_login', {
-                  title: 'oldmela.com',
-                  city_data: city_data,
-                  cat_data: cat_data,
-                  sub_cat_data: sub_cat_data,
-                  user_name: '',
-                  msg: 'Invalid password',
-                })
-              }
-            } else {
-              res.render('user_login', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
-                user_name: '',
-                msg: 'Invalid mobile',
-              })
-            }
-          },
-        ) // end of pool
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-}) // end of get method
+router.post('/login', loginController.loginPost); // end of get method
 // ========================================= end of user login root sections ==========================================================
 
+
+/* ======================================= Forget password start .================================================= */
+//  Get method
+router.get('/forget_password', (req, res, next) => {
+  res.send('vertyhing is okey');
+}) // end of get method
+
+//  post method
+router.post('/forget_password', (req, res, next) => {
+}) // end of post method
+
+// ========================================= end of forget password sections ==================================================
+
+
 /* =======================================GET user home page.================================================= */
-router.get('/dash_board', logout, (req, res, next) => {
+router.get('/dash_board', logout, async (req, res, next) => {
+try{
   let id = mongoose.Types.ObjectId(req.query.id)
   // console.log(req.query);
   let session = req.session
   // console.log(session)
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err
-          // console.log(result);
-          res.render('users/index', {
-            title: 'oldmela.com',
-            city_data: city_data,
-            cat_data: cat_data,
-            sub_cat_data: sub_cat_data,
-            user_data: result,
-            user_name: session.name,
-          })
-        }) // end of user data
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
+  const city_data = await pool.city_data.find();
+  const cat_data = await pool.cat_data.find();
+  const sub_cat_data = await pool.sub_cat_data.find();
+  const user_data = await pool.user_data.findOne({ _id: session.user_id });
+  res.render('users/index', {
+    title: 'oldmela.com',
+    city_data: city_data,
+    cat_data: cat_data,
+    sub_cat_data: sub_cat_data,
+    user_data: user_data,
+    user_name: session.name,
+  });
+}catch(e){
+  console.log(e);
+  console.log('error in dash_bard path');
+  next();
+}
 }) // end of get method
 
 // ========================================= end of user home sections ==================================================
@@ -770,7 +484,7 @@ router.get('/donation', (req, res, next) => {
 router.get('/logout', (req, res) => {
   req.session.destroy((err, result) => {
     if (err) throw err
-    // console.log("logout ho gya", result)
+    // console.log("logout ho gya", result);
   })
   res.redirect('/login');
 })
