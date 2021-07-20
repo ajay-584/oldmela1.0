@@ -1,11 +1,11 @@
 const express = require('express')
-const pool = require('./../model/pool')
+const pool = require('./../model/pool');
 const uuid = require('uuid')
 const moment = require('moment')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const session = require('express-session')
-const middleware = require('../middleware/index');
+// const middleware = require('../middleware/index');
 const helper = require('../helper/index');
 // Callback controllers
 const adsController = require('../controller/adsController');
