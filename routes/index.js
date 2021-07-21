@@ -43,17 +43,6 @@ var sub_cat_data = async () => {
   return data
 }
 
-// router.get('/test', async (req, res, next)=>{
-//   try{
-//     const data = await helper.deleteImage(filePath + 'img.jpeg');
-//     return res.send(data);
-//   }catch(e){
-//     console.log(e);
-//     return res.send(e);
-//   }
-// })
-
-
 /* =======================================GET home page.================================================= */
 router.get('/', adsController.allAds); // end of get method
 
