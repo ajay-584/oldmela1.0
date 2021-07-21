@@ -1,10 +1,6 @@
-const express = require('express')
 const pool = require('./../model/pool')
-const uuid = require('uuid')
 const moment = require('moment')
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
-const session = require('express-session')
+const mongoose = require('mongoose');
 const middleware = require('../middleware/index');
 const helper = require('../helper/index');
 
@@ -58,5 +54,30 @@ exports.allAds = async (req, res, next)=> {
       console.log("Error in cat root");
       console.log(e);
       next();
+    }
+  }
+
+  // for single add page
+  exports.oneAddById = async function (req, res) {
+    try {
+      let session = req.session;
+      const id = mongoose.Types.ObjectId(req.query.link);
+      const ads_info = await pool.ads_data.findOne({_id: id});
+      const city = await pool.city_data.find();
+      const cat = await pool.cat_data.find();
+      const sub_cat = await pool.sub_cat_data.find();
+      const city_name = await helper.city(ads_info.ads_city_id);
+      res.render('ads_page', {
+        title: 'oldmela.com',
+        city_data: city,
+        cat_data: cat,
+        sub_cat_data: sub_cat,
+        ads_info: ads_info,
+        city_name:city_name,
+        user_name: session.name,
+        moment: moment,
+      });
+    } catch (err) {
+      res.send('Not found');
     }
   }

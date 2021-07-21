@@ -11,10 +11,15 @@ const helper = require('../helper/index');
 const adsController = require('../controller/adsController');
 const verifyController = require('../controller/verificationController');
 const signUpController = require('../controller/signUpController');
-const loginController = require('../controller/loginController');
+const userLoginController = require('../controller/userLoginController');
 const sellAdsController = require('../controller/sellAdsController');
+const updateProfileController = require('../controller/updateProfileController');
+const dashBoardController = require('../controller/dashBoardController');
+const myAdsController = require('../controller/myAdsController');
 
 const router = express.Router()
+
+const filePath = process.env.FILE_URL // There is file path of images file
 
 function logout(req, res, next) {
   let user_session = req.session
@@ -37,6 +42,17 @@ var sub_cat_data = async () => {
   var data = await pool.sub_cat_data.find({})
   return data
 }
+
+// router.get('/test', async (req, res, next)=>{
+//   try{
+//     const data = await helper.deleteImage(filePath + 'img.jpeg');
+//     return res.send(data);
+//   }catch(e){
+//     console.log(e);
+//     return res.send(e);
+//   }
+// })
+
 
 /* =======================================GET home page.================================================= */
 router.get('/', adsController.allAds); // end of get method
@@ -71,29 +87,7 @@ router.get('/sellsubcat', (req, res) => {
 })
 // ========================================= end of ajax sections ==================================================
 // ========================================= Start of main ads page sections ==================================================
-router.get('/card', async function (req, res) {
-  try {
-    let session = req.session;
-    const id = mongoose.Types.ObjectId(req.query.link);
-    const ads_info = await pool.ads_data.findOne({_id: { $eq: id },});
-    const city = await pool.city_data.find();
-    const cat = await pool.cat_data.find();
-    const sub_cat = await pool.sub_cat_data.find();
-    const city_name = await helper.city(ads_info.ads_city_id);
-    res.render('ads_page', {
-      title: 'oldmela.com',
-      city_data: city,
-      cat_data: cat,
-      sub_cat_data: sub_cat,
-      ads_info: ads_info,
-      city_name:city_name,
-      user_name: session.name,
-      moment: moment,
-    });
-  } catch (err) {
-    res.send('Not found');
-  }
-}); // end of get method
+router.get('/card', adsController.oneAddById); // end of get method
 // ========================================= end of main ads page sections ====================================================
 
 /* -----------------------------------------------------------------------------------------------------------------------------
@@ -124,10 +118,10 @@ router.post('/verification', verifyController.verifyPost); // end of get method
 
 // ========================================= start of user login root sections =======================================================
 // get method
-router.get('/login', loginController.loginGet); // end of get method
+router.get('/login', userLoginController.loginGet); // end of get method
 
 // post method
-router.post('/login', loginController.loginPost); // end of get method
+router.post('/login', userLoginController.loginPost); // end of get method
 // ========================================= end of user login root sections ==========================================================
 
 
@@ -145,136 +139,22 @@ router.post('/forget_password', (req, res, next) => {
 
 
 /* =======================================GET user home page.================================================= */
-router.get('/dash_board', logout, async (req, res, next) => {
-try{
-  let id = mongoose.Types.ObjectId(req.query.id)
-  // console.log(req.query);
-  let session = req.session
-  // console.log(session)
-  const city_data = await pool.city_data.find();
-  const cat_data = await pool.cat_data.find();
-  const sub_cat_data = await pool.sub_cat_data.find();
-  const user_data = await pool.user_data.findOne({ _id: session.user_id });
-  res.render('users/index', {
-    title: 'oldmela.com',
-    city_data: city_data,
-    cat_data: cat_data,
-    sub_cat_data: sub_cat_data,
-    user_data: user_data,
-    user_name: session.name,
-  });
-}catch(e){
-  console.log(e);
-  console.log('error in dash_bard path');
-  next();
-}
-}) // end of get method
+router.get('/dash_board', logout, dashBoardController.dashBoard); // end of get method
 
 // ========================================= end of user home sections ==================================================
 
 // ========================================= start myAds section    ==================================================
-router.get("/myAds", logout, (req, res, next) => {
-  // let id = mongoose.Types.ObjectId(req.query.id)
-  // console.log(req.query);
-  let session = req.session;
-  // console.log(session)
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err;
-          // console.log(result);
-          pool.ads_data.find({ user_id: result._id }, (err, data) => {
-            // console.log(data);
-            res.render("users/user_ads", {
-              title: "oldmela.com",
-              city_data: city_data,
-              cat_data: cat_data,
-              sub_cat_data: sub_cat_data,
-              user_data: result,
-              ads_data: data,
-              moment: moment,
-              user_name: session.name,
-            }); //end of render
-          }); //end of  ads data
-        }); // end of user data
-      }); // end of city
-    }); // end of sub catagories
-  }); // end of catagories
-});
-
-router.get('/deleteMyad', logout, async (req, res)=>{
-  const ad_id = mongoose.Types.ObjectId(req.query.id);
-  try{
-    const find_id = await pool.ads_data.findOne({_id:ad_id});
-    if(find_id){
-      await pool.ads_data.deleteOne({_id:find_id._id});
-    }
-  }catch(e){
-    console.log(e);
-  }
-  res.redirect('/myAds');
-})
+// my ads
+router.get("/myAds", logout, myAdsController.myAdsGet);
+// delete my ads
+router.get('/deleteMyad', logout, myAdsController.deleteMyAdsGet);
 // ========================================= end of myads sections ===================================================
 
 // ========================================= start updateProfile section    ==================================================
 // get method
-router.get('/update_profile', logout, (req, res, next) => {
-  let id = mongoose.Types.ObjectId(req.query.id)
-  // console.log(req.query);
-  let session = req.session
-  // console.log(session)
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err
-          // console.log(result);
-          res.render('users/user_update_profile', {
-            title: 'oldmela.com',
-            city_data: city_data,
-            cat_data: cat_data,
-            sub_cat_data: sub_cat_data,
-            user_data: result,
-            user_name: session.name,
-            msg: '',
-          })
-        }) // end of user data
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-})
+router.get('/update_profile', logout, updateProfileController.updateProfileGet); 
 // Post method
-router.post('/update_profile', logout, (req, res, next) => {
-  // console.log(req.body);
-  const name = req.body.user_name;
-  const email = req.body.user_email;
-  const add = req.body.user_address;
-  let session = req.session
-  // console.log(session)
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err
-          pool.user_data.updateOne({_id:result._id}, {$set: {user_name:name, user_email:email, user_address:add}}, (err, rel)=>{
-            if(err) throw err;
-            // console.log(result);
-            res.render('users/user_update_profile', {
-              title: 'oldmela.com',
-              city_data: city_data,
-              cat_data: cat_data,
-              sub_cat_data: sub_cat_data,
-              user_data: result,
-              user_name: session.name,
-              msg: 'Data has been updated',
-            }) //end of render method
-          }) // end of update user
-        }) // end of user data
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-})
+router.post('/update_profile', logout, updateProfileController.updateProfilePost);
 // ========================================= end of Update Profile sections ===================================================
 
 // ========================================= start Change password section    ==================================================
