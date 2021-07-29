@@ -16,6 +16,7 @@ const sellAdsController = require('../controller/sellAdsController');
 const updateProfileController = require('../controller/updateProfileController');
 const dashBoardController = require('../controller/dashBoardController');
 const myAdsController = require('../controller/myAdsController');
+const updatePasswordController = require('../controller/updatePasswordController');
 
 const router = express.Router()
 
@@ -147,87 +148,10 @@ router.post('/update_profile', logout, updateProfileController.updateProfilePost
 // ========================================= end of Update Profile sections ===================================================
 
 // ========================================= start Change password section    ==================================================
-router.get('/update_password', (req, res, next) => {
-  let id = mongoose.Types.ObjectId(req.query.id)
-  // console.log(req.query);
-  let session = req.session
-  // console.log(session)
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err
-          // console.log(result);
-          res.render('users/user_change_password', {
-            title: 'oldmela.com',
-            city_data: city_data,
-            cat_data: cat_data,
-            sub_cat_data: sub_cat_data,
-            user_data: result,
-            user_name: session.name,
-            msg: '',
-          })
-        }) // end of user data
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-}) // end of get method
+router.get('/update_password', updatePasswordController.updatePasswordGet); // end of get method
 
 // post mehtod
-router.post('/update_password', (req, res) => {
-  let session = req.session;
-  let current_password = req.body.old_password;
-  let new_password = req.body.new_password;
-  let confirm_password = req.body.confirm_password;
-  cat_data().then((cat_data) => {
-    sub_cat_data().then((sub_cat_data) => {
-      city_data().then((city_data) => {
-        pool.user_data.findOne({ _id: session.user_id }, (err, result) => {
-          if (err) throw err
-          let match = bcrypt.compareSync(current_password, result.user_password,);
-          if(match){
-            if(new_password === confirm_password){
-              const hash_pass = bcrypt.hashSync(confirm_password, 10);
-              pool.user_data.updateOne({_id:result._id},{$set:{user_password:hash_pass}},(err, rel)=>{
-                if(err) throw err;
-                // console.log(rel);
-                res.render('users/user_change_password', {
-                  title: 'oldmela.com',
-                  city_data: city_data,
-                  cat_data: cat_data,
-                  sub_cat_data: sub_cat_data,
-                  user_data: result,
-                  user_name: session.name,
-                  msg: 'Password has been successfully changed',
-                }); //end of render 
-              }) // end of update one
-            }else{
-              res.render('users/user_change_password', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
-                user_data: result,
-                user_name: session.name,
-                msg: 'Your new password and confirm password does not matched',
-              }) // end of render
-            } // end of if password matching statement 
-          }else{
-            res.render('users/user_change_password', {
-              title: 'oldmela.com',
-              city_data: city_data,
-              cat_data: cat_data,
-              sub_cat_data: sub_cat_data,
-              user_data: result,
-              user_name: session.name,
-              msg: 'Your current password is invalid',
-            }); // end of render
-          } // end of verify password statement 
-        }) // end of user data
-      }) // end of city
-    }) // end of sub catagories
-  }) // end of catagories
-}) // end of post method
+router.post('/update_password',updatePasswordController.updatePasswordPost); // end of post method
 // ========================================= end of change password sections ===================================================
 
 // ========================================= start donation section    ==================================================
