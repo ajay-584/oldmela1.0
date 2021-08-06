@@ -4,7 +4,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
+const helmet = require('helmet');
 const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
@@ -17,6 +18,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(helmet());
 app.use(session({ 
   secret : "@#%$@#$sdfjk;",
   // name: cookie_name,
