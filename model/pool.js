@@ -15,7 +15,7 @@ const ads_schema = mongoose.Schema({
     ads_address:String,
     ads_date:{type:Date, default: Date.now()},
     user_id:{type:mongoose.Types.ObjectId, ref:'user_data'},
-    ads_status:{type:Boolean, default:false}
+    ads_status:{type:Boolean, default:true}
 });
 var ads_model = mongoose.model('ads_model',ads_schema,'ads_data');
 

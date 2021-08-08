@@ -394,7 +394,7 @@ html{
 }
 .ads-image{
   margin: 2rem;
-  width: 30%;
+  max-width: 100%;
   height: 40rem;
   /* border: 1px solid red; */
   padding: 1rem;
@@ -409,7 +409,8 @@ html{
 }
 .big-image img{
   height: 100%;
-  width: 100%;
+  max-width: 100%;
+  object-fit: fill;
 }
 .ads-image .small-image{
   height: 20%;
@@ -419,7 +420,7 @@ html{
 .small-image img{
   margin: 0.7rem;
   height: 7rem;
-  width: 7rem;
+  max-width: 7rem;
   border-radius: 0.3rem;
   border: 1px solid #f0f0f0;
 }
