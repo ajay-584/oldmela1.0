@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const compression = require('compression');
 const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
@@ -19,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // app.use(helmet());
+app.use(compression());
 app.use(session({ 
   secret : "@#%$@#$sdfjk;",
   // name: cookie_name,
