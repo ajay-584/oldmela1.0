@@ -12,6 +12,8 @@ const myAdsController = require('../controller/myAdsController');
 const updatePasswordController = require('../controller/updatePasswordController');
 const logoutController = require('../controller/logoutController');
 const userForgetPasswordController = require('../controller/forgetPasswordController');
+const setNewPasswordController = require('../controller/setNewPasswordController');
+const forgetPasswordOtpController = require('../controller/forgetPasswordOtpController');
 
 const router = express.Router()
 
@@ -98,16 +100,16 @@ router.get('/forget_password', userForgetPasswordController.forgetPasswordGet); 
 router.post('/forget_password', userForgetPasswordController.forgetPasswordPost) // end of post method
 
 //  Get method
-router.get('/forget_password_otp', userForgetPasswordController.forgetPasswordOtpGet); // end of get method
+router.get('/forget_password_otp', forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method
 
 //  post method
-router.post('/forget_password_otp', userForgetPasswordController.forgetPasswordOtpPost) // end of post method
+router.post('/forget_password_otp', forgetPasswordOtpController.forgetPasswordOtpPost) // end of post method
 
 //  Get method
-router.get('/forget_password_new_password', userForgetPasswordController.forgetPasswordNewPasswordGet); // end of get method
+router.get('/forget_password_new_password', setNewPasswordController.setNewPasswordGet); // end of get method
 
 //  post method
-router.post('/forget_password_new_password', userForgetPasswordController.forgetPasswordNewPasswordPost) // end of post method
+router.post('/forget_password_new_password', setNewPasswordController.setNewPasswordPost) // end of post method
 
 // ========================================= end of forget password sections ==================================================
 
