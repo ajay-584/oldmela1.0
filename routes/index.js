@@ -1,6 +1,5 @@
 const express = require('express')
 const pool = require('./../model/pool');
-const helper = require('../helper/index');
 // Callback controllers
 const adsController = require('../controller/adsController');
 const verifyController = require('../controller/verificationController');
@@ -12,6 +11,7 @@ const dashBoardController = require('../controller/dashBoardController');
 const myAdsController = require('../controller/myAdsController');
 const updatePasswordController = require('../controller/updatePasswordController');
 const logoutController = require('../controller/logoutController');
+const userForgetPasswordController = require('../controller/forgetPasswordController');
 
 const router = express.Router()
 
@@ -92,13 +92,22 @@ router.post('/login', userLoginController.loginPost); // end of get method
 
 /* ======================================= Forget password start .================================================= */
 //  Get method
-router.get('/forget_password', (req, res, next) => {
-  res.send('vertyhing is okey');
-}) // end of get method
+router.get('/forget_password', userForgetPasswordController.forgetPasswordGet); // end of get method
 
 //  post method
-router.post('/forget_password', (req, res, next) => {
-}) // end of post method
+router.post('/forget_password', userForgetPasswordController.forgetPasswordPost) // end of post method
+
+//  Get method
+router.get('/forget_password_otp', userForgetPasswordController.forgetPasswordOtpGet); // end of get method
+
+//  post method
+router.post('/forget_password_otp', userForgetPasswordController.forgetPasswordOtpPost) // end of post method
+
+//  Get method
+router.get('/forget_password_new_password', userForgetPasswordController.forgetPasswordNewPasswordGet); // end of get method
+
+//  post method
+router.post('/forget_password_new_password', userForgetPasswordController.forgetPasswordNewPasswordPost) // end of post method
 
 // ========================================= end of forget password sections ==================================================
 
