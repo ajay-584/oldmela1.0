@@ -78,3 +78,8 @@ function img3() {
   x = document.getElementById('img3').src
   document.getElementById('bigImage').src = x
 }
+// when some one select city
+function cityId(id){
+  // console.log(id);
+  window.location = "/city?id="+String(id);
+}

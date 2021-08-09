@@ -28,17 +28,17 @@
       <div class="search-box">
         <!-- select city section for desktop view -->
         <div id="city-select" class="city-select">
-          <select>
+          <select onchange="cityId(this.value)">
             <option value="#">Select City</option>
             <% for(x of city_data){ %>
-            <option value="1"><%= x.name %></option>
+            <option value="<%= x._id %>"> <%= x.name %> </option>
             <% } %>
           </select>
         </div>
         <!-- This is search area for desk to view like search any items of products -->
         <div id="search-container" class="search-container">
-          <form class="from-area" action="index.html">
-            <input type="text" placeholder="Search.." name="search">
+          <form class="from-area" action="/search" method="GET">
+            <input type="text" placeholder="Search.." name="search" required>
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>

@@ -1,5 +1,5 @@
 const pool = require('./../model/pool')
-const moment = require('moment')
+const moment = require('moment');
 const mongoose = require('mongoose');
 const middleware = require('../middleware/index');
 const helper = require('../helper/index');
@@ -13,7 +13,7 @@ exports.allAds = async (req, res, next)=> {
       const sub_cat = await pool.sub_cat_data.find();
       const ads_data = await pool.ads_data.find({ads_status:true});
       // console.log(ads_data);
-      res.render('index', {
+      return res.render('index', {
         title: 'oldmela.com',
         city_data: city,
         cat_data: cat,
@@ -41,7 +41,7 @@ exports.allAds = async (req, res, next)=> {
       const sub_cat = await pool.sub_cat_data.find();
       const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]});
       // console.log(id,ads);
-      res.render('index', {
+      return res.render('index', {
         title: 'oldmela.com',
         city_data: city,
         cat_data: cat,
@@ -57,8 +57,34 @@ exports.allAds = async (req, res, next)=> {
     }
   }
 
+  //   for get method
+  exports.allAdsByCityId = async (req, res, next)=>{
+    try{
+      let session = req.session;
+      const id = mongoose.Types.ObjectId(req.query.id);
+      const city = await pool.city_data.find();
+      const cat = await pool.cat_data.find();
+      const sub_cat = await pool.sub_cat_data.find();
+      const ads = await pool.ads_data.find({$and:[{ads_city_id:id},{ads_status:true}]});
+      // console.log(id,ads);
+      return res.render('index', {
+        title: 'oldmela.com',
+        city_data: city,
+        cat_data: cat,
+        sub_cat_data: sub_cat,
+        ads_data: ads,
+        moment: moment,
+        user_name: session.name,
+      });
+    }catch(e){
+      console.log("Error in city page");
+      console.log(e);
+      next();
+    }
+  }
+
   // for single add page
-  exports.oneAddById = async function (req, res) {
+  exports.oneAddById = async function (req, res, next) {
     try {
       let session = req.session;
       const id = mongoose.Types.ObjectId(req.query.link);
@@ -67,7 +93,7 @@ exports.allAds = async (req, res, next)=> {
       const cat = await pool.cat_data.find();
       const sub_cat = await pool.sub_cat_data.find();
       const city_name = await helper.city(ads_info.ads_city_id);
-      res.render('ads_page', {
+      return res.render('ads_page', {
         title: 'oldmela.com',
         city_data: city,
         cat_data: cat,
@@ -78,6 +104,7 @@ exports.allAds = async (req, res, next)=> {
         moment: moment,
       });
     } catch (err) {
-      res.send('Not found');
+      console.log(err);
+      next();
     }
   }

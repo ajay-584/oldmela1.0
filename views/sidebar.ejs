@@ -28,10 +28,10 @@
       <aside class="city">
         <!-- responsive city means mobile view interface -->
         <div  class="responsive-city">
-          <select>
-            <option  value="0">Select City</option>
+          <select onchange="cityId(this.value)">
+            <option  value="#">Select City</option>
             <% for(x of city_data){ %>
-              <option value="1"><a href="/city"><%= x.name %></a></option>
+              <option value="<%= x._id %>"> <%= x.name %> </option>
             <% } %>
           </select>
           <!-- colse button of select city oprions -->
@@ -41,8 +41,8 @@
       <!-- Serach section means mobile view interface -->
       <aside class="search">
         <div class="search-div">
-          <form  action="index.html">
-            <input type="text" placeholder="Search.." name="search">
+          <form  action="/search" method="GET">
+            <input type="text" placeholder="Search.." name="search" required>
             <!-- search button -->
             <button onclick="closesearch()" type="submit"><i style="font-size: 3rem;" class="fa fa-search"></i></button>
           </form>

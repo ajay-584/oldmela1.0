@@ -3,5 +3,5 @@ exports.logout = (req, res) => {
       if (err) throw err
     //   console.log("logout ho gya", result);
     })
-    res.redirect('/login');
+    return res.redirect('/login');
   }

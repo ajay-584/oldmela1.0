@@ -13,12 +13,12 @@ const helper = require('../helper/index');
 exports.verifyGet = async function (req, res, next) {
     try{
       if (!req.query.hasOwnProperty('link')) {
-        res.redirect('404')
+        return res.redirect('404')
       }
       const city_data = await pool.city_data.find();
       const cat_data = await pool.cat_data.find();
       const sub_cat_data = await pool.sub_cat_data.find();
-      res.render('user_verification', {
+      return res.render('user_verification', {
         title: 'oldmela.com',
         city_data: city_data,
         cat_data: cat_data,
@@ -50,7 +50,7 @@ exports.verifyPost = async function (req, res, next) {
           if (result.user_otp === get_otp) {
             // updating user status 0 to 1 means verified
             await pool.user_data.updateOne({ _id: result._id },{ user_status: 1 });
-            res.render('user_verification', {
+            return res.render('user_verification', {
               title: 'oldmela.com',
               city_data: city_data,
               cat_data: cat_data,
@@ -60,7 +60,7 @@ exports.verifyPost = async function (req, res, next) {
             });
           } else {
             // when user put invalid otp
-            res.render('user_verification', {
+            return res.render('user_verification', {
               title: 'oldmela.com',
               city_data: city_data,
               cat_data: cat_data,

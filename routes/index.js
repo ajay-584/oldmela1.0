@@ -2,6 +2,7 @@ const express = require('express')
 const pool = require('./../model/pool');
 // Callback controllers
 const adsController = require('../controller/adsController');
+const searchAdsController = require('../controller/searchAdsController');
 const verifyController = require('../controller/verificationController');
 const signUpController = require('../controller/signUpController');
 const userLoginController = require('../controller/userLoginController');
@@ -34,6 +35,13 @@ router.get('/', adsController.allAds); // end of get method
 
 //  categories data
 router.get('/cat', adsController.allAdsByCatId); // end of get method
+
+// city data route
+
+router.get('/city', adsController.allAdsByCityId) // end of get method
+
+// search bar route
+router.get('/search', searchAdsController.searchAds);
 // ========================================= end of home sections ==================================================
 
 // ========================================= Ajax sections ==================================================

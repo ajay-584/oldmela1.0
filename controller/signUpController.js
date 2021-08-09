@@ -56,10 +56,10 @@ exports.signUpGet = async (req, res) => {
               //  sending otp to user mobile for verification 
               await helper.otpSender(new_otp, req.body.mobile);
               // Forwarding verification page
-              res.redirect('/verification?link=' + String(newUser._id));
+              return res.redirect('/verification?link=' + String(newUser._id));
             } else {
               // when user already exit
-              res.render('user_sign_up', {
+              return res.render('user_sign_up', {
                 title: 'oldmela.com',
                 city_data: city_data,
                 cat_data: cat_data,
@@ -70,7 +70,7 @@ exports.signUpGet = async (req, res) => {
             }
       } else {
         // when user password and confirm password does not matched 
-        res.render('user_sign_up', {
+        return res.render('user_sign_up', {
           title: 'oldmela.com',
           city_data: city_data,
           cat_data: cat_data,

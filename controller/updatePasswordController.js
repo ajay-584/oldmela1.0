@@ -10,7 +10,7 @@ exports.updatePasswordGet = async (req, res, next) => {
         const cat_data = await pool.cat_data.find();
         const sub_cat_data = await pool.sub_cat_data.find();
         const user_data = await pool.user_data.findOne({ _id: session.user_id });
-        res.render('users/user_change_password', {
+        return res.render('users/user_change_password', {
             title: 'oldmela.com',
             city_data: city_data,
             cat_data: cat_data,
@@ -40,7 +40,7 @@ exports.updatePasswordPost = async (req, res) => {
             if(new_password === confirm_password){
                 const hash_pass = bcrypt.hashSync(confirm_password, 10);
                 await pool.user_data.updateOne({_id:result._id},{$set:{user_password:hash_pass}});
-                res.render('users/user_change_password', {
+                return res.render('users/user_change_password', {
                     title: 'oldmela.com',
                     city_data: city_data,
                     cat_data: cat_data,
@@ -50,7 +50,7 @@ exports.updatePasswordPost = async (req, res) => {
                     msg: 'Password has been successfully changed',
                 }); //end of render 
             }else{
-                res.render('users/user_change_password', {
+                return res.render('users/user_change_password', {
                     title: 'oldmela.com',
                     city_data: city_data,
                     cat_data: cat_data,
@@ -61,7 +61,7 @@ exports.updatePasswordPost = async (req, res) => {
                 }) // end of render
             } // end of if password matching statement 
         }else{
-            res.render('users/user_change_password', {
+            return res.render('users/user_change_password', {
                 title: 'oldmela.com',
                 city_data: city_data,
                 cat_data: cat_data,

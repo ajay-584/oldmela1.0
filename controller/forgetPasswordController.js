@@ -6,7 +6,7 @@ exports.forgetPasswordGet = async(req, res, next)=>{
         const city_data = await pool.city_data.find();
         const cat_data = await pool.cat_data.find();
         const sub_cat_data = await pool.sub_cat_data.find();
-        res.render('userForgetPassword', {
+        return res.render('userForgetPassword', {
           title: 'oldmela.com',
           city_data: city_data,
           cat_data: cat_data,
@@ -32,9 +32,9 @@ exports.forgetPasswordPost = async(req, res, next)=>{
             await pool.user_data.updateOne({_id:result._id},{user_otp:otp});
             await helper.otpSender(otp,result.user_mobile);
             // console.log(otp);
-            res.redirect('/forget_password_otp?id='+ String(result._id))
+            return res.redirect('/forget_password_otp?id='+ String(result._id))
         }else{
-            res.render('userForgetPassword', {
+            return res.render('userForgetPassword', {
                 title: 'oldmela.com',
                 city_data: city_data,
                 cat_data: cat_data,

@@ -12,7 +12,7 @@ exports.dashBoard = async (req, res, next) => {
       const cat_data = await pool.cat_data.find();
       const sub_cat_data = await pool.sub_cat_data.find();
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
-      res.render('users/index', {
+      return res.render('users/index', {
         title: 'oldmela.com',
         city_data: city_data,
         cat_data: cat_data,
