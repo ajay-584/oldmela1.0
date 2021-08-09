@@ -1,9 +1,13 @@
 const sharp = require('sharp');
+const uuid = require('uuid');
 
-
-sharp('../public/images/img_avatar2.png').toFile('../public/newfile.png',(err,rel)=>{
-    if(err){
-        console.log("error h idher ",err)
+const compressAndMoveImage = async (img,outputPath)=>{
+    var img1 = '';
+    if(img){
+        img1 = uuid.v1() + '.png';
+        await sharp(img.data).toFile(outputPath+img1);
     }
-    console.log("sabkuchh thik h",rel);
-});
+    return img1
+}
+
+module.exports = compressAndMoveImage;
