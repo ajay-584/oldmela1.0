@@ -18,6 +18,13 @@ const forgetPasswordOtpController = require('../controller/forgetPasswordOtpCont
 
 const router = express.Router()
 
+const rateLimit = require("express-rate-limit");
+const limitReq = rateLimit({
+  windowMs: 1440 * 60 * 1000, // 24 hours
+  max: 5,
+  message:"You have cross the limit, please try after 24 hours.'"
+});
+
 function logout(req, res, next) {
   let user_session = req.session
   if (!user_session.phone) {
@@ -102,10 +109,10 @@ router.post('/login', userLoginController.loginPost); // end of get method
 
 /* ======================================= Forget password start .================================================= */
 //  Get method
-router.get('/forget_password', userForgetPasswordController.forgetPasswordGet); // end of get method
+router.get('/forget_password', limitReq, userForgetPasswordController.forgetPasswordGet); // end of get method
 
 //  post method
-router.post('/forget_password', userForgetPasswordController.forgetPasswordPost) // end of post method
+router.post('/forget_password', limitReq, userForgetPasswordController.forgetPasswordPost) // end of post method
 
 //  Get method
 router.get('/forget_password_otp', forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method

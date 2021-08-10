@@ -10,11 +10,21 @@ const compression = require('compression');
 const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
+const rateLimit = require("express-rate-limit");
+const cluster = require('cluster');
+const os = require('os');
+
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
 
 var app = express();
 
+const numCpu = os.cpus().length;
+const limiter = rateLimit({
+  windowMs: 2 * 60 * 1000, // 15 minutes
+  max: 1000,
+  message:"Too many requests, please try after 2 minutes.'"
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -35,6 +45,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
+app.use(limiter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -56,8 +67,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // ==============================================port===============================
-app.listen(process.env.PORT,function(){
-  console.log(`server started.... on ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT,function(){
+//   console.log(`server started.... on ${process.env.PORT}`);
+// });
+
+// clustering 
+if(cluster.isMaster){
+  for(let i = 0; i < numCpu; i++ ){
+    cluster.fork();
+  } 
+  cluster.on('exit', (worker, code, signal)=>{
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  })
+} else {
+  app.listen(process.env.PORT,function(){
+    console.log(`server started.... on ${process.env.PORT} and pId is ${process.pid}`);
+  });
+}
 
 module.exports = app;
