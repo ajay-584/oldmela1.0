@@ -115,10 +115,10 @@ router.get('/forget_password', limitReq, userForgetPasswordController.forgetPass
 router.post('/forget_password', limitReq, userForgetPasswordController.forgetPasswordPost) // end of post method
 
 //  Get method
-router.get('/forget_password_otp', forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method
+router.get('/forget_password_otp', limitReq, forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method
 
 //  post method
-router.post('/forget_password_otp', forgetPasswordOtpController.forgetPasswordOtpPost) // end of post method
+router.post('/forget_password_otp', limitReq, forgetPasswordOtpController.forgetPasswordOtpPost) // end of post method
 
 //  Get method
 router.get('/forget_password_new_password', setNewPasswordController.setNewPasswordGet); // end of get method
