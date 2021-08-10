@@ -67,23 +67,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // ==============================================port===============================
-// app.listen(process.env.PORT,function(){
-//   console.log(`server started.... on ${process.env.PORT}`);
-// });
+app.listen(process.env.PORT,function(){
+  console.log(`server started.... on ${process.env.PORT}`);
+});
 
 // clustering 
-if(cluster.isMaster){
-  for(let i = 0; i < numCpu; i++ ){
-    cluster.fork();
-  } 
-  cluster.on('exit', (worker, code, signal)=>{
-    console.log(`worker ${worker.process.pid} died`);
-    cluster.fork();
-  })
-} else {
-  app.listen(process.env.PORT,function(){
-    console.log(`server started.... on ${process.env.PORT} and pId is ${process.pid}`);
-  });
-}
+// if(cluster.isMaster){
+//   for(let i = 0; i < numCpu; i++ ){
+//     cluster.fork();
+//   } 
+//   cluster.on('exit', (worker, code, signal)=>{
+//     console.log(`worker ${worker.process.pid} died`);
+//     cluster.fork();
+//   })
+// } else {
+//   app.listen(process.env.PORT,function(){
+//     console.log(`server started.... on ${process.env.PORT} and pId is ${process.pid}`);
+//   });
+// }
 
 module.exports = app;
