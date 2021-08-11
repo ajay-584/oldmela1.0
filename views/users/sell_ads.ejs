@@ -10,7 +10,7 @@
                 <label for="fname">Title/Name</label>
               </div>
               <div class="col-75">
-                <input type="text" class="sell_input" id="fname" name="ads_name" placeholder="Ads name.." required>
+                <input type="text" class="sell_input" id="fname" name="ads_name" placeholder="Ads name.." maxlength="100" required>
               </div>
             </div>
             <div class="row">
@@ -18,7 +18,7 @@
                 <label for="lname">Price</label>
               </div>
               <div class="col-75">
-                <input type="number" class="sell_input"  id="lname" name="ads_price" placeholder="Ads price.." required>
+                <input type="number" class="sell_input"  id="lname" name="ads_price" placeholder="Ads price.." maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
               </div>
             </div>
             <div class="row">
@@ -61,7 +61,7 @@
                 <label for="subject">Description</label>
               </div>
               <div class="col-75">
-                <textarea class="sell_input"  id="dsubject" name="description" placeholder="Write ads details.." style="height:100px" required></textarea>
+                <textarea class="sell_input"  id="dsubject" name="description" placeholder="Write ads details.." style="height:100px" maxlength="500" required></textarea>
               </div>
             </div>
             <div class="row">
@@ -81,7 +81,7 @@
                 <label for="lname">Phone</label>
               </div>
               <div class="col-75">
-                <input type="number" class="sell_input"  id="pname" name="phone" placeholder="Your mobile number.." required>
+                <input type="number" class="sell_input"  id="pname" name="phone" placeholder="Your mobile number.." maxlength="12" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
               </div>
             </div>
             <div class="row">
@@ -89,7 +89,7 @@
                 <label for="subject">Address</label>
               </div>
               <div class="col-75">
-                <textarea class="sell_input"  id="asubject" name="address" placeholder="Write your contact address.." style="height:70px" required></textarea>
+                <textarea class="sell_input"  id="asubject" name="address" placeholder="Write your contact address.." maxlength="500" style="height:70px" required></textarea>
               </div>
             </div>
             <div class="row">
