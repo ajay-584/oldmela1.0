@@ -176,6 +176,7 @@ html{
 }
 .open-profile{
   display: block;
+  position: fixed;
 }
 .profile-links{
   width: 100%;

@@ -34,9 +34,9 @@ exports.sellAdsPost = async (req, res, next) => {
       const sub_cat_data = await pool.sub_cat_data.find();
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       //  Uploading file in public/images folder
-      const img1 = await helper.imgUploader(req.files.img_1, filePath);
-      const img2 = await helper.imgUploader(req.files.img_2, filePath);
-      const img3 = await helper.imgUploader(req.files.img_3, filePath);
+      const img1 = await helper.compressAndMoveImage(req.files.img_1, filePath);
+      const img2 = await helper.compressAndMoveImage(req.files.img_2, filePath);
+      const img3 = await helper.compressAndMoveImage(req.files.img_3, filePath);
       var msg = ''
       await pool.ads_data.create(
             {
