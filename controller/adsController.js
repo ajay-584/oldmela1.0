@@ -1,7 +1,6 @@
-const pool = require('./../model/pool')
+const pool = require('./../model/pool');
 const moment = require('moment');
 const mongoose = require('mongoose');
-const middleware = require('../middleware/index');
 const helper = require('../helper/index');
 
 // Fro get method

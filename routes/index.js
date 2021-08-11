@@ -1,5 +1,6 @@
 const express = require('express')
-const pool = require('./../model/pool');
+// Middleware
+const middleware = require('../middleware/middleware');
 // Callback controllers
 const adsController = require('../controller/adsController');
 const searchAdsController = require('../controller/searchAdsController');
@@ -15,27 +16,9 @@ const logoutController = require('../controller/logoutController');
 const userForgetPasswordController = require('../controller/forgetPasswordController');
 const setNewPasswordController = require('../controller/setNewPasswordController');
 const forgetPasswordOtpController = require('../controller/forgetPasswordOtpController');
+const sellSubCatController = require('../controller/sellSubCatController');
 
 const router = express.Router()
-
-const rateLimit = require("express-rate-limit");
-const limitReq = rateLimit({
-  windowMs: 1440 * 60 * 1000, // 24 hours
-  max: 5,
-  message:"You have cross the limit, please try after 24 hours.'"
-});
-
-function logout(req, res, next) {
-  let user_session = req.session
-  if (!user_session.phone) {
-    res.redirect('/login')
-  }
-  next()
-}
-var sub_cat_data = async () => {
-  var data = await pool.sub_cat_data.find({})
-  return data
-}
 
 /* =======================================GET home page.================================================= */
 router.get('/', adsController.allAds); // end of get method
@@ -44,7 +27,6 @@ router.get('/', adsController.allAds); // end of get method
 router.get('/cat', adsController.allAdsByCatId); // end of get method
 
 // city data route
-
 router.get('/city', adsController.allAdsByCityId) // end of get method
 
 // search bar route
@@ -53,20 +35,7 @@ router.get('/search', searchAdsController.searchAds);
 
 // ========================================= Ajax sections ==================================================
 // for sell section
-router.get('/sellsubcat', (req, res) => {
-  var val = req.query.value
-  sub_cat_data().then((data) => {
-    var catArray = []
-    for(x of data){
-      if(String(x.cat_id) === val){
-        // console.log(x.cat_id)
-        catArray.push(x)
-      }
-    }
-    // console.log("this is cat array:",catArray);
-    res.render('users/sellsubcatajax', { data: catArray })
-  })
-})
+router.get('/sellsubcat', sellSubCatController.sellSubCatAjax);
 // ========================================= end of ajax sections ==================================================
 // ========================================= Start of main ads page sections ==================================================
 router.get('/card', adsController.oneAddById); // end of get method
@@ -78,9 +47,9 @@ router.get('/card', adsController.oneAddById); // end of get method
 
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
-router.get('/sell_ads', logout, sellAdsController.sellAdsGet); // end of get method
+router.get('/sell_ads', middleware.auth, sellAdsController.sellAdsGet); // end of get method
 // post method------------------------------------------------------------
-router.post('/sell_ads', logout, sellAdsController.sellAdsPost); // end of post method
+router.post('/sell_ads', middleware.auth, sellAdsController.sellAdsPost); // end of post method
 
 // ========================================= end of sell ads sections ========================================================
 
@@ -105,20 +74,18 @@ router.get('/login', userLoginController.loginGet); // end of get method
 // post method
 router.post('/login', userLoginController.loginPost); // end of get method
 // ========================================= end of user login root sections ==========================================================
-
-
 /* ======================================= Forget password start .================================================= */
 //  Get method
-router.get('/forget_password', limitReq, userForgetPasswordController.forgetPasswordGet); // end of get method
+router.get('/forget_password', middleware.limitReq, userForgetPasswordController.forgetPasswordGet); // end of get method
 
 //  post method
-router.post('/forget_password', limitReq, userForgetPasswordController.forgetPasswordPost) // end of post method
+router.post('/forget_password', middleware.limitReq, userForgetPasswordController.forgetPasswordPost) // end of post method
 
 //  Get method
-router.get('/forget_password_otp', limitReq, forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method
+router.get('/forget_password_otp', middleware.limitReq, forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method
 
 //  post method
-router.post('/forget_password_otp', limitReq, forgetPasswordOtpController.forgetPasswordOtpPost) // end of post method
+router.post('/forget_password_otp', middleware.limitReq, forgetPasswordOtpController.forgetPasswordOtpPost) // end of post method
 
 //  Get method
 router.get('/forget_password_new_password', setNewPasswordController.setNewPasswordGet); // end of get method
@@ -128,37 +95,35 @@ router.post('/forget_password_new_password', setNewPasswordController.setNewPass
 
 // ========================================= end of forget password sections ==================================================
 
-
 /* =======================================GET user home page.================================================= */
-router.get('/dash_board', logout, dashBoardController.dashBoard); // end of get method
+router.get('/dash_board', middleware.auth, dashBoardController.dashBoard); // end of get method
 
 // ========================================= end of user home sections ==================================================
 
 // ========================================= start myAds section    ==================================================
 // my ads
-router.get("/myAds", logout, myAdsController.myAdsGet);
+router.get("/myAds", middleware.auth, myAdsController.myAdsGet);
 // delete my ads
-router.get('/deleteMyad', logout, myAdsController.deleteMyAdsGet);
+router.get('/deleteMyad', middleware.auth, myAdsController.deleteMyAdsGet);
 // ========================================= end of myads sections ===================================================
 
 // ========================================= start updateProfile section    ==================================================
 // get method
-router.get('/update_profile', logout, updateProfileController.updateProfileGet); 
+router.get('/update_profile', middleware.auth, updateProfileController.updateProfileGet); 
 // Post method
-router.post('/update_profile', logout, updateProfileController.updateProfilePost);
+router.post('/update_profile', middleware.auth, updateProfileController.updateProfilePost);
 // ========================================= end of Update Profile sections ===================================================
 
 // ========================================= start Change password section    ==================================================
-router.get('/update_password', updatePasswordController.updatePasswordGet); // end of get method
+router.get('/update_password', middleware.auth, updatePasswordController.updatePasswordGet); // end of get method
 
 // post mehtod
-router.post('/update_password',updatePasswordController.updatePasswordPost); // end of post method
+router.post('/update_password', middleware.auth, updatePasswordController.updatePasswordPost); // end of post method
 // ========================================= end of change password sections ===================================================
 
 // ========================================= start donation section    ==================================================
-router.get('/donation', (req, res, next) => {
-  next();
-})
+router.get('/donation', (req, res, next) => { next(); });
+
 // Logout section
 router.get('/logout', logoutController.logout);  // logout route
 

@@ -54,7 +54,7 @@ function sellselectcat(data) {
   // console.log(data)
   var cat = document.getElementById('sellsubcat')
   const ajaxreq = new XMLHttpRequest()
-  ajaxreq.open('GET', 'https://oldmela.herokuapp.com/sellsubcat?value=' + data, true)
+  ajaxreq.open('GET', 'https://www.oldmela.com/sellsubcat?value=' + data, true)
   ajaxreq.send()
 
   ajaxreq.onreadystatechange = function () {
