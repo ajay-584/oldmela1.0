@@ -1,0 +1,34 @@
+<%- include('./header') %>  <!-- header section -->
+<%- include('./admin_sidebar.ejs') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+        <div class="login-area">
+            <div class="model">
+                <div class="user-img">
+                    <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="form-area">
+                    <form class="frm" action="" method="post">
+                        <div><p style="color: red;"><%= msg %></p></div>
+                        <div class="input-area">
+                          <label for="uname"><b>Mobile</b></label>
+                          <input type="number" placeholder="Enter your 10 digit mobile number.." name="phone" required>
+                    
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="password" required>
+                            
+                          <button type="submit">Login</button>
+                          <span class="psw">Forgot <a href="/forget_password">password?</a></span>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div> <!--End of login area  -->
+    </div>
+    <!-- ==================================================footer Area========================================================= -->
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+</body>
+</html>

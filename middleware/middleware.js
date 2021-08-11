@@ -28,7 +28,7 @@ exports.limitReq = rateLimit({
 // User auth if they are not login
 exports.auth = (req, res, next)=> {
     try{
-        let user_session = req.session;
+        const user_session = req.session;
         if (!user_session.phone) {
           return res.redirect('/login');
         }
@@ -38,3 +38,17 @@ exports.auth = (req, res, next)=> {
         next();
     }
   }
+
+//   If user already logged in then
+exports.logged = (req, res, next)=>{
+    try{
+        const user_session = req.session;
+        if (user_session.phone) {
+            return res.redirect('/dash_board');
+          }
+          next();
+    }catch(e){
+        console.log(e);
+        next();
+    }
+}

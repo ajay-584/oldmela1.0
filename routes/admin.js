@@ -7,7 +7,16 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  try{
+    const adminSession = req.session;
+    if(!adminSession.phone){
+      return res.redirect('admin/admin_login');
+    } 
+    return res.render('admin/index');
+  }catch(e){
+    console.log(e);
+    next();
+  }
 });
 
 // ==============================Add cat========================
@@ -54,5 +63,24 @@ router.post('/city', function(req,res){
   });
   res.render('admin/add_city', {msg:"Data has been inseted!"});
   });
+
+// ========================Admin Loigin =========================
+router.get('/admin_login', (req, res, next)=>{
+  try{
+    return res.render('admin/adminLogin', {msg:''});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+});
+//  Post method
+router.post('/admin_login', (req, res, next)=>{
+  try{
+    return res.render('admin/adminLogin', {msg:''});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+})
 
 module.exports = router;
