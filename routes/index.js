@@ -76,10 +76,10 @@ router.post('/login', userLoginController.loginPost); // end of get method
 // ========================================= end of user login root sections ==========================================================
 /* ======================================= Forget password start .================================================= */
 //  Get method
-router.get('/forget_password', middleware.limitReq, userForgetPasswordController.forgetPasswordGet); // end of get method
+router.get('/forget_password', userForgetPasswordController.forgetPasswordGet); // end of get method
 
 //  post method
-router.post('/forget_password', middleware.limitReq, userForgetPasswordController.forgetPasswordPost) // end of post method
+router.post('/forget_password', userForgetPasswordController.forgetPasswordPost) // end of post method
 
 //  Get method
 router.get('/forget_password_otp', middleware.limitReq, forgetPasswordOtpController.forgetPasswordOtpGet); // end of get method

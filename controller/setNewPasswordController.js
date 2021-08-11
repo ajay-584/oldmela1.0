@@ -32,7 +32,7 @@ exports.setNewPasswordPost = async(req, res, next)=>{
         const sub_cat_data = await pool.sub_cat_data.find();
         if(new_password === confirm_new_Password){
             const hash_pass = bcrypt.hashSync(confirm_new_Password, 10);
-            await pool.user_data.updateOne({$and:[{_id:userId},{user_otp:userOtp}]},{user_password:hash_pass});
+            await pool.user_data.updateOne({$and:[{_id:userId},{user_otp:userOtp}]},{$set:{user_password:hash_pass, user_status:1}});
             res.render('userForgetPasswordSetNewPassword', {
                 title: 'oldmela.com',
                 city_data: city_data,
