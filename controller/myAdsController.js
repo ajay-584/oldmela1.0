@@ -37,13 +37,13 @@ exports.deleteMyAdsGet = async (req, res, next)=>{
       // console.log(ads_data);
       // deleting images from image folder
       if(ads_data.ads_img1){
-        await helper.deleteImage(filePath + ads_data.ads_img1);
+        await helper.deleteImage(ads_data.ads_img1);
       }
       if(ads_data.ads_img2){
-        await helper.deleteImage(filePath + ads_data.ads_img2);
+        await helper.deleteImage(ads_data.ads_img2);
       }
       if(ads_data.ads_img3){
-        await helper.deleteImage(filePath + ads_data.ads_img3);
+        await helper.deleteImage(ads_data.ads_img3);
       }
       // Deleting ads data from database
       if(ads_data){

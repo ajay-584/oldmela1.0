@@ -59,7 +59,7 @@ function sellselectcat(data) {
 
   ajaxreq.onreadystatechange = function () {
     if (ajaxreq.readyState == 4 && ajaxreq.status == 200) {
-      console.log("Working fine",ajaxreq.responseText);
+      // console.log("Working fine",ajaxreq.responseText);
       cat.innerHTML = ajaxreq.responseText
     }
   }

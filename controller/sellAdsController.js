@@ -35,8 +35,11 @@ exports.sellAdsPost = async (req, res, next) => {
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       //  Uploading file in public/images folder
       const img1 = await helper.compressAndMoveImage(req.files.img_1, filePath);
+      // console.log("Image_1",img1);
       const img2 = await helper.compressAndMoveImage(req.files.img_2, filePath);
+      // console.log("Image_2",img2)
       const img3 = await helper.compressAndMoveImage(req.files.img_3, filePath);
+      // console.log("Image_3",img3)
       var msg = ''
       await pool.ads_data.create(
             {

@@ -3,18 +3,42 @@
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
       <div class="cards">
-          <div class="card">
-            <h1>Total No of ads</h1>
-            <h2>25</h2>
+
+          <div class="card chunks">
+            <h1>Pending Ads</h1>
+            <h2><%= pendingAds %></h2>
           </div>
-          <div class="card">
-            <h1>Total No of users</h1>
-            <h2>105</h2>
+
+          <div class="card chunks">
+            <h1>Approved Ads</h1>
+            <h2><%= approvedAds %></h2>
           </div>
-          <div class="card">
-            <h1>Total No of Pending Ads</h1>
-            <h2>05</h2>
+
+          <div class="card chunks">
+            <h1>Authorized Users</h1>
+            <h2><%= authUsers %></h2>
           </div>
+
+          <div class="card chunks">
+            <h1>Unauthorized Users</h1>
+            <h2><%= unAuthUsers %></h2>
+          </div>
+
+          <div class="card chunks">
+            <h1>Total Cites</h1>
+            <h2><%= noOfCity %></h2>
+          </div>
+
+          <div class="card chunks">
+            <h1>Total Categories</h1>
+            <h2><%= noOfCategories %></h2>
+          </div>
+
+          <div class="card chunks">
+            <h1>Total Sub-Categories</h1>
+            <h2><%= noOfSubCat %></h2>
+          </div>
+
       </div>
     </div>
     <div class="footer-area">
@@ -23,3 +47,17 @@
      <!-- ==================================================End of footer Area========================================================= -->
 </body>
 </html>
+
+<style>
+  .chunks{
+    display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 2rem;
+  }
+  .chunks h1{
+    font-size: large;
+    font-weight: bold;
+  }
+  .chunks h2{
+    font-size: xx-large;
+    font-weight: 900;
+  }
+</style>
