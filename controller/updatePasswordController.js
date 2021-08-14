@@ -6,9 +6,9 @@ exports.updatePasswordGet = async (req, res, next) => {
     try{
         let id = mongoose.Types.ObjectId(req.query.id)
         let session = req.session;
-        const city_data = await pool.city_data.find();
-        const cat_data = await pool.cat_data.find();
-        const sub_cat_data = await pool.sub_cat_data.find();
+        const city_data = await pool.city_data.find().sort({_id:-1});
+        const cat_data = await pool.cat_data.find().sort({_id:-1});
+        const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
         const user_data = await pool.user_data.findOne({ _id: session.user_id });
         return res.render('users/user_change_password', {
             title: 'oldmela.com',
@@ -31,9 +31,9 @@ exports.updatePasswordPost = async (req, res) => {
         let current_password = req.body.old_password;
         let new_password = req.body.new_password;
         let confirm_password = req.body.confirm_password;
-        const city_data = await pool.city_data.find();
-        const cat_data = await pool.cat_data.find();
-        const sub_cat_data = await pool.sub_cat_data.find();
+        const city_data = await pool.city_data.find().sort({_id:-1});
+        const cat_data = await pool.cat_data.find().sort({_id:-1});
+        const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
         const result = await pool.user_data.findOne({ _id: session.user_id });
         let match = bcrypt.compareSync(current_password, result.user_password,);
         if(match){

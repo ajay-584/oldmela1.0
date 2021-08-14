@@ -1,4 +1,3 @@
-const express = require('express');
 const pool = require('../model/pool');
 const helper = require('../helper/index');
 
@@ -7,9 +6,9 @@ const filePath = process.env.FILE_URL // There is file path of images file
 exports.sellAdsGet = async (req, res, next)=> {
     try{
       let session = req.session;
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       return res.render('users/sell_ads', {
         title: 'oldmela.com',
@@ -29,9 +28,9 @@ exports.sellAdsGet = async (req, res, next)=> {
 exports.sellAdsPost = async (req, res, next) => {
     try{
       let session = req.session;
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       //  Uploading file in public/images folder
       const img1 = await helper.compressAndMoveImage(req.files.img_1, filePath);

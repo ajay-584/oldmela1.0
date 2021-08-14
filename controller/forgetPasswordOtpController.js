@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 
 exports.forgetPasswordOtpGet = async(req, res, next)=>{
     try{
-        const city_data = await pool.city_data.find();
-        const cat_data = await pool.cat_data.find();
-        const sub_cat_data = await pool.sub_cat_data.find();
+        const city_data = await pool.city_data.find().sort({name:1});
+        const cat_data = await pool.cat_data.find().sort({name:1});
+        const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
         return res.render('userForgetPasswordOtp', {
           title: 'oldmela.com',
           city_data: city_data,
@@ -26,9 +26,9 @@ exports.forgetPasswordOtpPost = async(req, res, next)=>{
         const userId = mongoose.Types.ObjectId(req.query.id);
         const userOtp = req.body.userOtp;
         // console.log(userId,userOtp)
-        const city_data = await pool.city_data.find();
-        const cat_data = await pool.cat_data.find();
-        const sub_cat_data = await pool.sub_cat_data.find();
+        const city_data = await pool.city_data.find().sort({name:1});
+        const cat_data = await pool.cat_data.find().sort({name:1});
+        const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
         const user_data = await pool.user_data.findOne({$and:[{_id:userId},{user_otp:userOtp}]});
         if(user_data){
             return res.redirect('/forget_password_new_password?id='+ String(user_data._id)+'&otp='+String(user_data.user_otp));

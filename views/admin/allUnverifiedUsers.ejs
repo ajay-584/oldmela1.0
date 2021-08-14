@@ -1,0 +1,39 @@
+<%- include('./header') %>  <!-- header section -->
+<%- include('./admin_sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+        <% if(usersData.length){ %>
+            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Un-Verified Users</h1>
+        <div class="cards">
+          <% for(ele of usersData){ %>
+            <div class="card chunks">
+                <ul>
+                    <li><span>Name:</span><span style="color: green;"><%= ele.user_name %></span></li>
+                    <li><span>Phone:</span><%= ele.user_mobile %></li>
+                    <li><span>Date:</span><%= moment(ele.user_date).format('Do MMM YYYY') %></li>
+                    <li><span>City:</span> <%= ele.user_address %></li>
+                    <li><span>Email:</span><%= ele.user_email %> </li>
+                </ul>
+            </div>
+            <% } } else { %>
+                <div><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Un-Verified Users</h3></div>
+            <% } %>
+  
+        </div>
+    </div>
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+</body>
+</html>
+
+<style>
+    .chunks ul li{
+        list-style: none;
+        
+    }
+  .chunks ul li span{
+      font-weight: bold;
+  }
+</style>

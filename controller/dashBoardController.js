@@ -8,9 +8,9 @@ exports.dashBoard = async (req, res, next) => {
       // console.log(req.query);
       let session = req.session
       // console.log(session)
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       return res.render('users/index', {
         title: 'oldmela.com',

@@ -12,7 +12,6 @@ const filePath = process.env.FILE_URL // There is file path of images file
 /* GET users listing. */
 router.get('/', async(req, res, next)=> {
   try{
-    const adminSession = req.session;
     const approvedAds = await pool.ads_data.find({ads_status:true});
     const pendingAds = await pool.ads_data.find({ads_status:false});
     const authUsers = await pool.user_data.find({user_status:1});
@@ -85,7 +84,55 @@ router.get('/admin_delete_ads', async (req, res, next)=>{
     console.log(e);
     next();
   }
-})
+});
+
+// ============================ All approved ads==============
+router.get('/all_approved_ads', async(req, res, next)=> {
+  try{
+    const adminSession = req.session;
+    const approvedAds = await pool.ads_data.find({ads_status:true}).sort({_id:-1}); 
+    const userData = await pool.user_data.find();
+    const city_data = await pool.city_data.find();
+    return res.render('admin/allApprovedAds',{
+      approvedAds:approvedAds,
+      usersData:userData,
+      city_data:city_data,
+      moment: moment
+    });
+  }catch(e){
+    console.log(e);
+    next();
+  }
+}); 
+
+// ============================ All Verified Users==============
+router.get('/all_verified_users', async(req, res, next)=> {
+  try{ 
+    const userData = await pool.user_data.find({user_status:1}).sort({_id:-1});
+    return res.render('admin/allVerifiedUsers',{
+      usersData:userData,
+      moment: moment
+    });
+  }catch(e){
+    console.log(e);
+    next();
+  }
+}); 
+
+// ============================ All Un-Verified Users==============
+router.get('/all_un_verified_users', async(req, res, next)=> {
+  try{ 
+    const userData = await pool.user_data.find({user_status:0}).sort({_id:-1});
+    return res.render('admin/allUnVerifiedUsers',{
+      usersData:userData,
+      moment: moment
+    });
+  }catch(e){
+    console.log(e);
+    next();
+  }
+}); 
+
 // ==============================Add cat========================
 router.get('/cat', function(req,res){
 res.render('admin/add_cat',{msg:""});

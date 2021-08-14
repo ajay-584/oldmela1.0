@@ -4,9 +4,9 @@ exports.searchAds = async (req, res, next)=>{
     try{
       let session = req.session;
       const text = req.query.search;
-      const city = await pool.city_data.find();
-      const cat = await pool.cat_data.find();
-      const sub_cat = await pool.sub_cat_data.find();
+      const city = await pool.city_data.find().sort({name:1});
+      const cat = await pool.cat_data.find().sort({name:1});
+      const sub_cat = await pool.sub_cat_data.find().sort({name:1});
       const ads = await pool.ads_data.find({$and:[{ $text: { $search: text } }, {ads_status:1}]});
       res.render('index', {
         title: 'oldmela.com',

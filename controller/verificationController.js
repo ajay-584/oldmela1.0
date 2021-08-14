@@ -8,9 +8,9 @@ exports.verifyGet = async function (req, res, next) {
       if (!req.query.hasOwnProperty('link')) {
         return res.redirect('404')
       }
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({_id:-1});
+      const cat_data = await pool.cat_data.find().sort({_id:-1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
       return res.render('user_verification', {
         title: 'oldmela.com',
         city_data: city_data,
@@ -34,9 +34,9 @@ exports.verifyPost = async function (req, res, next) {
       if (!req.query.hasOwnProperty('link')) {
         res.redirect('404')
       } else {
-        const city_data = await pool.city_data.find();
-        const cat_data = await pool.cat_data.find();
-        const sub_cat_data = await pool.sub_cat_data.find();
+        const city_data = await pool.city_data.find().sort({_id:-1});
+        const cat_data = await pool.cat_data.find().sort({_id:-1});
+        const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
         const get_otp = parseInt(req.body.otp)
         const result = await pool.user_data.findOne({ _id: num });
         // checking otp is same or not

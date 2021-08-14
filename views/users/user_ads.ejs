@@ -4,9 +4,9 @@
         <!-- side bar section  -->
         <!-- ==================================================Main Area========================================================= -->
         <div class="main-area">
+          <% if(ads_data.length){ %>
+            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">My all ads</h1>
             <div class="cards">
-                <% if(ads_data.length){ %>
-                <h1 style="color: green; margin: .2rem;">My Ads</h1>
               <% for(ele of ads_data){ %>
                 <div class="card">
                   <a href="/card?link=<%= ele._id %>">
@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <% } } else { %>
-                    <div><h3>Dear <span style="color: green; font-weight: bold;"><%= user_name %></span> currently you have not any ads</h3></div>
+                    <div><h3>Dear <span style="color: green; font-weight: bold;padding-top: .5rem;"><%= user_name %></span> currently you have not any ads</h3></div>
                 <% } %>
       
             </div>

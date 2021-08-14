@@ -9,9 +9,9 @@ exports.myAdsGet = async (req, res, next) => {
       // let id = mongoose.Types.ObjectId(req.query.id)
       let session = req.session;
       // console.log(session)
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       const ads_data = await pool.ads_data.find({ user_id: user_data._id });
       return res.render("users/user_ads", {

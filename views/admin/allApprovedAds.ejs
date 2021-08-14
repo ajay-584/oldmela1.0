@@ -2,10 +2,10 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-      <% if(ads_data.length){ %>
-        <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">Pending Ads</h1>
+      <% if(approvedAds.length){ %>
+        <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Approved Ads</h1>
         <div class="cards">
-          <% for(ele of ads_data){ %>
+          <% for(ele of approvedAds){ %>
             <div class="card">
               <a href="/card?link=<%= ele._id %>">
                 <div class="image-section">
@@ -20,24 +20,22 @@
                   <li><i style="font-size:1.4rem; margin-right: 0.5rem;" class="far">&#xf073;</i>
                     <%= moment(ele.ads_date).format('Do MMM YYYY') %>
                   </li>
-                  <li>
-                    <i style="font-size:1.4rem; margin-right: 0.1rem;" class="fa">&#xf1f8;</i> 
-                    <a href="/admin/admin_delete_ads?id=<%= ele._id %>">
-                       <b style="color: blue;" >Discard</b>
-                    </a>
-                  </li>
-                  <li>
-                    <i style="font-size:1.4rem; margin-right: 0.1rem;" class="far fa-thumbs-up"></i>
-                    <!-- <i style="font-size:1.4rem; margin-right: 0.1rem;" class="fa">&#xf1f8;</i>  -->
-                    <a href="/admin/approve_ads?id=<%= ele._id %>">
-                       <b style="color: blue;" >Approve</b>
-                    </a>
-                  </li>
+                  <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf041;</i>
+                    <% for(x of city_data){ if(String(ele.ads_city_id) === String(x._id)){  %>
+                        <%= x.name %>
+                        <% }} %>
+                </li>
+                <li>
+                  <i style="font-size:1.4rem; margin-right: 0.1rem;" class="fa fa-user-circle-o"></i> 
+                    <% for(x of usersData){ if(String(ele.user_id) === String(x._id)){  %>
+                      <%= x.user_name %>
+                    <% }} %>
+                </li>
                 </ul>
               </div>
             </div>
             <% } } else { %>
-                <div><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not pending ads</h3></div>
+                <div><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Approved ads</h3></div>
             <% } %>
   
         </div>

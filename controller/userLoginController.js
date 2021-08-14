@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 
 exports.loginGet = async(req, res, next)=> {
     try{
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       let session = req.session
       if (session.phone) {
         return res.redirect('/dash_board')
@@ -27,9 +27,9 @@ exports.loginGet = async(req, res, next)=> {
 
 exports.loginPost = async (req, res, next) => {
     try{
-      const city_data = await pool.city_data.find();
-      const cat_data = await pool.cat_data.find();
-      const sub_cat_data = await pool.sub_cat_data.find();
+      const city_data = await pool.city_data.find().sort({name:1});
+      const cat_data = await pool.cat_data.find().sort({name:1});
+      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       // Fetching user data from database
       const data = await pool.user_data.findOne({ user_mobile: parseInt(req.body.phone) });
       // when user exist
