@@ -10,7 +10,7 @@ exports.allAds = async (req, res, next)=> {
       const city = await pool.city_data.find();
       const cat = await pool.cat_data.find();
       const sub_cat = await pool.sub_cat_data.find();
-      const ads_data = await pool.ads_data.find({ads_status:true});
+      const ads_data = await pool.ads_data.find({ads_status:true}).sort({_id:-1});
       // console.log(ads_data);
       return res.render('index', {
         title: 'oldmela.com',
@@ -38,7 +38,7 @@ exports.allAds = async (req, res, next)=> {
       const city = await pool.city_data.find();
       const cat = await pool.cat_data.find();
       const sub_cat = await pool.sub_cat_data.find();
-      const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]});
+      const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]}).sort({_id:-1});
       // console.log(id,ads);
       return res.render('index', {
         title: 'oldmela.com',
@@ -64,7 +64,7 @@ exports.allAds = async (req, res, next)=> {
       const city = await pool.city_data.find();
       const cat = await pool.cat_data.find();
       const sub_cat = await pool.sub_cat_data.find();
-      const ads = await pool.ads_data.find({$and:[{ads_city_id:id},{ads_status:true}]});
+      const ads = await pool.ads_data.find({$and:[{ads_city_id:id},{ads_status:true}]}).sort({_id:-1});
       // console.log(id,ads);
       return res.render('index', {
         title: 'oldmela.com',

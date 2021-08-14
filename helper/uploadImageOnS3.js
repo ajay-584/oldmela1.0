@@ -4,9 +4,26 @@ const BUCKET_NAME = 'oldmela';
 
 const s3 = new AWS.S3({
     accessKeyId: 'AKIA2N6AUCNQNXH4SCXA',
-    secretAccessKey:'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'
+    secretAccessKey:'IE8zMhk+lwGerWTDmT4T0klay6hHpryxYlRS1tYQ',
+    region:'ap-south-1'
 });
-// file upload
+
+
+//=============== Bucket Creation
+// const CreateBucket = ()=>{
+//     const params = {
+//         Bucket:BUCKET_NAME
+//     }
+//     s3.createBucket(params,(err,info)=>{
+//         if(err){
+//             console.log(err);
+//         }
+//         console.log(info);
+//     })
+// }
+// CreateBucket();
+
+// ===========upload file on se bucket
 
 const uploadFile = (buffer, name, imgType)=>{
     return new Promise((resolve, reject)=>{
@@ -25,6 +42,5 @@ const uploadFile = (buffer, name, imgType)=>{
         })
     });
 }
-
 
 module.exports = uploadFile;

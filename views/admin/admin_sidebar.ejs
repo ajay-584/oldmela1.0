@@ -8,16 +8,44 @@
       </div>
       <!-- End of heading area -->
       <!-- Thsi is list of categores in side bar like books, electronics -->
-      <div class="sidebar-links">
-        <button>Pending Ads</button>
-        <button>Approved Ads</button>
-        <button>Total Users</button>
-        <button>List of Sub-categories</button>
-        <button>List of Cites</button>
-        <button>List of approved ads</button>
+      <div class="sidebar-links links">
+        <ul>
+          <li><a href="/pending_ads">Pending Ads</a></li>
+          <li><a href="http://">Approved Ads</a></li>
+          <li><a href="http://">Verified Users</a></li>
+          <li><a href="http://">Unverified Users</a></li>
+          <li><a href="http://">Cities</a></li>
+          <li><a href="http://">Categories</a></li>
+          <li><a href="http://">Sub-Categories</a></li>
+        </ul>
       </div>
       <!-- End of list of  -->
     </aside>
     <!-- End of side bar section  -->
 
     <!-- ==================================================End of Side Bar Area========================================================= -->
+
+    <style>
+      .links ul{
+        display: flex;
+        flex-direction: column;
+      }
+      .links ul li{
+        justify-content: center;
+        text-align: center;
+        padding: .5rem;
+        /* margin: .1rem; */
+        list-style: none;
+        background-color: #fff;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 0.5px 1px #888888;
+        
+      }
+      .links ul li a{
+        font-weight: bold;
+        font-size: medium;
+        text-decoration: none;
+        color: #000;
+        display: block;
+      }
+    </style>

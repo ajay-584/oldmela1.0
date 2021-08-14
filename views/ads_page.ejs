@@ -33,7 +33,11 @@
                 <h2>Contact Details</h2>
                 <ul>
                     <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf095;</i><%= ads_info.ads_phone %></li>
-                    <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf64f;</i><%= city_name %></li>
+                    <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf64f;</i>
+                        <% for(x of city_data){ if(String(ads_info.ads_city_id) === String(x._id)){  %>
+                            <%= x.name %>
+                            <% }} %>
+                    </li>
                     <li><span style="font-weight: bold;">Address:</span>: <%= ads_info.ads_address %></li>
                     <hr>
                 </ul>
