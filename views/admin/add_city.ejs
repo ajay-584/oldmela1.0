@@ -1,3 +1,74 @@
+<%- include('./header') %>  <!-- header section -->
+<%- include('./admin_sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">City Section </h1>
+            <div class="sell-area">
+                <form action=""  method="post">
+                  <div><p style="color: green;"><%= msg %></p></div>
+                  <div class="row">
+                    <div class="col-25">
+                      <label for="fname">City</label>
+                    </div>
+                    <div class="col-75">
+                      <input type="text" class="sell_input" name="city" placeholder="Enter city name" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <input type="submit" class="sell_submit" value="Insert">
+                  </div>
+                  </form>
+                  <table >
+                      <tr>
+                          <th>Name</th>
+                          <th>Date</th>
+                      </tr>
+                      <% for(x of cityData){  %>
+                      <tr>
+                          <td><%= x.name %></td>
+                          <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
+                      </tr>
+                      <% } %>
+                  </table>
+            </div> <!--End of sell area  -->
+    </div>
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+</body>
+</html>
+
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

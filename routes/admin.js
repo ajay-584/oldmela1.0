@@ -134,49 +134,80 @@ router.get('/all_un_verified_users', async(req, res, next)=> {
 }); 
 
 // ==============================Add cat========================
-router.get('/cat', function(req,res){
-res.render('admin/add_cat',{msg:""});
+router.get('/cat', async(req, res, next)=>{
+  try{
+    const catData = await pool.cat_data.find().sort({name:1});
+    res.render('admin/add_cat',{catData:catData, moment:moment, msg:""});
+  }catch(e){
+    console.log(e);
+    next();
+  }
 });
 // post mehtod
-router.post('/cat', function(req,res){
-  pool.cat_data.create({
-    name:req.body.cat
-  });
-res.render('admin/add_cat', {msg:"Data has been inseted!"});
+router.post('/cat', async(req, res, next)=>{
+  try{
+    await pool.cat_data.create({
+      name:req.body.cat
+    });
+    const catData = await pool.cat_data.find().sort({name:1});
+  res.render('admin/add_cat', {catData:catData, moment:moment, msg:"Data has been inserted!"});
+  }catch(e){
+    console.log(e);
+    next();
+  }
 });
 
 
 // ==============================Add sub cat========================
 router.get('/sub_cat', async (req,res)=>{
   try{
-    var cat_data = await pool.cat_data.find();
+    var cat_data = await pool.cat_data.find().sort({name:1});
   }catch(err){
     console.log(err)
   }
   res.render('admin/add_sub_cat', {cat_data:cat_data, msg:''});
 });
 
+
 // post method
-router.post('/sub_cat', (req,res)=>{
-  pool.sub_cat_data.create({
-    name:req.body.sub_cat,
-    cat_id:req.body.cat_id
-  });
-  res.render('admin/add_sub_cat', {cat_data:'' ,msg:'Data has been inserted!'});
+router.post('/sub_cat', async (req, res, next)=>{
+  try{
+    await pool.sub_cat_data.create({
+      name:req.body.sub_cat,
+      cat_id:req.body.cat_id
+    });
+    const cat_data = await pool.cat_data.find().sort({name:1});
+    return res.render('admin/add_sub_cat', {cat_data:cat_data ,msg:'Data has been inserted!'});
+  }catch(e){
+    console.log(e);
+    next();
+  }
 });
 
 
 // ==============================Add cat========================
-router.get('/city', function(req,res){
-  res.render('admin/add_city',{msg:""});
-  });
+router.get('/city', async(req, res, next)=>{
+  try{
+    const cityData = await pool.city_data.find().sort({name:1});
+    res.render('admin/add_city',{cityData:cityData, moment:moment, msg:""});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+});
 // post mehtod
-router.post('/city', function(req,res){
-  pool.city_data.create({
-  name:req.body.city
-  });
-  res.render('admin/add_city', {msg:"Data has been inseted!"});
-  });
+router.post('/city', async (req, res, next)=>{
+  try{
+    await pool.city_data.create({
+      name:req.body.city
+    });
+    const cityData = await pool.city_data.find().sort({name:1});
+    return res.render('admin/add_city', {cityData:cityData, moment:moment ,msg:'Data has been inserted!'});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+});
 
 // ========================Admin Loigin =========================
 router.get('/admin_login', (req, res, next)=>{
