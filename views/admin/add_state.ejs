@@ -2,30 +2,16 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">City Section </h1>
+            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">State Section </h1>
             <div class="sell-area">
                 <form action=""  method="post">
                   <div><p style="color: green;"><%= msg %></p></div>
                   <div class="row">
                     <div class="col-25">
-                        <label for="fname">States</label>
-                    </div>
-                    <div class="col-25">
-                        <select name="state_id" class="sell_input">
-                            <option>Selcet State</option>
-                            <% if(stateData){ %>
-                              <% for(ele of stateData){ %>
-                              <option value="<%= ele._id %>"><%= ele.name %></option>
-                            <% } } %>
-                        </select>
-                    </div>
-                </div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="fname">City</label>
+                      <label for="fname">State</label>
                     </div>
                     <div class="col-75">
-                      <input type="text" class="sell_input" name="city" placeholder="Enter city name" required>
+                      <input type="text" class="sell_input" name="state" placeholder="Enter state name" required>
                     </div>
                   </div>
                   <div class="row">
@@ -37,7 +23,7 @@
                           <th>Name</th>
                           <th>Date</th>
                       </tr>
-                      <% for(x of cityData){  %>
+                      <% for(x of stateData){  %>
                       <tr>
                           <td><%= x.name %></td>
                           <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
@@ -72,3 +58,11 @@
       background-color: #dddddd;
     }
     </style>
+
+
+
+
+
+
+
+

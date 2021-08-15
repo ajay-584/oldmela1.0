@@ -1,28 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div><h1>add sub categoreis</h1></div>
-    <div><p style="color: red;"><%= msg %></p></div>
-    <div>
-        <form action="" method="post" style="border:1px solid;">
-            <label for="select cate">Select categoreis</label>
-            <select name="cat_id" id="">
-                <% if(cat_data){ %>
-                <% for(ele of cat_data){ %>
-                <option value="<%= ele._id %>"><%= ele.name %></option>
-                <% } } %>
-            </select>
-            <br>
-            <label for="Sub Cat">Enter sub_categoreis_name</label>
-            <input type="text" name="sub_cat" placeholder="enter text">
-            <br>
-            <input type="submit" value="Add">
-        </form>
+<%- include('./header') %>  <!-- header section -->
+<%- include('./admin_sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">Sub-Categories Section </h1>
+            <div class="sell-area">
+                <form action=""  method="post">
+                  <div><p style="color: green;"><%= msg %></p></div>
+                  <div class="row">
+                        <div class="col-25">
+                            <label for="fname"> Categories</label>
+                        </div>
+                        <div class="col-25">
+                            <select name="cat_id" class="sell_input">
+                                <option>Selcet Categories</option>
+                                <% if(cat_data){ %>
+                                <% for(ele of cat_data){ %>
+                                <option value="<%= ele._id %>"><%= ele.name %></option>
+                                <% } } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Sub-Categories</label>
+                      </div>
+                    <div class="col-75">
+                      <input type="text" class="sell_input" name="sub_cat" placeholder="Enter Sub-Categories name" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <input type="submit" class="sell_submit" value="Insert">
+                  </div>
+                  </form>
+                  <table >
+                      <tr>
+                          <th>Name</th>
+                          <th>Date</th>
+                      </tr>
+                      <% for(x of subCatData){  %>
+                      <tr>
+                          <td><%= x.name %></td>
+                          <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
+                      </tr>
+                      <% } %>
+                  </table>
+            </div> <!--End of sell area  -->
     </div>
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
 </body>
 </html>
+
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>

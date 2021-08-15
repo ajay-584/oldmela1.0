@@ -3,6 +3,7 @@ const pool = require('./../model/pool');
 const moment = require('moment');
 const mongoose = require('mongoose');
 const helper = require('../helper/index');
+const { sub_cat_data } = require('./../model/pool');
 
 var router = express.Router();
 
@@ -161,11 +162,12 @@ router.post('/cat', async(req, res, next)=>{
 // ==============================Add sub cat========================
 router.get('/sub_cat', async (req,res)=>{
   try{
-    var cat_data = await pool.cat_data.find().sort({name:1});
+    const cat_data = await pool.cat_data.find().sort({name:1});
+    const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
+    res.render('admin/add_sub_cat', {cat_data:cat_data, subCatData:sub_cat_data, moment:moment, msg:''});
   }catch(err){
     console.log(err)
   }
-  res.render('admin/add_sub_cat', {cat_data:cat_data, msg:''});
 });
 
 
@@ -177,32 +179,58 @@ router.post('/sub_cat', async (req, res, next)=>{
       cat_id:req.body.cat_id
     });
     const cat_data = await pool.cat_data.find().sort({name:1});
-    return res.render('admin/add_sub_cat', {cat_data:cat_data ,msg:'Data has been inserted!'});
+    const subCatData = await pool.sub_cat_data.find().sort({name:1});
+    return res.render('admin/add_sub_cat', {cat_data:cat_data, subCatData:subCatData, moment:moment, msg:'Data has been inserted!'});
   }catch(e){
     console.log(e);
     next();
   }
 });
 
-
-// ==============================Add cat========================
+// ============================== Add State ========================
+router.get('/state', async(req, res, next)=>{
+  try{
+    const stateData = await pool.state_data.find().sort({name:1});
+    res.render('admin/add_state',{stateData:stateData, moment:moment, msg:""});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+});
+// post method
+router.post('/state', async (req, res, next)=>{
+  try{
+    await pool.state_data.create({
+      name:req.body.state
+    });
+    const stateData = await pool.state_data.find().sort({name:1});
+    return res.render('admin/add_state', {stateData:stateData, moment:moment ,msg:'Data has been inserted!'});
+  }catch(e){
+    console.log(e);
+    next();
+  }
+});
+// ============================== Add city ========================
 router.get('/city', async(req, res, next)=>{
   try{
+    const stateData = await pool.state_data.find().sort({name:1});
     const cityData = await pool.city_data.find().sort({name:1});
-    res.render('admin/add_city',{cityData:cityData, moment:moment, msg:""});
+    res.render('admin/add_city',{stateData:stateData, cityData:cityData, moment:moment, msg:""});
   }catch(e){
     console.log(e);
     next();
   }
 });
-// post mehtod
+// post method
 router.post('/city', async (req, res, next)=>{
   try{
     await pool.city_data.create({
-      name:req.body.city
+      name:req.body.city,
+      state_id:req.body.state_id
     });
+    const stateData = await pool.state_data.find().sort({name:1});
     const cityData = await pool.city_data.find().sort({name:1});
-    return res.render('admin/add_city', {cityData:cityData, moment:moment ,msg:'Data has been inserted!'});
+    return res.render('admin/add_city', {cityData:cityData,stateData:stateData, moment:moment ,msg:'Data has been inserted!'});
   }catch(e){
     console.log(e);
     next();

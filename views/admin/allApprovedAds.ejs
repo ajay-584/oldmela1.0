@@ -2,8 +2,8 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
+      <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Approved Ads</h1>
       <% if(approvedAds.length){ %>
-        <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Approved Ads</h1>
         <div class="cards">
           <% for(ele of approvedAds){ %>
             <div class="card">
@@ -35,7 +35,7 @@
               </div>
             </div>
             <% } } else { %>
-                <div><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Approved ads</h3></div>
+                <div style="text-align: center;"><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Approved ads</h3></div>
             <% } %>
   
         </div>
