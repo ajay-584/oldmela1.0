@@ -18,7 +18,7 @@ exports.verifiedUsers = async(req, res, next)=> {
 exports.unVerifiedUsers = async(req, res, next)=> {
     try{ 
       const userData = await pool.user_data.find({user_status:0}).sort({_id:-1});
-      return res.render('admin/allVerifiedUsers',{
+      return res.render('admin/allUnVerifiedUsers',{
         userData:userData,
         moment: moment
       });
