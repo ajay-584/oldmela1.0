@@ -1,5 +1,4 @@
 const express = require('express');
-
 // ==========Middleware==========
 const middleware = require('../middleware/middleware');
 // ========= Admin Controllers ========
@@ -16,7 +15,6 @@ const loginController = require('../adminController/loginController');
 const logoutController = require('../adminController/logoutController');
 
 var router = express.Router();
-
 
 const filePath = process.env.FILE_URL // There is file path of images file
 
@@ -46,7 +44,6 @@ router.post('/cat', middleware.adminAuth, catController.catPost);
 
 // ==============================Add sub cat========================
 router.get('/sub_cat', middleware.adminAuth, subCatController.subCatGet);
-
 
 // post method
 router.post('/sub_cat', middleware.adminAuth, subCatController.subCatPost);
