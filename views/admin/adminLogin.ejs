@@ -1,5 +1,4 @@
 <%- include('./header') %>  <!-- header section -->
-<%- include('./admin_sidebar.ejs') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
         <div class="login-area">
@@ -8,7 +7,7 @@
                     <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
                 </div>
                 <div class="form-area">
-                    <form class="frm" action="" method="post">
+                    <form class="frm" action="" method="post" enctype="application/x-www-form-urlencoded">
                         <div><p style="color: red;"><%= msg %></p></div>
                         <div class="input-area">
                           <label for="uname"><b>Mobile</b></label>
@@ -18,7 +17,7 @@
                           <input type="password" placeholder="Enter Password" name="password" required>
                             
                           <button type="submit">Login</button>
-                          <span class="psw">Forgot <a href="/forget_password">password?</a></span>
+                          <!-- <span class="psw">Forgot <a href="/forget_password">password?</a></span> -->
                         </div>
                       </form>
                 </div>

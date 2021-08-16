@@ -52,3 +52,16 @@ exports.logged = (req, res, next)=>{
         next();
     }
 }
+
+exports.adminAuth = (req, res, next)=>{
+  try{
+    const session = req.session;
+    if(!session.adminPhone){
+      return res.redirect('/admin/admin_login')
+    }
+    next();
+  }catch(e){
+    console.log(e);
+    next();
+  }
+}

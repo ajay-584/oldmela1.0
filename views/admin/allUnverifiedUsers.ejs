@@ -2,10 +2,10 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-        <% if(usersData.length){ %>
-            <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Un-Verified Users</h1>
+        <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">All Un-Verified Users</h1>
+        <% if(userData.length){ %>
         <div class="cards">
-          <% for(ele of usersData){ %>
+          <% for(ele of userData){ %>
             <div class="card chunks">
                 <ul>
                     <li><span>Name:</span><span style="color: green;"><%= ele.user_name %></span></li>
@@ -16,7 +16,7 @@
                 </ul>
             </div>
             <% } } else { %>
-                <div><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Un-Verified Users</h3></div>
+                <div style="text-align: center;"><h3>Dear <span style="color: green; font-weight: bold;">Admin</span> Currently we did not have not Un-Verified Users</h3></div>
             <% } %>
   
         </div>

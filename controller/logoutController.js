@@ -1,7 +1,9 @@
-exports.logout = (req, res) => {
-    req.session.destroy((err, result) => {
-      if (err) throw err
-    //   console.log("logout ho gya", result);
-    })
+exports.logout = (req, res, next) => {
+  try{
+    req.session.destroy();
     return res.redirect('/login');
+  }catch(e){
+    console.log(e);
+    next();
   }
+}
