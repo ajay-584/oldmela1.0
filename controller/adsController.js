@@ -144,8 +144,7 @@ exports.allAds = async (req, res, next)=> {
         ads_info: ads_info,
         city_name:city_name,
         user_name: session.name,
-        moment: moment,
-        page:page
+        moment: moment
       });
     } catch (err) {
       console.log(err);
