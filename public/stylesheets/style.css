@@ -373,7 +373,8 @@ html{
 }
 .pagination{
   /* position: absolute; */
-  bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
   margin: 1rem;
   text-align: center;
 }
@@ -387,7 +388,7 @@ html{
   color: #fff;
 }
 .pagination button i{
-  width: 4rem;
+  width: 5rem;
   font-size: 2rem;
 }
 
