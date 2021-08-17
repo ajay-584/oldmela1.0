@@ -651,10 +651,10 @@ html{
 }
 .myFile{
   /* background-color: red; */
-  width: 6.5rem;
+  /* width: 6.5rem; */
   margin: .5rem;
   /* display: none; */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 label {
   padding: 12px 12px 12px 0;

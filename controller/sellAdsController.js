@@ -32,13 +32,21 @@ exports.sellAdsPost = async (req, res, next) => {
       const cat_data = await pool.cat_data.find().sort({name:1});
       const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
-      //  Uploading file in public/images folder
-      const img1 = await helper.compressAndMoveImage(req.files.img_1, filePath);
-      // console.log("Image_1",img1);
-      const img2 = await helper.compressAndMoveImage(req.files.img_2, filePath);
-      // console.log("Image_2",img2)
-      const img3 = await helper.compressAndMoveImage(req.files.img_3, filePath);
-      // console.log("Image_3",img3)
+      // taking all images in images array
+      const images = req.files.Img;
+      var fileSize = 0
+      if(images.length < 5){
+        fileSize = images.length;
+      }else{
+        fileSize = 5;
+      }
+      // console.log("file size",fileSize);
+      var img = []
+      for(let i=0; i < fileSize; i++){
+        const img1 = await helper.compressAndMoveImage(images[i], filePath);
+        img.push(img1);
+      }
+      // console.log(img);
       var msg = ''
       await pool.ads_data.create(
             {
@@ -46,9 +54,7 @@ exports.sellAdsPost = async (req, res, next) => {
               ads_price: req.body.ads_price,
               ads_cat_id: req.body.ads_cat,
               ads_sub_cat_id: req.body.sub_ads_cat,
-              ads_img1: img1,
-              ads_img2: img2,
-              ads_img3: img3,
+              ads_img: img,
               ads_description: req.body.description,
               ads_city_id: req.body.city,
               ads_phone: req.body.phone,

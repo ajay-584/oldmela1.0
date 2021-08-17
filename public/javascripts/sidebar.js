@@ -46,8 +46,9 @@ function sellselectcat(data) {
 }
 // sellselectcat("5fa4224d1ddd8d2ac89dcff5");
 // ads page
-function img1() {
-  x = document.getElementById('img1').src
+function img1(i) {
+  x = document.getElementById(i).src;
+  console.log(x,i);
   document.getElementById('bigImage').src = x
 }
 function img2() {
