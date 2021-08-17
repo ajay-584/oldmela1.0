@@ -36,6 +36,41 @@
             <div><span>There is no ads</span></div>
             <% } %>
       </div>
+      <!-- Here 0 == /, 1 === cat, 2 == city and 3 == search -->
+      <!-- for home page -->
+      <% if(check == 0){ %>
+      <div class="pagination">
+        <a href="/?page=<%= page %>&d=1"><button><i class="fas fa-step-backward"></i></button></a>
+        <% if(ads_data.length){ %>
+        <a href="/?page=<%= page %>&d=0"><button><i class="fas fa-step-forward"></i></button></a>
+        <% }else{ %>
+          <button><i class="fas fa-step-forward"></i></button>
+          <% } %>
+      </div>
+
+      <% } else if (check == 1 ){ %>
+        <div class="pagination">
+          <a href="/cat?id=<%= id %>&page=<%= page %>&d=1"><button><i class="fas fa-step-backward"></i></button></a>
+          <% if(ads_data.length){ %>
+          <a href="/cat?id=<%= id %>&page=<%= page %>&d=0"><button><i class="fas fa-step-forward"></i></button></a>
+          <% }else{ %>
+            <button><i class="fas fa-step-forward"></i></button>
+            <% } %>
+        </div>
+
+        <% } else if(check == 2){ %>
+          <div class="pagination">
+            <a href="/city?id=<%= id %>&page=<%= page %>&d=1"><button><i class="fas fa-step-backward"></i></button></a>
+            <% if(ads_data.length){ %>
+            <a href="/city?id=<%= id %>&page=<%= page %>&d=0"><button><i class="fas fa-step-forward"></i></button></a>
+            <% }else{ %>
+              <button><i class="fas fa-step-forward"></i></button>
+              <% } %>
+          </div>
+          <% } %>
+
+
+
     </div>
     <!-- ==================================================footer Area========================================================= -->
     <div class="footer-area">

@@ -371,7 +371,25 @@ html{
   /* text-align: left; */
   /* color: red; */
 }
-
+.pagination{
+  /* position: absolute; */
+  bottom: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+.pagination button{
+  padding: 0.5rem;
+  outline: none;
+  border: 1px solid #000000;
+  /* border-radius: 5%; */
+  cursor: pointer;
+  background-color: #12CF2E;
+  color: #fff;
+}
+.pagination button i{
+  width: 4rem;
+  font-size: 2rem;
+}
 
 /* =========================================footer section====================================== */
 .footer-area{
@@ -382,6 +400,7 @@ html{
   display: flex;
   justify-content:center;
   align-items: center;
+  margin-top: 1rem;
 }
 
 /* =========================================Ads page section====================================== */

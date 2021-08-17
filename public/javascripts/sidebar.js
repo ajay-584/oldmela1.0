@@ -29,26 +29,6 @@ function colseprofile() {
   x.classList.remove('open-profile')
 }
 
-//  for categories and sub cat data
-// function opensidebarlinks(data){
-//   // console.log(data)
-//   var x = document.getElementById("sidebar-link");
-//   if (x.className === "sidebar-link"){
-//     x.classList.add("sidebar-link-open");
-//   }
-
-//   const ajaxreq = new XMLHttpRequest();
-//   ajaxreq.open('GET','http://localhost:3000/subcat?value='+data,'TRUE');
-//   ajaxreq.send();
-
-//   ajaxreq.onreadystatechange = function(){
-//     if(ajaxreq.readyState == 4 && ajaxreq.status == 200){
-//       x.innerHTML = ajaxreq.responseText;
-//     }
-//   }
-
-// }
-
 // for sell cat and sub cat data
 function sellselectcat(data) {
   // console.log(data)
