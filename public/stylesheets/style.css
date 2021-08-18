@@ -395,15 +395,42 @@ html{
 /* =========================================footer section====================================== */
 .footer-area{
   width: 100%;
+  height: 10rem;
   grid-area: "footer-area";
-  border-top: 1px solid;
-  background-color: #f0f0f0f0;
+  /* border-top: 1px solid; */
+  background-color: #222222;
   display: flex;
   justify-content:center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: .5rem;
+  flex-direction: column;
+  /* padding: 0.5rem; */
+  color: #ffffff;
 }
-
+.footer-links{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+.footer-links a{
+  text-decoration: underline;
+  padding: 0.5rem;
+  color: #ffffff;
+}
+.social-icons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+.social-icons i{
+  margin: 0.5rem;
+  font-size: 2.5rem;
+}
+.copy-right{
+  margin: .5rem;
+}
 /* =========================================Ads page section====================================== */
 .ads{
   width: 100%;
@@ -649,13 +676,6 @@ html{
   /* justify-content: space-between; */
   justify-items: center;
 }
-.myFile{
-  /* background-color: red; */
-  /* width: 6.5rem; */
-  margin: .5rem;
-  /* display: none; */
-  /* overflow: hidden; */
-}
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
@@ -671,6 +691,7 @@ label {
   /* margin: 0.5rem; */
   cursor: pointer;
   float: right;
+  margin: .5rem;
 }
 
 .sell_submit:hover {
@@ -712,6 +733,17 @@ label {
   body {
     background-color: #fff;
   }
+  /* Footer area start */
+  .footer-links a{
+    font-size: 1.2rem;
+  }
+  .social-icons i{
+    font-size: 1.7rem;
+  }
+  .copy-right{
+    font-size: 1.5rem;
+  }
+  /* Header section  */
   .resposive-search-box{
       display: flex;
   }
@@ -732,6 +764,7 @@ label {
   .profile-box{
       width: 10rem;
   }
+  /* HOme page area */
   .card{
       margin: 0;
       width: 100%;
@@ -740,6 +773,7 @@ label {
       display: flex;
       flex-direction: row;
   }
+  /* Ads page */
   .image-section img{
       height: 12rem;
       width: 18rem;
@@ -768,9 +802,11 @@ label {
       margin:.5rem 0;
       height: auto;
   }
+  /* User login area */
   .model{
       width:100%
   }
+  /* user profile section */
   .profile-area{
       flex-direction: column;
   }
@@ -787,6 +823,7 @@ label {
       width: 37%;
       height: 37%;
   }
+  /* Sell ads section */
   .sell-area{
       padding: 0.5rem;
       margin: 0.5rem;
