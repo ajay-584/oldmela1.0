@@ -70,7 +70,7 @@ html{
   height: 3.5rem;
   text-decoration: none;
   font-size: 1.6rem;
-  text-align: center;
+  /* text-align: center; */
   align-items: center;
   border-bottom: 1px solid;
   padding: .5rem;
@@ -609,6 +609,7 @@ html{
   border: 1px solid #f0f0f0;
   box-shadow: 0 0.5px 1px #888888;
   padding: .5rem;
+  /* background-color: #ffffff; */
 }
 .profile-image-section{
   width: 100%;
@@ -650,14 +651,14 @@ html{
   display: block;
   padding: 0.7rem 0 0 0;
 }
-.profile-options-section ul li button{
+.profile-options-section ul li a{
+  display: block;
   width: 100%;
   padding: 1rem;
-  font-weight: bold;
+  text-decoration: none;
   border: 1px solid;
   border-radius: .5rem;
-  background-color: #f0f0f0;
-  cursor: pointer;
+  color: #000000;
 }
 .right-area{
   width: 70%;
