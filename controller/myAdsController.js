@@ -14,7 +14,7 @@ exports.myAdsGet = async (req, res, next) => {
       const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       const ads_data = await pool.ads_data.find({ user_id: user_data._id });
-      console.log(ads_data);
+      // console.log(ads_data);
       return res.render("users/user_ads", {
         title: "oldmela.com",
         city_data: city_data,
