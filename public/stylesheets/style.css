@@ -670,13 +670,14 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   margin: 1rem;
 }
 .profile-info ul li button{
+  outline: none;
   padding: .7rem;
   --tw-bg-opacity: 1;
   background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
   color: white;
   cursor: pointer;
   outline: none;
-  border-radius: 1rem;
+  border-radius: .5rem;
   text-align: center;
 }
 /* ===============================================================sell Section================================ */
