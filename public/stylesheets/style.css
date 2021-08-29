@@ -17,6 +17,7 @@ html{
   grid-template-rows: 5rem 1fr 4rem;
   height: 100%;
 }
+
 /* =========================================Side Bar section====================================== */
 .sidebar{
   position: fixed;
@@ -70,7 +71,6 @@ html{
   height: 3.5rem;
   text-decoration: none;
   font-size: 1.6rem;
-  /* text-align: center; */
   align-items: center;
   border-bottom: 1px solid;
   padding: .5rem;
@@ -163,15 +163,15 @@ html{
 }
 .profile-box{
   position: absolute;
-  /* float: right; */
   width: 15rem;
   right: .5rem;
   transition: all .5s;
   top: 5rem;
   height: auto;
-  background-color: #f0f0f0;
-  border: 1px solid;
+  background-color: white;
   border-radius: .3rem;
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   display: none;
 }
 .open-profile{
@@ -190,18 +190,22 @@ html{
 }
 .profile-links ul li{
   width: 100%;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #f1f1f1f1;
   list-style: none;
   padding: 0.5rem;
   margin-top: 0.5rem;
-  text-align: center;
+  /* opacity: .8; */
 }
 .profile-links ul li a{
   display: block;
   text-decoration: none;
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
   font-size: 1.5rem;
-  color: black;
-  letter-spacing: 0.2rem;
+  line-height: 2rem;
+}
+.profile-links ul li:hover{
+  border-left: 2px solid darkblue;
 }
 
 /* =========================================Header section====================================== */
@@ -310,6 +314,17 @@ html{
   cursor: pointer;
 }
 .profile{
+  cursor: pointer;
+  text-align: center;
+  width: 3.4rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  /* padding: 0.5rem; */
+  border: 3px solid #000000;
+  border-radius: 50%;
+  opacity: .8;
+}
+.profile-icon{
   cursor: pointer;
 }
 /* =========================================Main section====================================== */
@@ -591,80 +606,73 @@ html{
 }
 
 /* ===============================================================User profile Section================================ */
-.profile-area{
-  /* border: 1px solid red; */
-  height: 100%;
+.profile-main-area{
   width: 100%;
-  display: flex;
-  padding-top: 0.5rem;
-  justify-content: center;
-  /* flex-wrap: wrap; */
-}
-.left-area{
-  /* position: fixed; */
-  width: 100%;
-  /* height: 50rem; */
-  margin: 0 1% 0 3%;
-  /* border: 1px solid; */
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 0.5px 1px #888888;
-  padding: .5rem;
-  /* background-color: #ffffff; */
-}
-.profile-image-section{
-  width: 100%;
-  padding: 0.5rem;
-  /* height: 10rem; */
+  padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
-}
-.profile-image-section img{
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  padding: 0.5rem;
-}
-.user-info-section{
-  width: 100%;
-  border: 1px solid #f0f0f0f0;
-}
-.user-info-section ul{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0.5rem;
-  text-align: center;
   align-items: center;
 }
-.user-info-section ul li{
-  list-style: none;
-  padding: 0.2rem;
-  color: green;
-}
-.profile-options-section ul{
-  width: 100%;
+.profile-area{
+  display: flex;
   padding: 0.5rem;
+  margin: 0.5rem 10%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 0.5px 1px #888888;
+  flex-wrap: wrap;
 }
-.profile-options-section ul li{
+.profile-header{
+  width: 100%;
+  /* border: 1px solid; */
+}
+.profile-header h1{
+  text-align: center;
+  padding: .5rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 900;
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+.profile-img{
+  padding: 0;
+}
+.profile-img img{
+  width: 15rem;
+  height: 15rem;
+  border: 1px;
+  border-radius: 50%;
+  /* padding: .5rem; */
+  /* margin-right: .5rem; */
+}
+.profile-info{
+  /* width: 30%; */
+  /* border: 1px solid; */
+  padding: 0;
+}
+.profile-info ul{
+  padding: .5rem;
+}
+.profile-info ul li{
   list-style: none;
-  width: 100%;
-  display: block;
-  padding: 0.7rem 0 0 0;
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+	font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 1rem;
 }
-.profile-options-section ul li a{
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  text-decoration: none;
-  border: 1px solid;
-  border-radius: .5rem;
-  color: #000000;
-}
-.right-area{
-  width: 70%;
-  /* height: 70rem; */
-  margin: 0 3% 0 0;
-  border: 1px solid;
+.profile-info ul li button{
+  padding: .7rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border-radius: 1rem;
+  text-align: center;
 }
 /* ===============================================================sell Section================================ */
 .sell-area{
@@ -768,7 +776,7 @@ label {
       padding-right: 0;
   }
   .profile-box{
-      width: 10rem;
+      width: 35%;
   }
   /* HOme page area */
   .card{
@@ -818,20 +826,8 @@ label {
   }
   /* user profile section */
   .profile-area{
-      flex-direction: column;
-  }
-  .left-area{
-      width: 100%;
-      padding: 0;
-      margin: 0;
-  }
-  .right-area{
-      display: none;
-      width: 100%;
-  }
-  .profile-image-section img{
-      width: 37%;
-      height: 37%;
+    padding: 0.5rem;
+    margin: 0.5rem;
   }
   /* Sell ads section */
   .sell-area{

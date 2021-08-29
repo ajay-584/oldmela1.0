@@ -1,9 +1,25 @@
 <%- include('../header') %>  <!-- header section -->
-<%- include('./user_profile_sidebar') %> <!-- side bar section  -->
+<%- include('../sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-      <div class="cards">
-          <h3 style="text-align: center; margin-top: .5rem;"> Dear <span style="color: green; margin: 0 .5rem;"> <%= user_name %> </span> welcome to oldmela.com. Here we are trying to provide an alternative solutions of olx.</h3>
+      <div class="profile-main-area">
+        <div class="profile-area">
+          <div class="profile-header">
+            <h1>Welcome <%= user_name %></h1>
+          </div>
+          <div class="profile-img">
+            <img src="images/img_avatar2.png" alt="profile image">
+          </div>
+          <div class="profile-info">
+            <ul>
+              <li>Name: <%= user_data.user_name%></li>
+              <li>Phone: <%= user_data.user_mobile%></li>
+              <li>Email: <%= user_data.user_email%></li>
+              <li>Address: <%= user_data.user_address%></li>
+              <li><a href="/update_profile"><button> Update Profile </button></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <!-- ===================================Footer started =========================== -->
