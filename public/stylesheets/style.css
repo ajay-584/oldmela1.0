@@ -70,13 +70,15 @@ html{
 .sidebar-link a{
   height: 3.5rem;
   text-decoration: none;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   align-items: center;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #f0f0f0;
   padding: .5rem;
   display: block;
   transition: all .5s;
-  color: black;
+	--tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
   cursor: pointer;
 }
 .sidebar h1{
@@ -163,7 +165,7 @@ html{
 }
 .profile-box{
   position: absolute;
-  width: 15rem;
+  width: 18rem;
   right: .5rem;
   transition: all .5s;
   top: 5rem;
@@ -200,8 +202,8 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   display: block;
   text-decoration: none;
   --tw-text-opacity: 1;
-  color: rgba(75, 85, 99, var(--tw-text-opacity));
-  font-size: 1.5rem;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+  font-size: 1.6rem;
   line-height: 2rem;
 }
 .profile-links ul li:hover{
@@ -389,8 +391,10 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   height: 2rem;
   margin: 0.1rem;
   overflow: hidden;
-  /* text-align: left; */
-  /* color: red; */
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: rgba(31, 41, 55, var(--tw-text-opacity));
 }
 .pagination{
   /* position: absolute; */
@@ -402,11 +406,12 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 .pagination button{
   padding: 0.5rem;
   outline: none;
-  border: 1px solid #000000;
-  /* border-radius: 5%; */
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   cursor: pointer;
-  background-color: #12CF2E;
-  color: #fff;
+  background-color: white;
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
 .pagination button i{
   width: 5rem;
@@ -776,7 +781,7 @@ label {
       padding-right: 0;
   }
   .profile-box{
-      width: 35%;
+      width: 40%;
   }
   /* HOme page area */
   .card{
