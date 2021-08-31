@@ -31,6 +31,7 @@ exports.signUpGet = async (req, res) => {
 
   exports.signUpPost = async (req, res) => {
     try{
+      const userPhone = req.body.mobile;
       const city_data = await pool.city_data.find().sort({_id:-1});
       const cat_data = await pool.cat_data.find().sort({_id:-1});
       const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
@@ -66,7 +67,7 @@ exports.signUpGet = async (req, res) => {
                 cat_data: cat_data,
                 sub_cat_data: sub_cat_data,
                 user_name: '',
-                fail: `${result.user_mobile} is already registered!`,
+                fail: `${userPhone} is already registered!`,
                 pass:'',
               })
             }

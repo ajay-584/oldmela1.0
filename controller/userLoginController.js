@@ -28,6 +28,7 @@ exports.loginGet = async(req, res, next)=> {
 
 exports.loginPost = async (req, res, next) => {
     try{
+      const userPhone = req.body.phone; 
       const city_data = await pool.city_data.find().sort({name:1});
       const cat_data = await pool.cat_data.find().sort({name:1});
       const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
@@ -45,7 +46,7 @@ exports.loginPost = async (req, res, next) => {
             cat_data: cat_data,
             sub_cat_data: sub_cat_data,
             user_name: '',
-            fail: `${data.user_mobile} is not verified`,
+            fail: `${userPhone} is not verified`,
             pass:'',
           });
         } else if (match) {
@@ -76,7 +77,7 @@ exports.loginPost = async (req, res, next) => {
           cat_data: cat_data,
           sub_cat_data: sub_cat_data,
           user_name: '',
-          fail: `${data.user_mobile} does not registered!`,
+          fail: `${userPhone} does not registered!`,
           pass:'',
         });
       }
