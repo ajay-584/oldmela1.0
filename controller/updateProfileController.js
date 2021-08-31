@@ -18,7 +18,8 @@ exports.updateProfileGet = async (req, res, next) => {
         sub_cat_data: sub_cat_data,
         user_data: user_data,
         user_name: session.name,
-        msg: '',
+        fail: '',
+        pass:'',
       });
     }catch(e){
       console.log(e);
@@ -42,12 +43,13 @@ exports.updateProfilePost = async (req, res, next) => {
       await pool.user_data.updateOne({_id:result._id}, {$set: {user_name:name, user_email:email, user_address:add}});
       return res.render('users/user_update_profile', {
         title: 'oldmela.com',
-        city_data: city_data,
-        cat_data: cat_data,
-        sub_cat_data: sub_cat_data,
+        city_data,
+        cat_data,
+        sub_cat_data,
         user_data: result,
         user_name: session.name,
-        msg: 'Data has been updated',
+        fail:'',
+        pass: 'Data has been updated',
       }); //end of render method
     }catch(e){
       console.log(e);

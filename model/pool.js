@@ -62,11 +62,16 @@ const city_schema = mongoose.Schema({
 });
 var city_model = mongoose.model('city_model', city_schema,'city_data');
 
+// express visitor counter
+const visitor_schema = mongoose.Schema({},{strict:false});
+var visitor_model = mongoose.model('visitor_mode', visitor_schema, 'visitor_data');
+
 module.exports = {
     ads_data : ads_model,
     cat_data : cat_model,
     sub_cat_data : sub_cat_model,
     user_data : sign_up_model,
     state_data:state_model,
-    city_data : city_model
+    city_data : city_model,
+    visitor_data : visitor_model
 };

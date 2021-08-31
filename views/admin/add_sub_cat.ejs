@@ -5,7 +5,8 @@
             <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">Sub-Categories Section </h1>
             <div class="sell-area">
                 <form action=""  method="post">
-                  <div><p style="color: green;"><%= msg %></p></div>
+                  <div><p style="color: red"><%= fail %></p></div>
+                  <div><p style="color: green"><%= pass %></p></div>
                   <div class="row">
                         <div class="col-25">
                             <label for="fname"> Categories</label>
@@ -34,11 +35,21 @@
                   </form>
                   <table >
                       <tr>
+                          <th>S.No</th>
+                          <th>Categories</th>
                           <th>Name</th>
                           <th>Date</th>
                       </tr>
+                      <% c=1 %>
                       <% for(x of subCatData){  %>
                       <tr>
+                          <td><%= c++ %></td>
+
+                          <% for(cat of cat_data){ %>
+                            <% if(String(x.cat_id)==String(cat._id)){ %>
+                              <td><%= cat.name %></td>
+                              <% }} %>
+                  
                           <td><%= x.name %></td>
                           <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
                       </tr>

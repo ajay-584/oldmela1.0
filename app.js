@@ -1,27 +1,26 @@
 require('dotenv').config();
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const db = require('./database');
 const compression = require('compression');
-const database = require('./database');
 const session = require('express-session');
 const fileUpload = require('express-fileupload'); 
 const rateLimit = require("express-rate-limit");
-const cluster = require('cluster');
 const os = require('os');
+const visitor = require('./helper/visitorCounter');
 
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
 
 var app = express();
 
-const numCpu = os.cpus().length;
+// const numCpu = os.cpus().length;
 const limiter = rateLimit({
-  windowMs: 2 * 60 * 1000, // 15 minutes
+  windowMs: 2 * 60 * 1000, // 2 minutes
   max: 1000,
   message:"Too many requests, please try after 2 minutes.'"
 });
@@ -31,13 +30,13 @@ app.set('view engine', 'ejs');
 
 // app.use(helmet());
 app.use(session({ 
-  secret : "@#%$@#$sdfjk;",
+  secret : "WQ?wWWn_hjCa88rq%6GfTvwD&",
   // name: cookie_name,
   // store: sessionStore, // connect-mongo session store
   proxy: true,
-  resave: true,
+  resave: false,
   saveUninitialized: true
-}));  // seesion
+}));  // session
 app.use(cors());
 app.use(fileUpload());
 app.use(logger('dev'));

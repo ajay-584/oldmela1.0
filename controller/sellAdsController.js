@@ -17,7 +17,8 @@ exports.sellAdsGet = async (req, res, next)=> {
         sub_cat_data: sub_cat_data,
         user_data: user_data,
         user_name: session.name,
-        msg: '',
+        fail: '',
+        pass:'',
       });
     }catch(e){
       console.log(e);
@@ -47,7 +48,6 @@ exports.sellAdsPost = async (req, res, next) => {
         img.push(img1);
       }
       // console.log(img);
-      var msg = ''
       await pool.ads_data.create(
             {
               ads_title: req.body.ads_name,
@@ -61,16 +61,7 @@ exports.sellAdsPost = async (req, res, next) => {
               ads_address: req.body.address,
               user_id: session.user_id,
         }); // end of insert data
-        msg = 'The ads data has been submitted Thank you!'
-        return res.render('users/sell_ads', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
-          user_data: user_data,
-          user_name: session.name,
-          msg: msg,
-        })
+        return res.redirect('/myAds');
     }catch(e){
       console.log(e);
       next();

@@ -5,14 +5,15 @@
             <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">City Section </h1>
             <div class="sell-area">
                 <form action=""  method="post">
-                  <div><p style="color: green;"><%= msg %></p></div>
+                  <div><p style="color: red"><%= fail %></p></div>
+                  <div><p style="color: green"><%= pass %></p></div>
                   <div class="row">
                     <div class="col-25">
                         <label for="fname">States</label>
                     </div>
                     <div class="col-25">
                         <select name="state_id" class="sell_input">
-                            <option>Selcet State</option>
+                            <option>Select State</option>
                             <% if(stateData){ %>
                               <% for(ele of stateData){ %>
                               <option value="<%= ele._id %>"><%= ele.name %></option>
@@ -34,13 +35,23 @@
                   </form>
                   <table >
                       <tr>
+                          <th>S.No</th>
+                          <th>State</th>
                           <th>Name</th>
                           <th>Date</th>
                       </tr>
-                      <% for(x of cityData){  %>
+                      <% c = 1 %>
+                      <% for(city of cityData){  %>
                       <tr>
-                          <td><%= x.name %></td>
-                          <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
+                          <td><%= c++ %></td>
+
+                          <% for(state of stateData){ %>
+                            <% if(String(city.state_id) == String(state._id)){ %>
+                            <td><%= state.name %></td>
+                          <% } } %>
+
+                          <td><%= city.name %></td>
+                          <td><%= moment(city.date).format('Do MMMM YYYY') %></td>
                       </tr>
                       <% } %>
                   </table>

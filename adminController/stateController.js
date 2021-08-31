@@ -6,7 +6,7 @@ const helper = require('../helper/index');
 exports.stateGet = async(req, res, next)=>{
     try{
       const stateData = await pool.state_data.find().sort({name:1});
-      res.render('admin/add_state',{stateData:stateData, moment:moment, msg:""});
+      res.render('admin/add_state',{stateData:stateData, moment:moment, fail:"", pass:""});
     }catch(e){
       console.log(e);
       next();
@@ -15,11 +15,17 @@ exports.stateGet = async(req, res, next)=>{
 
 exports.statePost = async (req, res, next)=>{
     try{
+      const state = (req.body.state).trim();
+      const checkState = await pool.state_data.findOne({name:state});
+      if(checkState){
+        const stateData = await pool.state_data.find().sort({name:1});
+        return res.render('admin/add_state', {stateData:stateData, moment:moment ,fail:`${state} already exited!`, pass:""});
+      }
       await pool.state_data.create({
-        name:req.body.state
+        name:state
       });
       const stateData = await pool.state_data.find().sort({name:1});
-      return res.render('admin/add_state', {stateData:stateData, moment:moment ,msg:'Data has been inserted!'});
+      return res.render('admin/add_state', {stateData:stateData, moment:moment ,fail:"", pass:`${state} has been inserted!`});
     }catch(e){
       console.log(e);
       next();

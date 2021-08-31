@@ -12,7 +12,8 @@ exports.forgetPasswordGet = async(req, res, next)=>{
           cat_data: cat_data,
           sub_cat_data: sub_cat_data,
           user_name: '',
-          msg:''
+          fail:'',
+          pass:'',
         });
     }catch(e){
         console.log(e);
@@ -40,7 +41,8 @@ exports.forgetPasswordPost = async(req, res, next)=>{
                 cat_data: cat_data,
                 sub_cat_data: sub_cat_data,
                 user_name: '',
-                msg:'Given phone does not registered!'
+                fail:`${userPhone} does not registered!`,
+                pass:``,
               });
         }
     }catch(e){

@@ -20,7 +20,8 @@ exports.signUpGet = async (req, res) => {
         cat_data: cat_data,
         sub_cat_data: sub_cat_data,
         user_name: '',
-        msg: '',
+        fail: '',
+        pass:'',
       });
     }catch(e){
       console.log(e);
@@ -65,7 +66,8 @@ exports.signUpGet = async (req, res) => {
                 cat_data: cat_data,
                 sub_cat_data: sub_cat_data,
                 user_name: '',
-                msg: 'Mobile number is already registered.',
+                fail: `${result.user_mobile} is already registered!`,
+                pass:'',
               })
             }
       } else {
@@ -76,7 +78,8 @@ exports.signUpGet = async (req, res) => {
           cat_data: cat_data,
           sub_cat_data: sub_cat_data,
           user_name: '',
-          msg: 'Confirm password does not matched!',
+          fail: 'Confirm password does not matched!',
+          pass:'',
         }) // end of response
       } // end of else statement  
     }catch(e){

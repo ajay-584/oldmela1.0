@@ -13,7 +13,8 @@ exports.forgetPasswordOtpGet = async(req, res, next)=>{
           cat_data: cat_data,
           sub_cat_data: sub_cat_data,
           user_name: '',
-          msg:''
+          fail:'',
+          pass:'',
         });
     }catch(e){
         console.log(e);
@@ -39,7 +40,8 @@ exports.forgetPasswordOtpPost = async(req, res, next)=>{
                 cat_data: cat_data,
                 sub_cat_data: sub_cat_data,
                 user_name: '',
-                msg:'Invalid Opt'
+                fail:'Invalid Opt',
+                pass:``
               });
         }
     }catch(e){

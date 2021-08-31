@@ -17,7 +17,8 @@ exports.updatePasswordGet = async (req, res, next) => {
             sub_cat_data: sub_cat_data,
             user_data: user_data,
             user_name: session.name,
-            msg: '',
+            fail:'',
+            pass:'',
         });
     }catch(e){
         console.log(e);
@@ -47,7 +48,8 @@ exports.updatePasswordPost = async (req, res) => {
                     sub_cat_data: sub_cat_data,
                     user_data: result,
                     user_name: session.name,
-                    msg: 'Password has been successfully changed',
+                    fail:'',
+                    pass: 'Password has been successfully changed',
                 }); //end of render 
             }else{
                 return res.render('users/user_change_password', {
@@ -57,7 +59,8 @@ exports.updatePasswordPost = async (req, res) => {
                     sub_cat_data: sub_cat_data,
                     user_data: result,
                     user_name: session.name,
-                    msg: 'Your new password and confirm password does not matched',
+                    fail: 'Your new password and confirm password does not matched',
+                    pass:'',
                 }) // end of render
             } // end of if password matching statement 
         }else{
@@ -68,7 +71,8 @@ exports.updatePasswordPost = async (req, res) => {
                 sub_cat_data: sub_cat_data,
                 user_data: result,
                 user_name: session.name,
-                msg: 'Your current password is invalid',
+                fail: 'Your current password is invalid',
+                pass:'',
             }); // end of render
         } // end of verify password statement 
     }catch(e){

@@ -17,7 +17,8 @@ exports.verifyGet = async function (req, res, next) {
         cat_data: cat_data,
         sub_cat_data: sub_cat_data,
         user_name: '',
-        msg: '',
+        fail:'',
+        pass:''
       });
     }catch(e){
       console.log(e);
@@ -49,7 +50,8 @@ exports.verifyPost = async function (req, res, next) {
               cat_data: cat_data,
               sub_cat_data: sub_cat_data,
               user_name: '',
-              msg: 'Verification successful',
+              fail:'',
+              pass: `${result.user_mobile} has been verify successfully!`,
             });
           } else {
             // when user put invalid otp
@@ -59,7 +61,8 @@ exports.verifyPost = async function (req, res, next) {
               cat_data: cat_data,
               sub_cat_data: sub_cat_data,
               user_name: '',
-              msg: 'Invalid otp',
+              fail: 'Invalid otp',
+              pass:``,
             })
           }
       } // end of req.qeury else statement

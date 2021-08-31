@@ -17,7 +17,8 @@ exports.loginGet = async(req, res, next)=> {
         cat_data: cat_data,
         sub_cat_data: sub_cat_data,
         user_name: '',
-        msg: '',
+        fail: '',
+        pass:'',
       });
     }catch(e){
       console.log(e);
@@ -44,7 +45,8 @@ exports.loginPost = async (req, res, next) => {
             cat_data: cat_data,
             sub_cat_data: sub_cat_data,
             user_name: '',
-            msg: 'This number is not verified',
+            fail: `${data.user_mobile} is not verified`,
+            pass:'',
           });
         } else if (match) {
           // When user verified and password is also same
@@ -62,7 +64,8 @@ exports.loginPost = async (req, res, next) => {
               cat_data: cat_data,
               sub_cat_data: sub_cat_data,
               user_name: '',
-              msg: 'Invalid password',
+              fail: 'Invalid password',
+              pass:'',
             });
         }
       } else {
@@ -73,8 +76,9 @@ exports.loginPost = async (req, res, next) => {
           cat_data: cat_data,
           sub_cat_data: sub_cat_data,
           user_name: '',
-          msg: 'Invalid mobile number',
-        })
+          fail: `${data.user_mobile} does not registered!`,
+          pass:'',
+        });
       }
     }catch(e){
       console.log(e);
