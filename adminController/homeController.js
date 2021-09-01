@@ -1,4 +1,5 @@
 const pool = require('../model/pool');
+const helper = require('../helper/index');
 
 exports.homeGet = async(req, res, next)=> {
     try{
@@ -9,6 +10,8 @@ exports.homeGet = async(req, res, next)=> {
       const noOfCity = await pool.city_data.find();
       const noOfCategories = await pool.cat_data.find();
       const noOfSubCat = await pool.sub_cat_data.find();
+      const walletBalance = await helper.walletBalance();
+
       // if(!adminSession.phone){
       //   return res.redirect('admin/admin_login');
       // } 
@@ -19,7 +22,8 @@ exports.homeGet = async(req, res, next)=> {
         unAuthUsers: unAuthUsers.length,
         noOfCity:noOfCity.length,
         noOfCategories:noOfCategories.length,
-        noOfSubCat: noOfSubCat.length
+        noOfSubCat: noOfSubCat.length,
+        walletBalance
       });
     }catch(e){
       console.log(e);

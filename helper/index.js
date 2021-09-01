@@ -5,7 +5,8 @@ const imgUploader = require('./imageUploader');
 const deleteImage = require('./deleteImage');
 const compressAndMoveImage = require('./imageCompressor');
 const pendingAds = require('./pendingAds');
-const uploadFile = require('./uploadImageOnS3')
+const uploadFile = require('./uploadImageOnS3');
+const walletBalance = require('./walletBalance');
 
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     deleteImage,
     compressAndMoveImage,
     pendingAds,
-    uploadFile
+    uploadFile,
+    walletBalance
 }

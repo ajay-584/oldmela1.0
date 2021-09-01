@@ -2,11 +2,10 @@ const randomstring = require("randomstring");
 
 // Generating 6 digit random no for otp
 const otpGenerator = () => {
-  const a = randomstring.generate({
-  length: 4,
-  charset: 'numeric'
-  });
-  // console.log("Your otp is ",parseInt(a));
-  return parseInt(a);
+  var a = Math.floor(100000 + Math.random() * 900000)
+  a = a.toString().substring(0, 6)
+  a = parseInt(a)
+  // console.log("Your otp is ",a);
+  return a
 }
 module.exports = otpGenerator;
