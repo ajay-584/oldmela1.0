@@ -653,6 +653,24 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   /* padding: .5rem; */
   /* margin-right: .5rem; */
 }
+.msg{
+  display: flex;
+  max-width: 15rem;
+  min-height: 15rem;
+  border: 1px;
+  padding: .5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  word-wrap: break-word;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .profile-info{
   /* width: 30%; */
   /* border: 1px solid; */
@@ -834,6 +852,10 @@ label {
   .profile-area{
     padding: 0.5rem;
     margin: 0.5rem;
+  }
+  .msg{
+    max-width: 100%;
+    min-height: auto;
   }
   /* Sell ads section */
   .sell-area{
