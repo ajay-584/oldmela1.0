@@ -642,6 +642,11 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   --tw-text-opacity: 1;
   color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
+.profile-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .profile-img{
   padding: 0;
 }
@@ -852,10 +857,6 @@ label {
   .profile-area{
     padding: 0.5rem;
     margin: 0.5rem;
-  }
-  .msg{
-    max-width: 100%;
-    min-height: auto;
   }
   /* Sell ads section */
   .sell-area{
