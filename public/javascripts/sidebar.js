@@ -1,9 +1,9 @@
-function opensidebar() {
-  document.querySelector('.sidebar').classList.add('open')
-}
-function closeSideBar() {
-  document.querySelector('.sidebar').classList.remove('open')
-}
+// function opensidebar() {
+//   document.querySelector('.sidebar').classList.add('open')
+// }
+// function closeSideBar() {
+//   document.querySelector('.sidebar').classList.remove('open')
+// }
 function selcetcity() {
   document.querySelector('.city').classList.add('city-open')
 }
