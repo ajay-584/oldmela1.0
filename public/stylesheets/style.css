@@ -595,14 +595,13 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 }
 /* ===============================================================User form Section================================ */
 .form-container{
-  padding-top: 1.5rem;
-  /* height: 100%; */
   width: 100%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
 }
 .model{
+  margin-top: .3rem;
   padding: 1rem;
   width: 45rem;
   border: 1px solid #050505;
