@@ -13,7 +13,7 @@ $(document).ready(function () {
     // City data by ajax
     $(function () { 
         // console.log("Event occur");
-        const url = 'https://oldmela.herokuapp.com/city_data';
+        const url = 'http://localhost:3000/city_data';
         fetch(url).then(res=>res.json()).then((data)=>{
             const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
             // console.log(city)

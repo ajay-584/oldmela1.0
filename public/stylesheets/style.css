@@ -602,7 +602,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 }
 .model{
   margin-top: .3rem;
-  padding: 1rem;
+  padding: .5rem;
   width: 45rem;
   border: 1px solid #050505;
   box-shadow: 0 0.5px 1px #888888;
@@ -902,7 +902,8 @@ label {
   }
   /* User login area */
   .model{
-      width:100%
+      width:100%;
+      padding: 0;
   }
   /* user profile section */
   .profile-area{
