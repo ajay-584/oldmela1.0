@@ -2,23 +2,27 @@
 <%- include('sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-        <div class="login-area">
+        <div class="form-container">
             <div class="model">
-                <div class="user-img">
-                    <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                <div class="user-avtar">
+                    <i class="far" >&#xf2bd;</i>
+                    <h1>Sign In</h1>
                 </div>
                 <div class="form-area">
                     <form class="frm" action="" method="post">
                         <div><p style="color: red"><%= fail %></p></div>
                         <div><p style="color: green"><%= pass %></p></div>
                         <div class="input-area">
-                          <label for="uname"><b>Mobile</b></label>
+
+                          <!-- <label for="uname"><b>Mobile</b></label> -->
+                          Mobile
                           <input type="number" placeholder="Enter your 10 digit mobile number.." name="phone" required>
                     
-                          <label for="psw"><b>Password</b></label>
+                          <!-- <label for="psw"><b>Password</b></label> -->
+                          Password
                           <input type="password" placeholder="Enter Password" name="password" required>
                             
-                          <button type="submit">Login</button>
+                          <button type="submit">Sign In</button>
 
                           <a href="sign_up"><button type="button">Create New Account</button></a>
                           <span class="psw">Forgot <a href="/forget_password">password?</a></span>

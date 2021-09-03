@@ -4,7 +4,7 @@
         <!-- Heading area -->
         <div class="sidebar-header">
           <h1>Categroies</h1>
-          <button class="closebtn" onclick="closeSideBar()"><i style="font-size:2rem" class="fas">&#xf00d;</i></button>
+          <button class="closebtn" id="closeSideBar"><i style="font-size:2rem" class="fas">&#xf00d;</i></button>
         </div>
         <!-- End of heading area -->
         <!-- Thsi is list of categores in side bar like books, electronics -->
@@ -27,13 +27,16 @@
       <!-- select city section -->
       <aside class="city">
         <!-- responsive city means mobile view interface -->
+        <!-- Normal implementation -->
         <div  class="responsive-city">
-          <select onchange="cityId(this.value)">
+          <!-- <select onchange="cityId(this.value)">
             <option  value="#">Select City</option>
             <% for(x of city_data){ %>
               <option value="<%= x._id %>"> <%= x.name %> </option>
             <% } %>
-          </select>
+          </select> -->
+        <!-- using jquery implementation -->
+          <input placeholder="Search City..." class="citySearch">
           <!-- colse button of select city oprions -->
           <div><button class="city-close-btn" onclick="removecity()"><i style="font-size:3rem" class="fas">&#xf00d;</i></button></div>
         </div>

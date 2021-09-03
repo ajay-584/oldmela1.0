@@ -2,26 +2,31 @@
 <%- include('sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-        <div class="login-area">
+        <div class="form-container">
             <div class="model">
-                <div class="user-img">
-                    <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                <div class="user-avtar">
+                    <i class='far' >&#xf2bd;</i>
+                    <h1>Sign Up</h1>
                 </div>
                 <div class="form-area">
                     <form class="frm" action="" method="post">
                         <div><p style="color: red"><%= fail %></p></div>
                         <div><p style="color: green"><%= pass %></p></div>
                         <div class="input-area">
-                          <label for="uname"><b>Mobile</b></label>
+                          <!-- <label for="uname"><b>Mobile</b></label> -->
+                          <span>Mobile</span>
                           <input type="number" placeholder="Enter your 10 digit mobile no.." name="mobile" required>
 
-                          <label for="name"><b>Name</b></label>
+                          <!-- <label for="name"><b>Name</b></label> -->
+                          <span>Name</span>
                           <input type="text" placeholder="Enter Full Name" name="name" required>
 
-                          <label for="password"><b>Password</b></label>
+                          <!-- <label for="password"><b>Password</b></label> -->
+                          <span>Password</span>
                           <input type="password" placeholder="Enter Password" name="password" required>
                     
-                          <label for="cinfirmpassword"><b>Confirm Password</b></label>
+                          <!-- <label for="cinfirmpassword"><b>Confirm Password</b></label> -->
+                          <span>confirm Password</span>
                           <input type="password" placeholder="Enter Confirm Password" name="confirmPassword" required>
                             
                           <button type="submit">Register</button>

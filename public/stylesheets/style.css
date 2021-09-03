@@ -18,6 +18,58 @@ html{
   height: 100%;
 }
 
+
+/* =============================== auto complete============== */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;   
+  padding: 4px 0;
+  margin: 0 0 10px 25px;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+
+.ui-menu-item > a.ui-corner-all {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #555555;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.ui-state-hover, .ui-state-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
+}
+
 /* =========================================Side Bar section====================================== */
 .sidebar{
   position: fixed;
@@ -99,10 +151,10 @@ html{
   cursor: pointer;
 }
 .city{
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 5rem;
-  background-color: #f0f0f0;
+  /* height: 100vh; */
+  background-color:white;
   transition: all .5s;
   transform: translateY(-5rem);
   display: flex;
@@ -118,28 +170,23 @@ html{
 .city-close-btn{
   width: 8rem;
   height: 5rem;
+  cursor: pointer;
 }
-.responsive-city select{
+.responsive-city input{
   width: 100%;
   padding: 1rem;
   /* padding-top: 0.rem; */
   outline: none;
   /* border-radius: 5%; */
-  font-weight: bold;
-  overflow: scroll;
-  background-color: #f0f0f0;
+  /* font-weight: bold; */
+  /* overflow: scroll; */
+  background-color: #ffffff;
   align-items: center;
   letter-spacing: 0.2rem;
 }
-.responsive-city select option{
-  font-weight: bold;
-  background-color: #fff;
-  padding-bottom: .5rem;
-  /* letter-spacing: 0.5rem; */
-}
 .search{
   width: 100%;
-  position: absolute;
+  position: fixed;
   height: 5rem;
   transition: all .5s;
   transform: translateY(-5rem);
@@ -252,28 +299,19 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   align-items: center;
   /* display: none; */
 }
-.city-select{
-  /* padding-right: 1rem; */
-  /* position: relative; */
-  margin-right: auto;
-}
-.city-select select{
+.city-select input{
   padding: 0.8rem;
   outline: none;
-  border-radius: 5%;
+  border-radius: .5rem;
   font-weight: 100;
   overflow: scroll;
-  background-color: #f0f0f0;
-}
-.city-select select option{
-  font-weight: 100;
-  background-color: #fff;
-  padding-bottom: .5rem;
+  background-color: #ffffff;
 }
 .search-container{
   flex-basis: 100%;
   border-radius: 10%;
   margin-left: 2rem;
+  /* width: 50rem; */
 }
 .from-area{
   /* width: 100%; */
@@ -312,7 +350,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   padding: 0.5rem;
   letter-spacing: 0.2rem;
   outline: none;
-  border-radius: 10%;
+  border-radius: .5rem;
   cursor: pointer;
 }
 .profile{
@@ -454,6 +492,10 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   margin: 0.5rem;
   font-size: 2.5rem;
 }
+.social-icons a{
+  text-decoration: none;
+  color: #ffffff;
+}
 .copy-right{
   margin-top: .5rem;
 }
@@ -551,31 +593,38 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   display: block;
   width: 100%;
 }
-/* ===============================================================User login Section================================ */
-.login-area{
-  padding-top: 0.5rem;
-  height: 100%;
+/* ===============================================================User form Section================================ */
+.form-container{
+  padding-top: 1.5rem;
+  /* height: 100%; */
   width: 100%;
   display: flex;
   justify-content: center;
+  /* align-items: center; */
 }
 .model{
+  padding: 1rem;
   width: 45rem;
-  /* height: 50rem; */
-  /* position: fixed; */
+  border: 1px solid #050505;
+  box-shadow: 0 0.5px 1px #888888;
 }
-.user-img {
-  padding: .5rem 0 0 0;
+.user-avtar {
   width: 100%;
   height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
-.user-img img{
+.user-avtar h1{
+	font-size: 3rem;
+  line-height: 1;
+  font-weight: 700;
+}
+.user-avtar i{
     padding: .5rem;
-    width: 15rem;
-    /* border: 5px solid #000; */
-    border-radius: 50%;
+    font-size: 8rem;
+    line-height: 1;
 }
 .frm{
   padding: 0.5rem;
@@ -586,11 +635,14 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 }
 .input-area input{
   width: 100%;
-  padding: 12px 20px;
-  margin: 0.5rem 0;
+  padding: 12px .5rem;
+  margin-bottom: 1rem;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   /* box-sizing: border-box; */
+}
+.input-area input:hover{
+  border: 2px solid blue;
 }
 .input-area button{
   background-color: #111;

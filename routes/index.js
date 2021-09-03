@@ -20,6 +20,16 @@ const sellSubCatController = require('../controller/sellSubCatController');
 
 const router = express.Router()
 
+const pool = require('../model/pool');
+router.get('/city_data', async(req, res, next)=>{
+    try{
+        const cityData = await pool.city_data.find();
+        res.json(cityData);
+    }catch(e){
+        console.log(e);
+        next();
+    }
+});
 /* =======================================GET home page.================================================= */
 router.get('/', adsController.allAds); // end of get method
 

@@ -2,17 +2,19 @@
 <%- include('sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-        <div class="login-area">
+        <div class="form-container">
             <div class="model">
-                <div class="user-img">
-                    <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+                <div class="user-avtar">
+                    <i class="far" >&#xf2bd;</i>
+                    <h1>Verification</h1>
                 </div>
                 <div class="form-area">
                     <form class="frm" action="" method="post">
                         <div><p style="color: red"><%= fail %></p></div>
                         <div><p style="color: green"><%= pass %></p></div>
                         <div class="input-area">
-                          <label for="otp"><b>We sent 6-digit code on your phone</b></label>
+                          <!-- <label for="otp"><b>We sent 6-digit code on your phone</b></label> -->
+                          <span>We sent 6-digit code on your mobile</span>
                           <input type="number" placeholder="Please enter your otp" name="otp" required>
                             
                           <button type="submit">Verify</button>
