@@ -29,26 +29,30 @@
         <!-- responsive city means mobile view interface -->
         <!-- Normal implementation -->
         <div  class="responsive-city">
-          <!-- <select onchange="cityId(this.value)">
-            <option  value="#">Select City</option>
-            <% for(x of city_data){ %>
-              <option value="<%= x._id %>"> <%= x.name %> </option>
-            <% } %>
-          </select> -->
+          <!-- close button of city button -->
+          <div>
+            <button class="city-close-btn" onclick="removecity()"> 
+              <i style="font-size: 3rem;" class="fas fa-long-arrow-alt-left"></i> 
+            </button>
+          </div>
         <!-- using jquery implementation -->
           <input placeholder="Search City..." class="citySearch">
-          <!-- colse button of select city oprions -->
-          <div><button class="city-close-btn" onclick="removecity()"><i style="font-size:3rem" class="fas">&#xf00d;</i></button></div>
         </div>
       </aside>
       <!-- Serach section means mobile view interface -->
       <aside class="search">
         <div class="search-div">
           <form  action="/search" method="GET">
+      
+          <button onclick="closesearch()"> 
+            <i style="font-size: 3rem;" class="fas fa-long-arrow-alt-left"></i> 
+          </button>
+          
             <input type="text" placeholder="Search.." name="search" required>
             <!-- search button -->
             <button onclick="closesearch()" type="submit"><i style="font-size: 3rem;" class="fa fa-search"></i></button>
           </form>
+
         </div>
       </aside>
       <!-- Profile sections for both desktop and mobile view interface -->

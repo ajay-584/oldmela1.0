@@ -51,7 +51,8 @@ html{
 
 .ui-menu-item > a.ui-corner-all {
   display: block;
-  padding: 3px 15px;
+  padding: 5px 15px;
+  /* font-size: 5rem; */
   clear: both;
   font-weight: normal;
   line-height: 18px;
@@ -64,6 +65,8 @@ html{
   color: #ffffff;
   text-decoration: none;
   background-color: #0088cc;
+  font-size: 2rem;
+  /* line-height: 1rem; */
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -168,7 +171,7 @@ html{
   justify-content: space-between;
 }
 .city-close-btn{
-  width: 8rem;
+  width: 5rem;
   height: 5rem;
   cursor: pointer;
 }
