@@ -1,5 +1,6 @@
 const pool = require('../model/pool');
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 
 exports.dashBoard = async (req, res, next) => {
@@ -13,7 +14,7 @@ exports.dashBoard = async (req, res, next) => {
       const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
       return res.render('users/index', {
-        title: 'oldmela.com',
+        moment,
         city_data: city_data,
         cat_data: cat_data,
         sub_cat_data: sub_cat_data,

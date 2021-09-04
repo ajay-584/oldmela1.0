@@ -3,26 +3,31 @@
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
       <div class="profile-main-area">
-        <div class="profile-area">
-          <div class="profile-header">
-            <h1>Welcome <%= user_name %></h1>
-          </div>
-          <div class="profile-body">
-            <div class="profile-img">
-              <!-- <img src="images/img_avatar2.png" alt="profile image"> -->
-              <div class="msg">Buy & Sell anything form anywhere in Bihar India only on oldmela.com</div>
+
+        <div class="profile-header">
+          <h1>Welcome <%= user_name %>!</h1>
+          <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
+        </div>
+
+        <div class="profile-body">
+
+            <div class="user-avtar">
+              <i class="far" >&#xf2bd;</i>
+              <h1> <%= user_data.user_name %> </h1>
             </div>
+
             <div class="profile-info">
               <ul>
-                <li>Name: <%= user_data.user_name%></li>
-                <li>Phone: <%= user_data.user_mobile%></li>
-                <li>Email: <%= user_data.user_email%></li>
-                <li>Address: <%= user_data.user_address%></li>
-                <li><a href="/update_profile"><button> Update Profile </button></a></li>
+                <li> <span>Phone</span>  <span><%= user_data.user_mobile%> </span> </li>
+                <li>  <span>Email</span> <span><%= user_data.user_email%> </span> </li>
+                <li><span> Member Since </span> <span><%= moment(user_data.user_date).format('Do MMM YYYY')%> </span> </li>
+                <li>  <span>Address</span> <span><%= user_data.user_address%> </span> </li>
               </ul>
+              <a href="/update_profile"><button> Update Profile </button></a>
             </div>
-          </div>
+
         </div>
+
       </div>
     </div>
     <!-- ===================================Footer started =========================== -->
