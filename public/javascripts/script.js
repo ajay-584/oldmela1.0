@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // url variable 
+    const url = 'http://localhost:3000/'
+    $('.ui-autocomplete-input').css('fontSize', '50px');
     // open sidebar action
     $('#sideBaron').click(function (e) { 
         e.preventDefault();
@@ -13,8 +16,8 @@ $(document).ready(function () {
     // City data by ajax
     $(function () { 
         // console.log("Event occur");
-        const url = 'https://oldmela.herokuapp.com/city_data';
-        fetch(url).then(res=>res.json()).then((data)=>{
+        const cityPath = `${url}city_data`;
+        fetch(cityPath).then(res=>res.json()).then((data)=>{
             const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
             // console.log(city)
             $('.citySearch').autocomplete({

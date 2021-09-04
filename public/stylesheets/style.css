@@ -72,6 +72,7 @@ html{
   -moz-border-radius: 0px;
   background-image: none;
 }
+.ui-helper-hidden-accessible { display:none; }
 
 /* =========================================Side Bar section====================================== */
 .sidebar{
@@ -215,7 +216,7 @@ html{
 }
 .profile-box{
   position: absolute;
-  width: 18rem;
+  width: 20rem;
   right: .5rem;
   transition: all .5s;
   top: 5rem;
@@ -244,20 +245,23 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   width: 100%;
   border-bottom: 1px solid #f1f1f1f1;
   list-style: none;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
+  /* padding: 0.5rem; */
+  /* margin-top: 0.5rem; */
   /* opacity: .8; */
 }
 .profile-links ul li a{
   display: block;
   text-decoration: none;
+  /* margin: 0.5rem; */
+  padding: .5rem;
   --tw-text-opacity: 1;
   color: rgba(0, 0, 0, var(--tw-text-opacity));
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 2rem;
 }
-.profile-links ul li:hover{
-  border-left: 2px solid darkblue;
+.profile-links ul li a:hover{
+  background-color:  darkblue;
+  color: white;
 }
 
 /* =========================================Header section====================================== */
@@ -604,10 +608,12 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   /* align-items: center; */
 }
 .model{
-  margin-top: .3rem;
-  padding: .5rem;
-  width: 45rem;
-  border: 1px solid #050505;
+  width: 58rem;
+  padding: 0.5rem;
+  margin: 0.5rem 10%;
+  border-radius: 5px;
+  /* background-color: #f2f2f2; */
+  border: 1px solid #f0f0f0;
   box-shadow: 0 0.5px 1px #888888;
 }
 .user-avtar {
@@ -773,6 +779,9 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   border-radius: 4px;
   resize: vertical;
 }
+.sell_input:hover{
+  border: 1px solid darkblue;
+}
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
@@ -905,8 +914,9 @@ label {
   }
   /* User login area */
   .model{
-      width:100%;
-      padding: 0;
+    width: 100%;
+    /* padding: 0.5rem; */
+    margin: 0.5rem;
   }
   /* user profile section */
   .profile-area{
@@ -917,6 +927,10 @@ label {
   .sell-area{
       padding: 0.5rem;
       margin: 0.5rem;
+  }
+  label {
+    padding: 12px 12px 0 0;
+    display: inline-block;
   }
   .col-25, .col-75, .sell_submit {
       width: 100%;
