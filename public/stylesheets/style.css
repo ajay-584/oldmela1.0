@@ -162,7 +162,7 @@ html{
   width: 100%;
   background-color:white;
   transition: all .5s;
-  transform: translateY(-5rem);
+  transform: translateY(-6rem);
   display: flex;
   /* border: 1px solid; */
 }
@@ -197,7 +197,7 @@ html{
   position: fixed;
   height: 5rem;
   transition: all .5s;
-  transform: translateY(-5rem);
+  transform: translateY(-6rem);
 }
 .search-open{
   transform: translateY(0);
@@ -205,12 +205,15 @@ html{
 .search-div{
   width: 100%;
   display: flex;
+  justify-content: space-around;
 }
 .search-div button{
+  width: 5rem;
+  height: 5rem;
+  cursor: pointer;
   background-color: #ffffff;
   outline: none;
   border: none;
-  padding-right: .5rem;
 }
 .search-div form{
   display: flex;
@@ -222,7 +225,7 @@ html{
   width: 100%;
   height: 5rem;
   /* letter-spacing: 0.2rem; */
-  padding: .5rem;
+  padding: 0 .5rem;
   border: none;
   outline: none;
 }
@@ -638,6 +641,15 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   width: 100%;
 }
 /* ===============================================================User form Section================================ */
+/* .danger-massage{
+  width: 100%;
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+} */
 .form-container{
   width: 100%;
   display: flex;
@@ -663,9 +675,9 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   align-items: center;
 }
 .user-avtar h1{
-	font-size: 3rem;
-  line-height: 1;
-  font-weight: 700;
+	font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 500;
 }
 .user-avtar i{
     padding: .5rem;

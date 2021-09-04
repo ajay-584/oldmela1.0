@@ -13,6 +13,26 @@ $(document).ready(function () {
         $('.sidebar').removeClass('open');
     });
 
+    // search item action
+    $('#openSearchBtn').click((e)=>{
+        e.preventDefault();
+        $('.search').addClass('search-open');
+    }); 
+    $('#closeseSearchBtn').click((e)=>{
+        e.preventDefault();
+        $('.search').removeClass('search-open');
+    });
+    
+    // search city aciton
+    $('#openCityBtn').click(function (e) { 
+        e.preventDefault();
+        $('.city').addClass('city-open');
+    });
+    $('#removecity').click(function (e) { 
+        e.preventDefault();
+        $('.city').removeClass('city-open');
+    });
+
     // City data by ajax
     $(function () { 
         // console.log("Event occur");

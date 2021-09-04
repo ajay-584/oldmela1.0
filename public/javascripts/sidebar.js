@@ -4,18 +4,18 @@
 // function closeSideBar() {
 //   document.querySelector('.sidebar').classList.remove('open')
 // }
-function selcetcity() {
-  document.querySelector('.city').classList.add('city-open')
-}
-function removecity() {
-  document.querySelector('.city').classList.remove('city-open')
-}
-function searchitem() {
-  document.querySelector('.search').classList.add('search-open')
-}
-function closesearch() {
-  document.querySelector('.search').classList.remove('search-open')
-}
+// function selcetcity() {
+//   document.querySelector('.city').classList.add('city-open')
+// }
+// function removecity() {
+//   document.querySelector('.city').classList.remove('city-open')
+// }
+// function searchitem() {
+//   document.querySelector('.search').classList.add('search-open')
+// }
+// function closesearch() {
+//   document.querySelector('.search').classList.remove('search-open')
+// }
 function profile() {
   var x = document.getElementById('profile')
   if (x.className == 'profile-box') {
@@ -60,7 +60,7 @@ function img3() {
   document.getElementById('bigImage').src = x
 }
 // when some one select city
-function cityId(id){
-  // console.log(id);
-  window.location = "/city?id="+String(id);
-}
+// function cityId(id){
+//   // console.log(id);
+//   window.location = "/city?id="+String(id);
+// }
