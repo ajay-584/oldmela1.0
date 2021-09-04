@@ -743,6 +743,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   flex-direction: column;
   justify-content: center;
   padding-left: 10%;
+  /* margin-bottom: 2rem; */
 
 }
 .profile-header h1{
@@ -756,8 +757,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   margin-top: 2rem;
 }
 .profile-body{
-  width: 58rem;
-  /* border: 1px solid red; */
+  width: 40%;
   margin: .5rem;
   padding: .5rem;
   display: flex;
@@ -770,6 +770,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 }
 .profile-info{
   width: 100%;
+  margin-top: 2rem;
 }
 .profile-info ul{
   padding: .5rem;
