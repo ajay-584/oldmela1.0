@@ -276,7 +276,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   padding: .5rem;
   --tw-text-opacity: 1;
   color: rgba(0, 0, 0, var(--tw-text-opacity));
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   line-height: 2rem;
 }
 .profile-links ul li a:hover{
@@ -386,14 +386,14 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   font-size: 1.5rem;
   border: 1px solid #000000;
   background-color: #ffffff;
-  /* color: #ffffff; */
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(255, 255, 255, 0.7),inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  text-decoration: none;
   font-weight: bold;
   padding: 0.5rem;
   letter-spacing: 0.2rem;
   outline: none;
   border-radius: .2rem;
   cursor: pointer;
-  /* background-image: linear-gradient(to right  , darkblue, #1616cc); */
 }
 .links-box ul li a button:hover{
   --tw-bg-opacity: 1;
@@ -657,8 +657,9 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 .form-container{
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
 }
 .model{
   width: 58rem;
@@ -711,7 +712,9 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   color: #ffffff;
   padding: 14px 20px;
   margin: .5rem 0;
-  /* border: 1px solid; */
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  text-align: center;
   border-radius: 0.5rem;
   cursor: pointer;
   width: 100%;
@@ -737,7 +740,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 }
 .profile-header{
   width: 100%;
-  height: 17rem;
+  height: 15rem;
   background-image: linear-gradient(to right  , darkblue, #1616cc);
   display: flex;
   flex-direction: column;
@@ -827,9 +830,9 @@ label {
   color: white;
   border: 1px solid;
   padding: 12px 20px;
-  /* border: none; */
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  text-decoration: none;
   border-radius: 4px;
-  /* margin: 0.5rem; */
   cursor: pointer;
   float: right;
   margin-top: .5rem;
@@ -903,7 +906,7 @@ label {
       padding-right: 0;
   }
   .profile-box{
-      width: 40%;
+      width: 50%;
   }
   /* HOme page area */
   .card{
@@ -956,6 +959,11 @@ label {
   /* user profile section */
   .profile-header{
     padding: 0.5rem;
+  }
+  .profile-header h1{
+    font-size: 2.5rem;
+    line-height: 2rem;
+    font-weight: 700;
   }
   .profile-body{
     width: 100%;
