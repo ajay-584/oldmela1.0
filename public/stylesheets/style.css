@@ -719,6 +719,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   cursor: pointer;
   width: 100%;
   font-weight: 700;
+  border: none;
 }
 .input-area button:hover {
   opacity: 0.8;
@@ -836,6 +837,7 @@ label {
   cursor: pointer;
   float: right;
   margin-top: .5rem;
+  border: none;
 }
 
 .sell_submit:hover {
