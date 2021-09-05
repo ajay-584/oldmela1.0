@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // url variable 
-    const url = 'http://localhost:3000/'
+    const url = 'https://www.oldmela.com/';
 
     // Profile icon 
     $('#profileIcon').click(function (e) { 
@@ -63,6 +63,24 @@ $(document).ready(function () {
         });
     });
 });
+
+// for sell cat and sub cat data
+function sellselectcat(data) {
+    // console.log(data)
+    const url = 'https://www.oldmela.com/';
+    const cat = document.getElementById('sellsubcat')
+    const ajaxreq = new XMLHttpRequest()
+    ajaxreq.open('GET', `${url}sellsubcat?value=${data}`, true)
+    ajaxreq.send()
+  
+    ajaxreq.onreadystatechange = function () {
+      if (ajaxreq.readyState == 4 && ajaxreq.status == 200) {
+        // console.log("Working fine",ajaxreq.responseText);
+        cat.innerHTML = ajaxreq.responseText
+      }
+    }
+  }
+
 
 // Ads page image selector 
 function img1(i) {

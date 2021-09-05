@@ -29,21 +29,7 @@
 //   x.classList.remove('open-profile')
 // }
 
-// for sell cat and sub cat data
-function sellselectcat(data) {
-  // console.log(data)
-  var cat = document.getElementById('sellsubcat')
-  const ajaxreq = new XMLHttpRequest()
-  ajaxreq.open('GET', 'https://www.oldmela.com/sellsubcat?value=' + data, true)
-  ajaxreq.send()
 
-  ajaxreq.onreadystatechange = function () {
-    if (ajaxreq.readyState == 4 && ajaxreq.status == 200) {
-      // console.log("Working fine",ajaxreq.responseText);
-      cat.innerHTML = ajaxreq.responseText
-    }
-  }
-}
 // sellselectcat("5fa4224d1ddd8d2ac89dcff5");
 // ads page
 // function img1(i) {
