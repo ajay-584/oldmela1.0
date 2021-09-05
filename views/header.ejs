@@ -60,7 +60,7 @@ Home,personal,electronics,Homes,Sale,classified,books,olditems">
           <li><a href="/sell_ads"><button>SELL</button></a></li>
           <!-- This is profile seciton where shows the sign in and sign up after click -->
           <% if(user_name){ %>
-            <li><div onclick="profile()" class="profile"> <%= user_name[0].toUpperCase() %> </div></li>
+            <li><div id="profileIcon" class="profile"> <%= user_name[0].toUpperCase() %> </div></li>
           <% }else{ %>
             <li><a href="login"><div class="profile-icon"><i style="font-size:3.5rem" class="far" >&#xf2bd;</i></div></a></li>
           <% } %>

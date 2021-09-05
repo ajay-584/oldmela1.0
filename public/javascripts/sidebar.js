@@ -16,18 +16,18 @@
 // function closesearch() {
 //   document.querySelector('.search').classList.remove('search-open')
 // }
-function profile() {
-  var x = document.getElementById('profile')
-  if (x.className == 'profile-box') {
-    x.classList.add('open-profile')
-  } else {
-    x.classList.remove('open-profile')
-  }
-}
-function colseprofile() {
-  var x = document.getElementById('profile')
-  x.classList.remove('open-profile')
-}
+// function profile() {
+//   var x = document.getElementById('profile')
+//   if (x.className == 'profile-box') {
+//     x.classList.add('open-profile')
+//   } else {
+//     x.classList.remove('open-profile')
+//   }
+// }
+// function colseprofile() {
+//   var x = document.getElementById('profile')
+//   x.classList.remove('open-profile')
+// }
 
 // for sell cat and sub cat data
 function sellselectcat(data) {
@@ -46,19 +46,11 @@ function sellselectcat(data) {
 }
 // sellselectcat("5fa4224d1ddd8d2ac89dcff5");
 // ads page
-function img1(i) {
-  x = document.getElementById(i).src;
-  console.log(x,i);
-  document.getElementById('bigImage').src = x
-}
-function img2() {
-  x = document.getElementById('img2').src
-  document.getElementById('bigImage').src = x
-}
-function img3() {
-  x = document.getElementById('img3').src
-  document.getElementById('bigImage').src = x
-}
+// function img1(i) {
+//   x = document.getElementById(i).src;
+//   console.log(x,i);
+//   document.getElementById('bigImage').src = x
+// }
 // when some one select city
 // function cityId(id){
 //   // console.log(id);

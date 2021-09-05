@@ -1,7 +1,18 @@
 $(document).ready(function () {
     // url variable 
     const url = 'http://localhost:3000/'
-    $('.ui-autocomplete-input').css('fontSize', '50px');
+
+    // Profile icon 
+    $('#profileIcon').click(function (e) { 
+        e.preventDefault();
+        const x = document.getElementById('profile')
+        if (x.className == 'profile-box') {
+          x.classList.add('open-profile')
+        } else {
+          x.classList.remove('open-profile')
+        }
+    });
+
     // open sidebar action
     $('#sideBaron').click(function (e) { 
         e.preventDefault();
@@ -33,6 +44,7 @@ $(document).ready(function () {
         $('.city').removeClass('city-open');
     });
 
+
     // City data by ajax
     $(function () { 
         // console.log("Event occur");
@@ -51,3 +63,10 @@ $(document).ready(function () {
         });
     });
 });
+
+// Ads page image selector 
+function img1(i) {
+    const x = document.getElementById(i).src;
+    // console.log(x,i);
+    document.getElementById('bigImage').src = x;
+  }
