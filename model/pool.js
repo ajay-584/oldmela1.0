@@ -64,7 +64,8 @@ var city_model = mongoose.model('city_model', city_schema,'city_data');
 
 // express visitor counter
 const visitor_schema = mongoose.Schema({
-    visitData:String
+    visitData:String,
+    date:{typeDate, default:Date.now()}
 });
 var visitor_model = mongoose.model('visitor_mode', visitor_schema, 'visitor_data');
 
