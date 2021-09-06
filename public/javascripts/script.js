@@ -65,9 +65,9 @@ $(document).ready(function () {
 
     // Cat data by fetch function
     $(function(){
-        const catPath = `http://localhost:3000/cat_data`;
+        const catPath = `${url}cat_data`;
         fetch(catPath).then(res=>res.text()).then((data)=>{
-            console.log(data);
+            // console.log(data);
             $('#catData').html(data);
         });
     });

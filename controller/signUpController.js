@@ -11,14 +11,7 @@ exports.signUpGet = async (req, res) => {
       if (session.phone) {
         return res.redirect('404'); 
       }
-      const city_data = await pool.city_data.find().sort({_id:-1});
-      const cat_data = await pool.cat_data.find().sort({_id:-1});
-      const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
       return res.render('user_sign_up', {
-        title: 'oldmela.com',
-        city_data: city_data,
-        cat_data: cat_data,
-        sub_cat_data: sub_cat_data,
         user_name: '',
         fail: '',
         pass:'',
@@ -32,9 +25,6 @@ exports.signUpGet = async (req, res) => {
   exports.signUpPost = async (req, res) => {
     try{
       const userPhone = req.body.mobile;
-      const city_data = await pool.city_data.find().sort({_id:-1});
-      const cat_data = await pool.cat_data.find().sort({_id:-1});
-      const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
       // Checking password and confirm password is same or not?
       if (req.body.password === req.body.confirmPassword) {
         const result = await pool.user_data.find({ user_mobile: parseInt(req.body.mobile) });
@@ -62,10 +52,6 @@ exports.signUpGet = async (req, res) => {
             } else {
               // when user already exit
               return res.render('user_sign_up', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
                 user_name: '',
                 fail: `${userPhone} is already registered!`,
                 pass:'',
@@ -74,10 +60,6 @@ exports.signUpGet = async (req, res) => {
       } else {
         // when user password and confirm password does not matched 
         return res.render('user_sign_up', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
           user_name: '',
           fail: 'Confirm password does not matched!',
           pass:'',

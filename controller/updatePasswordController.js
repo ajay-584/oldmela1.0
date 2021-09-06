@@ -6,16 +6,9 @@ exports.updatePasswordGet = async (req, res, next) => {
     try{
         let id = mongoose.Types.ObjectId(req.query.id)
         let session = req.session;
-        const city_data = await pool.city_data.find().sort({_id:-1});
-        const cat_data = await pool.cat_data.find().sort({_id:-1});
-        const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
         const user_data = await pool.user_data.findOne({ _id: session.user_id });
         return res.render('users/user_change_password', {
-            title: 'oldmela.com',
-            city_data: city_data,
-            cat_data: cat_data,
-            sub_cat_data: sub_cat_data,
-            user_data: user_data,
+            user_data,
             user_name: session.name,
             fail:'',
             pass:'',
@@ -32,9 +25,6 @@ exports.updatePasswordPost = async (req, res) => {
         let current_password = req.body.old_password;
         let new_password = req.body.new_password;
         let confirm_password = req.body.confirm_password;
-        const city_data = await pool.city_data.find().sort({_id:-1});
-        const cat_data = await pool.cat_data.find().sort({_id:-1});
-        const sub_cat_data = await pool.sub_cat_data.find().sort({_id:-1});
         const result = await pool.user_data.findOne({ _id: session.user_id });
         let match = bcrypt.compareSync(current_password, result.user_password,);
         if(match){
@@ -42,10 +32,6 @@ exports.updatePasswordPost = async (req, res) => {
                 const hash_pass = bcrypt.hashSync(confirm_password, 10);
                 await pool.user_data.updateOne({_id:result._id},{$set:{user_password:hash_pass}});
                 return res.render('users/user_change_password', {
-                    title: 'oldmela.com',
-                    city_data: city_data,
-                    cat_data: cat_data,
-                    sub_cat_data: sub_cat_data,
                     user_data: result,
                     user_name: session.name,
                     fail:'',
@@ -53,10 +39,6 @@ exports.updatePasswordPost = async (req, res) => {
                 }); //end of render 
             }else{
                 return res.render('users/user_change_password', {
-                    title: 'oldmela.com',
-                    city_data: city_data,
-                    cat_data: cat_data,
-                    sub_cat_data: sub_cat_data,
                     user_data: result,
                     user_name: session.name,
                     fail: 'Your new password and confirm password does not matched',
@@ -65,10 +47,6 @@ exports.updatePasswordPost = async (req, res) => {
             } // end of if password matching statement 
         }else{
             return res.render('users/user_change_password', {
-                title: 'oldmela.com',
-                city_data: city_data,
-                cat_data: cat_data,
-                sub_cat_data: sub_cat_data,
                 user_data: result,
                 user_name: session.name,
                 fail: 'Your current password is invalid',

@@ -4,18 +4,11 @@ const bcrypt = require('bcryptjs');
 
 exports.loginGet = async(req, res, next)=> {
     try{
-      const city_data = await pool.city_data.find().sort({name:1});
-      const cat_data = await pool.cat_data.find().sort({name:1});
-      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       let session = req.session
       if (session.phone) {
         return res.redirect('/dash_board')
       }
       return res.render('user_login', {
-        title: 'oldmela.com',
-        city_data: city_data,
-        cat_data: cat_data,
-        sub_cat_data: sub_cat_data,
         user_name: '',
         fail: '',
         pass:'',
@@ -29,9 +22,6 @@ exports.loginGet = async(req, res, next)=> {
 exports.loginPost = async (req, res, next) => {
     try{
       const userPhone = req.body.phone; 
-      const city_data = await pool.city_data.find().sort({name:1});
-      const cat_data = await pool.cat_data.find().sort({name:1});
-      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
       // Fetching user data from database
       const data = await pool.user_data.findOne({ user_mobile: parseInt(req.body.phone) });
       // when user exist
@@ -41,10 +31,6 @@ exports.loginPost = async (req, res, next) => {
         // When user is not verified 
         if(!data.user_status){
           return res.render('user_login', {
-            title: 'oldmela.com',
-            city_data: city_data,
-            cat_data: cat_data,
-            sub_cat_data: sub_cat_data,
             user_name: '',
             fail: `${userPhone} is not verified`,
             pass:'',
@@ -60,10 +46,6 @@ exports.loginPost = async (req, res, next) => {
         }else {
           // When user password does not matched
             return res.render('user_login', {
-              title: 'oldmela.com',
-              city_data: city_data,
-              cat_data: cat_data,
-              sub_cat_data: sub_cat_data,
               user_name: '',
               fail: 'Invalid password',
               pass:'',
@@ -72,10 +54,6 @@ exports.loginPost = async (req, res, next) => {
       } else {
         // When user mobile does not exist in database
         return res.render('user_login', {
-          title: 'oldmela.com',
-          city_data: city_data,
-          cat_data: cat_data,
-          sub_cat_data: sub_cat_data,
           user_name: '',
           fail: `${userPhone} does not registered!`,
           pass:'',
