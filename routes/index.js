@@ -16,20 +16,21 @@ const logoutController = require('../controller/logoutController');
 const userForgetPasswordController = require('../controller/forgetPasswordController');
 const setNewPasswordController = require('../controller/setNewPasswordController');
 const forgetPasswordOtpController = require('../controller/forgetPasswordOtpController');
-const sellSubCatController = require('../controller/sellSubCatController');
+const ajaxController = require('../controller/ajaxController');
 
 const router = express.Router()
 
-const pool = require('../model/pool');
-router.get('/city_data', async(req, res, next)=>{
-    try{
-        const cityData = await pool.city_data.find();
-        res.json(cityData);
-    }catch(e){
-        console.log(e);
-        next();
-    }
-});
+
+
+// ========================================= Ajax sections ==================================================
+// for sell section
+router.get('/sellsubcat', ajaxController.sellSubCatAjax);
+// for search city section
+router.get('/city_data', ajaxController.ajaxCityData);
+// for cat data side bar section
+router.get('/cat_data', ajaxController.ajaxCatData);
+// ========================================= end of ajax sections ==================================================
+
 /* =======================================GET home page.================================================= */
 router.get('/', adsController.allAds); // end of get method
 
@@ -43,10 +44,6 @@ router.get('/city', adsController.allAdsByCityId) // end of get method
 router.get('/search', searchAdsController.searchAds);
 // ========================================= end of home sections ==================================================
 
-// ========================================= Ajax sections ==================================================
-// for sell section
-router.get('/sellsubcat', sellSubCatController.sellSubCatAjax);
-// ========================================= end of ajax sections ==================================================
 // ========================================= Start of main ads page sections ==================================================
 router.get('/card', adsController.oneAddById); // end of get method
 // ========================================= end of main ads page sections ====================================================

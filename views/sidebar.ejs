@@ -8,18 +8,8 @@
         </div>
         <!-- End of heading area -->
         <!-- Thsi is list of categores in side bar like books, electronics -->
-        <div class="sidebar-links">
-          <% for(x of cat_data){ %>
-          <button><%= x.name %></button>
-          <!-- This is sub links area like engg books, medical books -->
-          <div class="sidebar-link">
-            <% for(y of sub_cat_data){ %>
-              <% if((x._id).toString() === (y.cat_id).toString()){ %>
-                <a href="/cat?id=<%= y._id %>"><%= y.name %></a>
-              <% } %> 
-            <% } %>
-          </div>
-          <% } %>
+        <div id="catData" class="sidebar-links">
+
         </div>
         <!-- End of list of  -->
       </aside>

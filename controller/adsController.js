@@ -19,22 +19,10 @@ exports.allAds = async (req, res, next)=> {
       }
       const limit = size;
       const skip = (page - 1) * size;
-      const city = await pool.city_data.find().sort({name:1});
-      const cat = await pool.cat_data.find().sort({name:1});
-      const sub_cat = await pool.sub_cat_data.find().sort({name:1});
+      const city_data = await pool.city_data.find().sort({name:1});
       const ads_data = await pool.ads_data.find({ads_status:true}).limit(limit).skip(skip).sort({_id:-1});
       // console.log(ads_data);
-      return res.render('index', {
-        title: 'oldmela.com',
-        city_data: city,
-        cat_data: cat,
-        sub_cat_data: sub_cat,
-        ads_data: ads_data,
-        moment: moment,
-        user_name: session.name,
-        page:page,
-        check:0
-      });
+      return res.render('index', {city_data, ads_data, moment, user_name: session.name, page, check:0});
     }catch(e){
       if(e){
         console.log(e);
@@ -61,22 +49,17 @@ exports.allAds = async (req, res, next)=> {
       const limit = size;
       const skip = (page - 1) * size;
       const id = mongoose.Types.ObjectId(req.query.id);
-      const city = await pool.city_data.find().sort({name:1});
-      const cat = await pool.cat_data.find().sort({name:1});
-      const sub_cat = await pool.sub_cat_data.find().sort({name:1});
+      const city_data = await pool.city_data.find().sort({name:1});
       const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]}).limit(limit).skip(skip).sort({_id:-1});
       // console.log(id,ads);
       return res.render('index', {
-        title: 'oldmela.com',
-        city_data: city,
-        cat_data: cat,
-        sub_cat_data: sub_cat,
+        city_data,
         ads_data: ads,
-        moment: moment,
+        moment,
         user_name: session.name,
-        page:page,
+        page,
         check:1,
-        id:id
+        id
       });
     }catch(e){
       console.log("Error in cat root");
@@ -102,22 +85,17 @@ exports.allAds = async (req, res, next)=> {
       const limit = size;
       const skip = (page - 1) * size;
       const id = mongoose.Types.ObjectId(req.query.id);
-      const city = await pool.city_data.find().sort({name:1});
-      const cat = await pool.cat_data.find().sort({name:1});
-      const sub_cat = await pool.sub_cat_data.find().sort({name:1});
+      const city_data = await pool.city_data.find().sort({name:1});
       const ads = await pool.ads_data.find({$and:[{ads_city_id:id},{ads_status:true}]}).limit(limit).skip(skip).sort({_id:-1});
       // console.log(id,ads);
       return res.render('index', {
-        title: 'oldmela.com',
-        city_data: city,
-        cat_data: cat,
-        sub_cat_data: sub_cat,
+        city_data,
         ads_data: ads,
-        moment: moment,
+        moment,
         user_name: session.name,
-        page:page,
+        page,
         check:2,
-        id:id
+        id
       });
     }catch(e){
       console.log("Error in city page");
@@ -132,19 +110,14 @@ exports.allAds = async (req, res, next)=> {
       let session = req.session;
       const id = mongoose.Types.ObjectId(req.query.link);
       const ads_info = await pool.ads_data.findOne({_id: id});
-      const city = await pool.city_data.find().sort({name:1});
-      const cat = await pool.cat_data.find().sort({name:1});
-      const sub_cat = await pool.sub_cat_data.find().sort({name:1});
+      const city_data = await pool.city_data.find().sort({name:1});
       const city_name = await helper.city(ads_info.ads_city_id);
       return res.render('ads_page', {
-        title: 'oldmela.com',
-        city_data: city,
-        cat_data: cat,
-        sub_cat_data: sub_cat,
-        ads_info: ads_info,
-        city_name:city_name,
+        city_data,
+        ads_info,
+        city_name,
         user_name: session.name,
-        moment: moment
+        moment
       });
     } catch (err) {
       console.log(err);
