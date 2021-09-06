@@ -37,6 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));  // session
+app.use(visitor());
 app.use(cors());
 app.use(fileUpload());
 app.use(logger('dev'));
