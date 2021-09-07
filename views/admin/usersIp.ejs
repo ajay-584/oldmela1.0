@@ -3,34 +3,22 @@
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
       <div class="profile-header">
-        <h1> States </h1>
+        <h1> Users IP </h1>
         <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
       </div>
             <div class="sell-area">
-                <form action=""  method="post">
-                  <div><p style="color: red"><%= fail %></p></div>
-                  <div><p style="color: green"><%= pass %></p></div>
-                  <div class="row">
-                    <div class="col-25">
-                      <label for="fname">State</label>
-                    </div>
-                    <div class="col-75">
-                      <input type="text" class="sell_input" name="state" placeholder="Enter state name" required>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <input type="submit" class="sell_submit" value="Insert">
-                  </div>
-                  </form>
-                  <table >
-                      <tr>
-                          <th>Name</th>
-                          <th>Date</th>
+                <table >
+                    <tr>
+                        <th>S.No</th>
+                        <th>Date</th>
+                        <th>Users IP </th>
                       </tr>
-                      <% for(x of stateData){  %>
+                      <% c = 1 %>
+                      <% for(data of visitors){  %>
                       <tr>
-                          <td><%= x.name %></td>
-                          <td><%= moment(x.date).format('Do MMMM YYYY') %></td>
+                          <td><%= c++ %></td>
+                          <td><%= moment(data.date).format('Do MMMM YYYY') %></td>
+                          <td><%= data.ip %></td>
                       </tr>
                       <% } %>
                   </table>
@@ -62,11 +50,3 @@
       background-color: #dddddd;
     }
     </style>
-
-
-
-
-
-
-
-

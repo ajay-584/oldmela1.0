@@ -2,6 +2,12 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
+
+      <div class="profile-header">
+        <h1>Welcome To Admin Panel</h1>
+        <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
+      </div>
+
       <div class="cards">
 
           <div class="card chunks">
@@ -17,6 +23,11 @@
           <div class="card chunks">
             <h1>Wallet Balance</h1>
             <h2><%= walletBalance %></h2>
+          </div>
+
+          <div class="card chunks">
+            <h1>Total Visitors</h1>
+            <h2><%= visitors %></h2>
           </div>
 
           <div class="card chunks">

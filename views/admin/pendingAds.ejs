@@ -2,7 +2,10 @@
 <%- include('./admin_sidebar') %> <!-- side bar section  -->
     <!-- ==================================================Main Area========================================================= -->
     <div class="main-area">
-      <h1 style="color: green; margin: .2rem; text-align: center; font-weight: bold;">Pending Ads</h1>
+      <div class="profile-header">
+        <h1> Pending Ads </h1>
+        <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
+      </div>
       <% if(ads_data.length){ %>
         <div class="cards">
           <% for(ele of ads_data){ %>

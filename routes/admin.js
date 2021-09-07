@@ -13,6 +13,7 @@ const stateController = require('../adminController/stateController');
 const cityController = require('../adminController/cityController');
 const loginController = require('../adminController/loginController');
 const logoutController = require('../adminController/logoutController');
+const userIpController = require('../adminController/userIpController')
 
 var router = express.Router();
 
@@ -20,6 +21,9 @@ const filePath = process.env.FILE_URL // There is file path of images file
 
 /* GET users listing. */
 router.get('/', middleware.adminAuth, homeController.homeGet);
+
+// user ip
+router.get('/users_ip', middleware.adminAuth, userIpController.usersIpGet);
 
 // Get method of pending ads
 router.get('/pending_ads', middleware.adminAuth, penddingAdsController.adsGet);

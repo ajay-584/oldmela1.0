@@ -11,6 +11,7 @@ exports.homeGet = async(req, res, next)=> {
       const noOfCategories = await pool.cat_data.find();
       const noOfSubCat = await pool.sub_cat_data.find();
       const walletBalance = await helper.walletBalance();
+      const visitors = await pool.visitor_data.find();
 
       // if(!adminSession.phone){
       //   return res.redirect('admin/admin_login');
@@ -23,7 +24,8 @@ exports.homeGet = async(req, res, next)=> {
         noOfCity:noOfCity.length,
         noOfCategories:noOfCategories.length,
         noOfSubCat: noOfSubCat.length,
-        walletBalance
+        walletBalance,
+        visitors:visitors.length
       });
     }catch(e){
       console.log(e);
