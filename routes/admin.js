@@ -13,7 +13,8 @@ const stateController = require('../adminController/stateController');
 const cityController = require('../adminController/cityController');
 const loginController = require('../adminController/loginController');
 const logoutController = require('../adminController/logoutController');
-const userIpController = require('../adminController/userIpController')
+const userIpController = require('../adminController/userIpController');
+const messageController = require('../adminController/messageController');
 
 var router = express.Router();
 
@@ -60,6 +61,11 @@ router.post('/state', middleware.adminAuth, stateController.statePost);
 router.get('/city', middleware.adminAuth, cityController.cityGet);
 // post method
 router.post('/city', middleware.adminAuth, cityController.cityPost);
+
+// ===============================Users Messages ======================
+// get method
+router.get('/messages', middleware.adminAuth, messageController.messageGet);
+router.post('/messages', middleware.adminAuth, messageController.messagePost);
 
 // ========================Admin Login =========================
 router.get('/admin_login', loginController.loginGet);

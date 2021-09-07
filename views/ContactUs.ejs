@@ -1,0 +1,48 @@
+<%- include('./header') %>  <!-- header section -->
+<%- include('./sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+      <div class="profile-header">
+        <h1>Contact Us</h1>
+        <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
+      </div>
+        <div class="sell-area">
+          <form action=""  method="POST" enctype="multipart/form-data">
+            <div><p style="color: red"><%= fail %></p></div>
+            <div><p style="color: green"><%= pass %></p></div>
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Name</label>
+              </div>
+              <div class="col-75">
+                <input type="text" class="sell_input" name="name" placeholder="Enter your name" required>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                  <label for="email">Mobile/Email</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" class="sell_input" name="email_or_phone" placeholder="Enter your email or phone" required>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="subject">Message</label>
+              </div>
+              <div class="col-75">
+                <textarea class="sell_input" name="message" placeholder="Please write your query" style="height:15rem" required></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <input type="submit" class="sell_submit" value="Send">
+            </div>
+            </form>
+        </div> <!--End of sell area  -->
+    </div>
+    <!-- ==================================================footer Area========================================================= -->
+    <%- include('./footer') %>
+     <!-- ==================================================End of footer Area======================================== -->
+     </div>
+</body>
+</html>

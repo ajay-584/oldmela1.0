@@ -20,6 +20,11 @@
                 <ul>
                     <li><h3><%= ads_info.ads_title %></h3></li>
                     <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf156;</i><%= ads_info.ads_price %></li>
+
+                    <% if(ads_info.ads_video !== ""){ %>
+                        <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas fa-video"></i><a href="<%= ads_info.ads_video %>" target="_blank">Watch video</a></li>
+                    <% } %>
+
                     <li><i style="font-size:1.4rem; margin-right: .5rem;" class="fas">&#xf073;</i><%= moment(ads_info.ads_date).format('Do MMMM YYYY') %></li>
                     <li><span style="font-weight: bold;">Description:</span> <%= ads_info.ads_description %></li>
                     <hr>

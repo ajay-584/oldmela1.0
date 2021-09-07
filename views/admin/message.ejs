@@ -1,0 +1,105 @@
+<%- include('./header') %>  <!-- header section -->
+<%- include('./admin_sidebar') %> <!-- side bar section  -->
+    <!-- ==================================================Main Area========================================================= -->
+    <div class="main-area">
+      <div class="profile-header">
+        <h1> Users Messages </h1>
+        <h2>Buy & Sell anything form anywhere in Bihar India only on oldmela.com</h2>
+      </div>
+            <div class="sell-area">
+                <% for(message of messages){ %>
+                <form action="/admin/messages?id=<%= message._id %>"  method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-25">
+                          <label for="fname">Date</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" class="sell_input" readonly value="<%= moment(message.date).format('LLLL'); %>">
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="fname">Name</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="text" class="sell_input" name="user_name" readonly value="<%= message.name %>">
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                          <label for="email">Contact Id</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="text" class="sell_input" readonly name="user_email" value="<%= message.phone_or_email %>">
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="subject">Message</label>
+                      </div>
+                      <div class="col-75">
+                        <textarea class="sell_input"  readonly name="message" placeholder="<%= message.message %>" style="height:70px"><%= message.message %></textarea>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <input type="submit" class="sell_submit" value="Mark as read">
+                    </div>
+                    </form>
+                    <% } %>
+
+                  <table>
+                      <caption>Read Messages</caption>
+                      <tr>
+                          <th>S.No</th>
+                          <th>Name</th>
+                          <th>Contact Id</th>
+                          <th>Message</th>
+                          <th>Date</th>
+                      </tr>
+                      <% c = 1 %>
+                      <% for(x of readMessages){  %>
+                      <tr>
+                          <td><%=  c++ %></td>
+                          <td><%= x.name %></td>
+                          <td><%= x.phone_or_email %></td>
+                          <td><%= x.message %></td>
+                          <td><%= moment(x.date).format('LLLL') %></td>
+                      </tr>
+                      <% } %>
+                  </table>
+            </div> <!--End of sell area  -->
+    </div>
+    <div class="footer-area">
+      <div><h3>footer area</h3></div>
+    </div>
+     <!-- ==================================================End of footer Area========================================================= -->
+</body>
+</html>
+
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+
+
+
+
+
+
+

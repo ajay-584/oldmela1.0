@@ -16,6 +16,7 @@ const logoutController = require('../controller/logoutController');
 const userForgetPasswordController = require('../controller/forgetPasswordController');
 const setNewPasswordController = require('../controller/setNewPasswordController');
 const forgetPasswordOtpController = require('../controller/forgetPasswordOtpController');
+const contactController = require('../controller/contactController');
 const ajaxController = require('../controller/ajaxController');
 
 const router = express.Router()
@@ -51,7 +52,10 @@ router.get('/card', adsController.oneAddById); // end of get method
 /* -----------------------------------------------------------------------------------------------------------------------------
                               USER SECTION IS HERE                                                                 
 ------------------------------------------------------------------------------------------------------------------------------- */
-
+// =====================================Start Contact us section ==================================
+router.get('/contact', contactController.contactGet);
+router.post('/contact', contactController.contactPost);
+// =========================================end of contact us section=================
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */
 router.get('/sell_ads', middleware.auth, sellAdsController.sellAdsGet); // end of get method

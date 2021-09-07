@@ -7,6 +7,7 @@ const ads_schema = mongoose.Schema({
     ads_cat_id:{type:mongoose.Types.ObjectId, ref:'cat_data'},
     ads_sub_cat_id:{type:mongoose.Types.ObjectId, ref:'sub_cat_data'},
     ads_img:[String],
+    ads_video:{type:String, default:'0'},
     ads_description:{type:String},
     ads_city_id:{type:mongoose.Types.ObjectId, ref:'city_data'},
     ads_phone:Number,
@@ -69,6 +70,16 @@ const visitor_schema = mongoose.Schema({
 });
 var visitor_model = mongoose.model('visitor_mode', visitor_schema, 'visitor_data');
 
+// Contact us
+const contact_schema = mongoose.Schema({
+    name :String,
+    phone_or_email: String,
+    message:String,
+    status:{type:Number, default:0},
+    date:{type:Date, default:Date.now()}
+});
+var contact_model = mongoose.model('contact_model', contact_schema, 'contact_data');
+
 module.exports = {
     ads_data : ads_model,
     cat_data : cat_model,
@@ -76,5 +87,6 @@ module.exports = {
     user_data : sign_up_model,
     state_data:state_model,
     city_data : city_model,
+    contact_data : contact_model,
     visitor_data : visitor_model
 };

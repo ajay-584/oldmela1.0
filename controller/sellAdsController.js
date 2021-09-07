@@ -35,18 +35,23 @@ exports.sellAdsPost = async (req, res, next) => {
       // taking all images in images array
       const images = req.files.Img;
       var fileSize = 0
+      var img = []
       if(images.length < 5){
         fileSize = images.length;
-      }else{
-        fileSize = 5;
-      }
-      // console.log("file size",fileSize);
-      var img = []
-      for(let i=0; i < fileSize; i++){
-        const img1 = await helper.compressAndMoveImage(images[i], filePath);
+      }else if(!images.length){
+        const img1 = await helper.compressAndMoveImage(images, filePath);
         img.push(img1);
+      }else{
+        fileSize = 5
       }
-      // console.log(img);
+      console.log("file size",fileSize);
+      if(fileSize){
+        for(let i=0; i < fileSize; i++){
+          const img1 = await helper.compressAndMoveImage(images[i], filePath);
+          img.push(img1);
+        }
+      }
+      console.log(img);
       await pool.ads_data.create(
             {
               ads_title: req.body.ads_name,
@@ -54,6 +59,7 @@ exports.sellAdsPost = async (req, res, next) => {
               ads_cat_id: req.body.ads_cat,
               ads_sub_cat_id: req.body.sub_ads_cat,
               ads_img: img,
+              ads_video:req.body.ads_video,
               ads_description: req.body.description,
               ads_city_id: req.body.city,
               ads_phone: req.body.phone,

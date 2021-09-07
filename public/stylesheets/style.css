@@ -493,14 +493,16 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
 .pagination button{
   padding: 0.5rem;
   outline: none;
-  border:1px solid;
+  text-decoration: none;
+  border-radius: 2px;
+  border:none;
   cursor: pointer;
-  background-color: white;
-  --tw-text-opacity: 1;
-  color: rgba(107, 114, 128, var(--tw-text-opacity));
+  background-image: linear-gradient(to right  , darkblue, #1616cc);
+  color: #ffffff;
 }
 .pagination button:hover{
-  border: 1px solid darkblue;
+  /* border: 1px solid #f0f0f0; */
+  box-shadow: 0 0.5px 1px #888888;
 }
 .pagination button i{
   width: 5rem;
@@ -761,7 +763,7 @@ box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #
   margin-top: 2rem;
 }
 .profile-body{
-  width: 40%;
+  width: 57rem;
   margin: .5rem;
   padding: .5rem;
   display: flex;
