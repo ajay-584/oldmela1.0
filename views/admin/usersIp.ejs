@@ -17,7 +17,7 @@
                       <% for(data of visitors){  %>
                       <tr>
                           <td><%= c++ %></td>
-                          <td><%= moment(data.date).format('Do MMMM YYYY') %></td>
+                          <td><%= data.date %></td>
                           <td><%= data.ip %></td>
                       </tr>
                       <% } %>
