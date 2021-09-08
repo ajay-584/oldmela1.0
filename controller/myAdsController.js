@@ -9,7 +9,7 @@ exports.myAdsGet = async (req, res, next) => {
       // let id = mongoose.Types.ObjectId(req.query.id)
       let session = req.session;
       const user_data = await pool.user_data.findOne({ _id: session.user_id });
-      const ads_data = await pool.ads_data.find({ user_id: user_data._id });
+      const ads_data = await pool.ads_data.find({ user_id: user_data._id }).sort({_id:-1});
       // console.log(ads_data);
       return res.render("users/user_ads", {
         user_data,

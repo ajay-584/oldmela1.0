@@ -55,6 +55,8 @@ router.get('/card', adsController.oneAddById); // end of get method
 // =====================================Start Contact us section ==================================
 router.get('/contact', contactController.contactGet);
 router.post('/contact', contactController.contactPost);
+// route for abut us
+router.get('/about_Us', (req, res, next)=>{res.render('aboutUs',{user_name:''})});
 // =========================================end of contact us section=================
 // ========================================= Start sell ads sections ==================================================
 /* GET sell ads pate */

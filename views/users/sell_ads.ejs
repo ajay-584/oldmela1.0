@@ -15,7 +15,7 @@
                 <label for="fname">Title/Name</label>
               </div>
               <div class="col-75">
-                <input type="text" class="sell_input" id="fname" name="ads_name" placeholder="Ads name.." maxlength="100" required>
+                <input type="text" class="sell_input" name="ads_name" placeholder="Ads name.." maxlength="100" required>
               </div>
             </div>
             <div class="row">
@@ -23,7 +23,7 @@
                 <label for="lname">Price</label>
               </div>
               <div class="col-75">
-                <input type="number" class="sell_input"  id="lname" name="ads_price" placeholder="Ads price.." maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" class="sell_input" name="ads_price" placeholder="Ads price.." maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
               </div>
             </div>
             <div class="row">
@@ -55,18 +55,14 @@
                 <label>Photos Up to 5</label>
               </div>
               <div class="col-75">
-                <div class="upload_image_section">
-                  <label for="image1">
                     <input 
                     type="file" 
-                    class="myFile" 
+                    class="sell_input"
                     name="Img" 
                     id="sellImg" 
                     accept="image/apng, image/gif, image/ico, image/cur, image/jpg, image/jpeg, image/jfif, image/pjpeg, image/pjp, image/png, image/svg"
                     required 
                     multiple>
-                  </label>
-                </div>
               </div>
             </div>
 
