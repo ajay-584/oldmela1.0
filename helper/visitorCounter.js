@@ -11,7 +11,7 @@ module.exports = () => {
 			const ip = requestIp.getClientIp(req); 
 			const visit = await pool.visitor_data.find({ip:ip});
 			if(visit.length<1){
-				await pool.visitor_data.create({ip,date});
+				await pool.visitor_data.create({ip});
 				return next();
 			}
 			next();
