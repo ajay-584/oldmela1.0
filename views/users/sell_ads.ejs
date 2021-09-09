@@ -26,7 +26,7 @@
                 <input type="number" class="sell_input" name="ads_price" placeholder="Ads price.." maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="cat">
               <div class="col-25">
                 <label for="Categroies">Categroies</label>
               </div>
@@ -39,7 +39,7 @@
                 </select>
               </div>
             </div>
-            <div class="row">
+            <div class="row" style="display: none;" id="subcat">
               <div class="col-25">
                 <label for="Sub_Categroies">Sub_Categroies</label>
               </div>
@@ -59,7 +59,6 @@
                     type="file" 
                     class="sell_input"
                     name="Img" 
-                    id="sellImg" 
                     accept="image/apng, image/gif, image/ico, image/cur, image/jpg, image/jpeg, image/jfif, image/pjpeg, image/pjp, image/png, image/svg"
                     required 
                     multiple>

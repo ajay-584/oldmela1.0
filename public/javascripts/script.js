@@ -71,6 +71,11 @@ $(document).ready(function () {
             $('#catData').html(data);
         });
     });
+
+    $("#cat").change(function (e) { 
+        e.preventDefault();
+        $("#subcat").show();
+    });
 });
 
 // for sell cat and sub cat data
