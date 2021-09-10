@@ -28,11 +28,11 @@
             </div>
             <div class="row" id="cat">
               <div class="col-25">
-                <label for="Categroies">Categroies</label>
+                <label for="Categroies">Select Categories</label>
               </div>
               <div class="col-75">
                 <select class="sell_input" onchange="sellselectcat(this.value)"  name="ads_cat" required>
-                  <option>Select Categroies</option>
+                  <option>Select Categories</option>
                   <% for(x of cat_data){ %>
                     <option value="<%= x._id %>"><%= x.name %></option>
                   <% } %>
@@ -41,11 +41,11 @@
             </div>
             <div class="row" style="display: none;" id="subcat">
               <div class="col-25">
-                <label for="Sub_Categroies">Sub_Categroies</label>
+                <label for="Sub_Categroies">Select Sub-Categories</label>
               </div>
               <div class="col-75">
                 <select id="sellsubcat" class="sell_input" name="sub_ads_cat">
-                  <option value="">Select Sub-Categroies</option>
+                  <option value="">Select Sub-Categories</option>
                 </select>
               </div>
             </div>

@@ -38,7 +38,7 @@ exports.loginPost = async (req, res, next) => {
         } else if (match) {
           // When user verified and password is also same
           // storing the session
-          var session = req.session;
+          const session = req.session;
             session.name = data.user_name;
             session.phone = data.user_mobile;
             session.user_id = data._id;
