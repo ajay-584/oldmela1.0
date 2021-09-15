@@ -46,22 +46,22 @@ $(document).ready(function () {
 
 
     // City data by ajax
-    $(function () { 
-        // console.log("Event occur");
-        const cityPath = `${url}city_data`;
-        fetch(cityPath).then(res=>res.json()).then((data)=>{
-            const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
-            // console.log(city)
-            $('.citySearch').autocomplete({
-                source:city, 
-                autoFocus:true,
-                select: (event, ui)=>{
-                    const cityLink = `/city?id=${ui.item.value}`;
-                    window.location.href = cityLink;
-                }
-            });
-        });
-    });
+    // $(function () { 
+    //     // console.log("Event occur");
+    //     const cityPath = `${url}city_data`;
+    //     fetch(cityPath).then(res=>res.json()).then((data)=>{
+    //         const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
+    //         // console.log(city)
+    //         $('.citySearch').autocomplete({
+    //             source:city, 
+    //             autoFocus:true,
+    //             select: (event, ui)=>{
+    //                 const cityLink = `/city?id=${ui.item.value}`;
+    //                 window.location.href = cityLink;
+    //             }
+    //         });
+    //     });
+    // });
 
     // Cat data by fetch function
     $(function(){
@@ -76,7 +76,20 @@ $(document).ready(function () {
         e.preventDefault();
         $("#subcat").show();
     });
-});
+
+    // map my India token
+    $('.citySearch').keyup(function (e) { 
+        e.preventDefault();
+        fetch('http://localhost:3000/map_token').then( data=> data.json()).
+        then((token)=>{
+            // console.log(token);
+            const add = $(this).val();
+            fetch(`http://localhost:3000/map_address?token=${token.access_token}&type=${token.token_type}&address=${add}`)
+            .then( address=>address.json())
+            .then((data)=>{console.log(data)});
+        });
+    });
+}); //end of jquery
 
 // for sell cat and sub cat data
 function sellselectcat(data) {

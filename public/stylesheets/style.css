@@ -913,9 +913,9 @@ label {
       margin: 0.8rem;
       cursor: pointer;
   }
-  .city-select{
+  /* .city-select{
       display: none;
-  }
+  } */
   .search-container{
       display: none;
   }

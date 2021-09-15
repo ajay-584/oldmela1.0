@@ -45,3 +45,26 @@ exports.sellSubCatAjax = async (req, res, next) => {
         next();
     }
   }
+
+// Ajax route for map my india token generator
+exports.mapToken = async (req, res, next) => {
+    try{
+        const token = await helper.mapToken();
+        res.send(token);
+    }catch(e){
+        console.log(e);
+        next();
+    }
+  }
+
+// Ajax route for map my india address generator
+exports.mapAddress = async (req, res, next) => {
+    try{
+        // console.log("Map Address calling",req.query);
+        const address = await helper.mapAddress(req.query.token, req.query.type, req.query.address, 1);
+        res.send(address);
+    }catch(e){
+        console.log(e);
+        next();
+    }
+  }
