@@ -26,7 +26,10 @@
             </button>
           </div>
           <!-- using jquery implementation -->
-          <input placeholder="Search City..." class="citySearch">
+          <input placeholder="Search City..." class="citySearch" autocomplete="off" onkeyup="autosuggest(this)">
+          <div class="dropdown">
+            <ul id="list"></ul>
+          </div> 
         </div>
       </aside>
       <!-- Serach section means mobile view interface -->

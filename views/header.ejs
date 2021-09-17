@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="https://www.oldmela.com/images/oldmela.png"><!-- Meta for image -->
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self';"> -->
+  <!-- here autocomplete geographical location  -->
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <!-- end of here geographical location  -->
   <meta name="title" content="oldmela.com India's most growing classified portal!">
   <meta name="description" content="oldmela.com is online classified website or an alternative of olx.The oldmela.com provides free ads posting  facilities where any one can post second hand items books, cycle, cars, bikes, and anything.">
   <meta name="keywords" content="wwww.oldmela.com, oldmela.com, oldmela, classified, classified website, classified protal, olx, alternative of olx, mela, oldmela india, oldmela Bihar,used bikes, used cars, used books, used itmes, secondhanditems,Buy,
@@ -15,8 +19,8 @@ Home,personal,electronics,Homes,Sale,classified,books,olditems">
   <script src="https://kit.fontawesome.com/d70525d306.js" crossorigin="anonymous"></script> <!--- fontawesome cdn link-->
   <meta name="google-site-verification" content="4nVRWDSza6vXjgecMDBFz2dX0j0wsM3vc6ag-D-Mvtc" /><!-- Goodle search console link -->
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>Jquery CDN link -->
-  <script defer src="/javascripts/sidebar.js"></script> <!--javascript file--->
-  <script src="/javascripts/script.js"></script>
+  <script type="text/javascript" src="/javascripts/geoLocation.js"></script> <!--javascript file--->
+  <script type="text/javascript" src="/javascripts/script.js"></script>
   <title>oldmela India's free classified portal! Buy and Sell free from anywhere in Bihar.</title>
 </head>
 <body>
@@ -38,7 +42,10 @@ Home,personal,electronics,Homes,Sale,classified,books,olditems">
         <!-- select city section for desktop view -->
         <!-- using jquery implementation -->
         <div class="city-select">
-          <input placeholder="Search City..." class="citySearch">
+          <input placeholder="Search City..."  class="citySearch" autocomplete="off" onkeyup="autosuggest(this)">
+          <div class="dropdown">
+            <ul id="list"></ul>
+          </div> 
         </div>
         <!-- This is search area for desk to view like search any items of products -->
         <div id="search-container" class="search-container">

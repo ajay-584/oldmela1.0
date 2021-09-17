@@ -46,22 +46,6 @@ $(document).ready(function () {
 
 
     // City data by ajax
-    $(function () { 
-        // console.log("Event occur");
-        const cityPath = `${url}city_data`;
-        fetch(cityPath).then(res=>res.json()).then((data)=>{
-            const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
-            // console.log(city)
-            $('.citySearch').autocomplete({
-                source:city, 
-                autoFocus:true,
-                select: (event, ui)=>{
-                    const cityLink = `/city?id=${ui.item.value}`;
-                    window.location.href = cityLink;
-                }
-            });
-        });
-    });
 
     // Cat data by fetch function
     $(function(){
