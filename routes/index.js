@@ -33,7 +33,7 @@ router.get('/cat_data', ajaxController.ajaxCatData);
 // For map my India token
 router.get('/map_token', ajaxController.mapToken);
 // For map address 
-router.get('/map_address', ajaxController.mapAddress);
+router.get('/map_address', ajaxController.geoAddress);
 // ========================================= end of ajax sections ==================================================
 
 /* =======================================GET home page.================================================= */

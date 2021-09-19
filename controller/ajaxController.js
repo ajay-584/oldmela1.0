@@ -58,10 +58,10 @@ exports.mapToken = async (req, res, next) => {
   }
 
 // Ajax route for map my india address generator
-exports.mapAddress = async (req, res, next) => {
+exports.geoAddress = async (req, res, next) => {
     try{
         // console.log("Map Address calling",req.query);
-        const address = await helper.mapAddress(req.query.token, req.query.type, req.query.address, 1);
+        const address = await helper.geoAddress(req.query.address);
         res.send(address);
     }catch(e){
         console.log(e);

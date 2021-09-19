@@ -19,9 +19,16 @@ exports.allAds = async (req, res, next)=> {
       }
       const limit = size;
       const skip = (page - 1) * size;
+      const options = {
+        ads_location:{
+          $geoWithin:{
+            $centerSphere:[ [77.216721, 28.644800], 7/3963.2]
+          }
+        }
+      }
       const city_data = await pool.city_data.find().sort({name:1});
-      const ads_data = await pool.ads_data.find({ads_status:true}).limit(limit).skip(skip).sort({_id:-1});
-      // console.log(ads_data);
+      const ads_data = await pool.ads_data.find(options).limit(limit).skip(skip).sort({_id:-1});
+      console.log(ads_data);
       return res.render('index', {city_data, ads_data, moment, user_name: session.name, page, check:0});
     }catch(e){
       if(e){

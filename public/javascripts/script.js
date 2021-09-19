@@ -34,7 +34,7 @@ $(document).ready(function () {
         $('.search').removeClass('search-open');
     });
     
-    // search city aciton
+    // search city action
     $('#openCityBtn').click(function (e) { 
         e.preventDefault();
         $('.city').addClass('city-open');
@@ -74,22 +74,39 @@ $(document).ready(function () {
 
     $("#cat").change(function (e) { 
         e.preventDefault();
-        $("#subcat").show();
+        $("#subcat").show("slow");
     });
 
     // map my India token
     $('.citySearch').keyup(function (e) { 
         e.preventDefault();
-        fetch('http://localhost:3000/map_token').then( data=> data.json()).
-        then((token)=>{
-            // console.log(token);
-            const add = $(this).val();
-            fetch(`http://localhost:3000/map_address?token=${token.access_token}&type=${token.token_type}&address=${add}`)
-            .then( address=>address.json())
-            .then((data)=>{console.log(data)});
-        });
+        $('#sellDropdown').show();
+        const add = $(this).val();
+        if(add != ""){
+            fetch(`http://localhost:3000/map_address?address=${add}`)
+            .then( res=>res.json())
+            .then((data)=>{
+                if(data.length != 0 ){
+                    $('#selldropdownList').html('');
+                    let dropData = data.items.map((item)=>{
+                        if ((item.position != undefined) & (item.position != "")){
+                            console.log(item);
+                            $('#selldropdownList').append(`<li onClick="sellCity(${item.position.lat},${item.position.lng},'${item.title}')">${item.title}</li>`);
+                        }
+                    })
+                } // end data length block
+            }); //end of fetch
+        } // end of add if block
     });
+
 }); //end of jquery
+// sell city function
+function sellCity(lat,lng,address){
+    document.getElementById('sellDropdown').style.display = 'none';
+    document.getElementById('sellSearch').value = address;
+    document.getElementById('lat').value = lat;
+    document.getElementById('lng').value = lng;
+}
 
 // for sell cat and sub cat data
 function sellselectcat(data) {

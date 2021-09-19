@@ -1,28 +1,23 @@
 const unirest = require("unirest");
 
 
-const mapAddress = (token, type, address, limit=10)=>{
+const mapAddress = (address)=>{
+    // const token = 'FvaH8c0_H6jzM4W8IxQdpw';
+    const apikey = `Wes6djuH85t982ux2RgmgiZ2IxfOlOpf8sqoXFHAUDA`;
     return new Promise((resolve, reject)=>{
-        const req = unirest(`GET`, `https://atlas.mapmyindia.com/api/places/geocode?address=${address}&itemCount=${limit}`);
-        req.headers({'Authorization': `${type} ${token}`})
+    const req = unirest(`GET`, `https://autosuggest.search.hereapi.com/v1/autosuggest?apiKey=${apikey}&at=28.644800,77.216721&limit=5&resultType=city&q=${address}&lang=en-UK`);
+        // req.headers({'Authorization': `Bearer tNSRkA7iQVs7rz1aJEL_mKaghBgyL9VBV--IRcxrE5A`})
         req.end((result)=>{
             if(result.error){
                 // console.log(result.error);
                 return reject(result.error);
             }
             // console.log(result.body);
+            // console.log(result.body.items[0].position);
             return resolve(result.body);
         });
     });
 } 
 
 module.exports = mapAddress;
-// const tempToken = {
-//     access_token: "cb01cbc8-c309-43d9-a187-a9b2a3f11ee5",
-//     client_id: "33OkryzDZsK_HllDUXmIZyD3dMUEDxvAib9S2UAb4zMOB1P8oMpIs5XUCNJaNVtjHEkfrb7k1gMqB0IiflXxeQ==",
-//     expires_in: 81044,
-//     project_code: "prj1631586936i321095552",
-//     scope: "READ",
-//     token_type: "bearer"
-// }
-// mapAddress(tempToken, 'machhaita', 10);
+// mapAddress('Pali Darbhanga');

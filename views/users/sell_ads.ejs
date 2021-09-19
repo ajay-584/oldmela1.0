@@ -84,14 +84,15 @@
             </div>
             <div class="row">
               <div class="col-25">
-                <label for="country">City</label>
+                <label for="city">City</label>
               </div>
               <div class="col-75">
-                <select class="sell_input"  name="city">
-                  <% for(x of city_data){ %>
-                    <option value="<%= x._id %>"><%= x.name %></option>
-                  <% } %>
-                </select>
+                <input placeholder="Search location..." type="text" name="city" id="sellSearch" class="citySearch sell_input" autocomplete="off"  required/>
+                <input type="hidden" name="lat" id="lat">
+                <input type="hidden" name="lng" id="lng">
+                <div id="sellDropdown" class="dropdown">
+                  <ul id="selldropdownList"></ul>
+                </div> 
               </div>
             </div>
             <div class="row">

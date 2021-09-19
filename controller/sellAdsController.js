@@ -28,10 +28,11 @@ exports.sellAdsGet = async (req, res, next)=> {
 exports.sellAdsPost = async (req, res, next) => {
     try{
       let session = req.session;
-      const city_data = await pool.city_data.find().sort({name:1});
-      const cat_data = await pool.cat_data.find().sort({name:1});
-      const sub_cat_data = await pool.sub_cat_data.find().sort({name:1});
-      const user_data = await pool.user_data.findOne({ _id: session.user_id });
+      // console.log(req.body);
+      // return next();
+
+      // taking location in coordinate
+      const location = {type:'Point', coordinates:[parseFloat(req.body.lng), parseFloat(req.body.lat)]};
       // taking all images in images array
       const images = req.files.Img;
       var fileSize = 0
@@ -44,14 +45,14 @@ exports.sellAdsPost = async (req, res, next) => {
       }else{
         fileSize = 5
       }
-      console.log("file size",fileSize);
+      // console.log("file size",fileSize);
       if(fileSize){
         for(let i=0; i < fileSize; i++){
           const img1 = await helper.compressAndMoveImage(images[i], filePath);
           img.push(img1);
         }
       }
-      console.log(img);
+      // console.log(img);
       await pool.ads_data.create(
             {
               ads_title: req.body.ads_name,
@@ -61,7 +62,8 @@ exports.sellAdsPost = async (req, res, next) => {
               ads_img: img,
               ads_video:req.body.ads_video,
               ads_description: req.body.description,
-              ads_city_id: req.body.city,
+              ads_city: req.body.city,
+              ads_location:location,
               ads_phone: req.body.phone,
               ads_address: req.body.address,
               user_id: session.user_id,

@@ -9,14 +9,25 @@ const ads_schema = mongoose.Schema({
     ads_img:[String],
     ads_video:{type:String, default:'0'},
     ads_description:{type:String},
-    ads_city_id:{type:mongoose.Types.ObjectId, ref:'city_data'},
+    ads_city:String,
+    ads_location:{
+        type:{
+            String,
+            enum:['Point'],
+            required:true
+        },
+        coordinates: {
+            type: [],
+            required: true
+        }
+    },
     ads_phone:Number,
     ads_address:{type:String},
     ads_date:{type:Date, default: Date.now()},
     user_id:{type:mongoose.Types.ObjectId, ref:'user_data'},
     ads_status:{type:Boolean, default:false}
 });
-ads_schema.index({ads_title:'text', ads_description:'text', ads_address:'text'});
+ads_schema.index({ads_title:'text', ads_description:'text', ads_address:'text', ads_city:'text', ads_location:'2dsphere'});
 var ads_model = mongoose.model('ads_model',ads_schema,'ads_data');
 
 // user resigration schema

@@ -8,7 +8,7 @@ const pendingAds = require('./pendingAds');
 const uploadFile = require('./uploadImageOnS3');
 const walletBalance = require('./walletBalance');
 const mapToken = require('./mapToken');
-const mapAddress = require('./geoAddress');
+const geoAddress = require('./geoAddress');
 
 
 module.exports = {
@@ -22,5 +22,5 @@ module.exports = {
     uploadFile,
     walletBalance,
     mapToken,
-    mapAddress
+    geoAddress
 }
