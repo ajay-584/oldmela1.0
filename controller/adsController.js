@@ -3,32 +3,45 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const helper = require('../helper/index');
 
+// defining options
+function adsCondition(session){
+  let options;
+  if(session.lat & session.lng){
+    options = {
+      ads_location:{
+        $geoWithin:{
+          $centerSphere:[ [session.lng, session.lat], 7/3963.2]
+        }
+      },
+      ads_status:true
+    }
+  }else{
+    options = {ads_status:true}
+  }
+  return options;
+}
+// pagination 
+function pagination(page, flag){
+  if(flag == 0){
+    page += 1;
+  }else if(flag == 1 && page >= 2){
+    page -= 1;
+  }else{
+    page = 1
+  }
+  return page;
+}
 // Fro get method
 exports.allAds = async (req, res, next)=> {
     try{
       let session = req.session;
-      var page = parseInt(req.query.page);
-      var flag = parseInt(req.query.d);
-      let size = 10;
-      if(flag == 0){
-        page += 1;
-      }else if(flag == 1 && page >= 2){
-        page -= 1;
-      }else{
-        page = 1
-      }
-      const limit = size;
-      const skip = (page - 1) * size;
-      const options = {
-        ads_location:{
-          $geoWithin:{
-            $centerSphere:[ [77.216721, 28.644800], 7/3963.2]
-          }
-        }
-      }
+      const page = pagination(parseInt(req.query.page), parseInt(req.query.d))
+      const limit = 15;
+      const skip = (page - 1) * limit;
+      const options = adsCondition(session);
       const city_data = await pool.city_data.find().sort({name:1});
       const ads_data = await pool.ads_data.find(options).limit(limit).skip(skip).sort({_id:-1});
-      console.log(ads_data);
+      // console.log(session);
       return res.render('index', {city_data, ads_data, moment, user_name: session.name, page, check:0});
     }catch(e){
       if(e){
@@ -43,21 +56,13 @@ exports.allAds = async (req, res, next)=> {
   exports.allAdsByCatId = async (req, res, next)=>{
     try{
       let session = req.session;
-      var page = parseInt(req.query.page);
-      var flag = parseInt(req.query.d);
-      let size = 10;
-      if(flag == 0){
-        page += 1;
-      }else if(flag == 1 && page >= 2){
-        page -= 1;
-      }else{
-        page = 1
-      }
-      const limit = size;
-      const skip = (page - 1) * size;
+      const page = pagination(parseInt(req.query.page), parseInt(req.query.d))
+      const limit = 15;
+      const skip = (page - 1) * limit;
+      const options = adsCondition(session);
       const id = mongoose.Types.ObjectId(req.query.id);
       const city_data = await pool.city_data.find().sort({name:1});
-      const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id},{ads_status:true}]}).limit(limit).skip(skip).sort({_id:-1});
+      const ads = await pool.ads_data.find({$and:[{ads_sub_cat_id:id}, options]}).limit(limit).skip(skip).sort({_id:-1});
       // console.log(id,ads);
       return res.render('index', {
         city_data,
@@ -75,41 +80,25 @@ exports.allAds = async (req, res, next)=> {
     }
   }
 
-  //   for get method
-  exports.allAdsByCityId = async (req, res, next)=>{
+  //   all ads by search keywords
+  exports.searchAds = async (req, res, next)=>{
     try{
       let session = req.session;
-      var page = parseInt(req.query.page);
-      var flag = parseInt(req.query.d);
-      let size = 10;
-      if(flag == 0){
-        page += 1;
-      }else if(flag == 1 && page >= 2){
-        page -= 1;
-      }else{
-        page = 1
-      }
-      const limit = size;
-      const skip = (page - 1) * size;
-      const id = mongoose.Types.ObjectId(req.query.id);
-      const city_data = await pool.city_data.find().sort({name:1});
-      const ads = await pool.ads_data.find({$and:[{ads_city_id:id},{ads_status:true}]}).limit(limit).skip(skip).sort({_id:-1});
-      // console.log(id,ads);
-      return res.render('index', {
-        city_data,
-        ads_data: ads,
+      const text = req.query.search;
+      const options = adsCondition(session);
+      const ads_data = await pool.ads_data.find({$and:[{ $text: { $search: text } }, options]}).sort({_id:-1});
+      res.render('index', {
+        ads_data,
         moment,
         user_name: session.name,
-        page,
-        check:2,
-        id
+        check:4
       });
     }catch(e){
-      console.log("Error in city page");
+      console.log("Error in search page");
       console.log(e);
       next();
     }
-  }
+}
 
   // for single add page
   exports.oneAddById = async function (req, res, next) {

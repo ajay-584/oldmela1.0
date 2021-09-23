@@ -44,25 +44,6 @@ $(document).ready(function () {
         $('.city').removeClass('city-open');
     });
 
-
-    // City data by ajax
-    // $(function () { 
-    //     // console.log("Event occur");
-    //     const cityPath = `${url}city_data`;
-    //     fetch(cityPath).then(res=>res.json()).then((data)=>{
-    //         const city = data.map(ele=>{return {'value':ele._id,'label':ele.name,}});
-    //         // console.log(city)
-    //         $('.citySearch').autocomplete({
-    //             source:city, 
-    //             autoFocus:true,
-    //             select: (event, ui)=>{
-    //                 const cityLink = `/city?id=${ui.item.value}`;
-    //                 window.location.href = cityLink;
-    //             }
-    //         });
-    //     });
-    // });
-
     // Cat data by fetch function
     $(function(){
         const catPath = `${url}cat_data`;
@@ -78,7 +59,7 @@ $(document).ready(function () {
     });
 
     // map my India token
-    $('.citySearch').keyup(function (e) { 
+    $('#sellSearch').keyup(function (e) { 
         e.preventDefault();
         $('#sellDropdown').show();
         const add = $(this).val();
@@ -90,7 +71,7 @@ $(document).ready(function () {
                     $('#selldropdownList').html('');
                     let dropData = data.items.map((item)=>{
                         if ((item.position != undefined) & (item.position != "")){
-                            console.log(item);
+                            // console.log(item);
                             $('#selldropdownList').append(`<li onClick="sellCity(${item.position.lat},${item.position.lng},'${item.title}')">${item.title}</li>`);
                         }
                     })
@@ -99,7 +80,39 @@ $(document).ready(function () {
         } // end of add if block
     });
 
+    // for header city search
+    $('#CitySearch').keyup(function (e) { 
+        e.preventDefault();
+        $('#dropdown').show();
+        const add = $(this).val();
+        if(add != ""){
+            fetch(`http://localhost:3000/map_address?address=${add}`)
+            .then( res=>res.json())
+            .then((data)=>{
+                if(data.length != 0 ){
+                    $('.rmcity').remove();
+                    let dropData = data.items.map((item)=>{
+                        if ((item.position != undefined) & (item.position != "")){
+                            // console.log(item);
+                            $('#dropdownList').append(`<li class="rmcity" onClick="searchCity(${item.position.lat},${item.position.lng},'${item.title}')">${item.title}</li>`);
+                        }
+                    })
+                } // end data length block
+            }); //end of fetch
+        } // end of add if block
+    });
+
+
+    // user click on outside defined click
+    $(document).click(function() {
+        $('#dropdown').hide('slow');
+        $('#sellDropdown').hide('slow');
+      });
+    
+    $("#CitySearch").val(cityAddress);
 }); //end of jquery
+
+var cityAddress;
 // sell city function
 function sellCity(lat,lng,address){
     document.getElementById('sellDropdown').style.display = 'none';
@@ -107,6 +120,45 @@ function sellCity(lat,lng,address){
     document.getElementById('lat').value = lat;
     document.getElementById('lng').value = lng;
 }
+// header city function
+function searchCity(lat,lng,address){
+    document.getElementById('dropdown').style.display = 'none';
+    sessionStorage.setItem("address", address);
+    window.location = `/city_data?lat=${lat}&lng=${lng}`;
+
+}
+// set value in city search field after refresh the page
+function saveAddress(){
+    // console.log(localStorage);
+    let address = sessionStorage.getItem("address");
+    if(address){
+        cityAddress = address;
+    }
+}
+saveAddress();
+// Getting user geo locaiton
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        console.log("Geolocation is not supported by this browser.");
+    } 
+  }
+  
+  function showPosition(position) {
+      searchCity(position.coords.latitude, position.coords.longitude, "Current Location");
+  }
+// this function will runs once to get user location
+function getGeoLocationOnlyOnce(){
+    let executed = false;
+    return ()=>{
+        if(!executed){
+            getLocation();
+            executed = true;
+        }
+    }
+}
+getGeoLocationOnlyOnce();
 
 // for sell cat and sub cat data
 function sellselectcat(data) {

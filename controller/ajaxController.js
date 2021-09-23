@@ -3,7 +3,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const helper = require('../helper/index');
 
-// Ajax route for cat adn subcat data on side bar section
+// Ajax route for cat and subcat data on side bar section
 exports.ajaxCatData = async(req, res, next)=>{
     try{
         const cat_data = await pool.cat_data.find().sort({name:1});
@@ -18,8 +18,11 @@ exports.ajaxCatData = async(req, res, next)=>{
 // Ajax route for city data on header city search section
 exports.ajaxCityData = async(req, res, next)=>{
     try{
-        const cityData = await pool.city_data.find();
-        res.json(cityData);
+        // console.log(req.query);
+        const session = req.session;
+        session.lng = parseFloat(req.query.lng);
+        session.lat = parseFloat(req.query.lat);
+        return res.redirect('/');
     }catch(e){
         console.log(e);
         next();
@@ -57,7 +60,7 @@ exports.mapToken = async (req, res, next) => {
     }
   }
 
-// Ajax route for map my india address generator
+// Ajax route for map of here india address generator
 exports.geoAddress = async (req, res, next) => {
     try{
         // console.log("Map Address calling",req.query);
